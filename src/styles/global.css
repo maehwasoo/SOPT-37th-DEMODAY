@@ -10,7 +10,7 @@
   html,
   body {
     font-size: 62.5%;
-    font-family: 'Pretendard', sans-serif;
+    font-family: var(--font-sans);
     width: 100%;
     min-width: var(--min-width);
     max-width: var(--max-width);
