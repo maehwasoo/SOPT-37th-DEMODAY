@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+@import './theme.css';
+
+@layer base {
+  :root {
+    --min-width: 375px;
+    --max-width: 1440px;
+  }
+
+  html,
+  body {
+    font-size: 62.5%;
+    font-family: 'Pretendard', sans-serif;
+    width: 100%;
+    min-width: var(--min-width);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    scroll-behavior: smooth;
+    color: var(--color-white);
+    background: var(--color-black);
+  }
+}

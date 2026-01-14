@@ -1,0 +1,111 @@
+@theme {
+  --color-black: #121212;
+  --color-white: #ffffff;
+
+  --color-gray-900: #242527;
+  --color-gray-800: #3c3e41;
+  --color-gray-700: #5d6166;
+  --color-gray-600: #777c82;
+  --color-gray-500: #91979f;
+  --color-gray-400: #adb3bb;
+  --color-gray-300: #c9ced5;
+  --color-gray-200: #e0e4e8;
+  --color-gray-100: #edeff2;
+
+  --color-navy1: #1e293b;
+  --color-navy2: #374560;
+  --color-navy3: #495870;
+  --color-navy4: #67758b;
+  --color-navy5: #8998b0;
+
+  --color-white-0: #ffffff;
+  --color-white-20: #ffffff33;
+  --color-white-30: #ffffff4d;
+  --color-white-50: #ffffff80;
+  --color-white-70: #ffffffb3;
+
+  --color-black-0: #121212;
+  --color-black-20: #12121233;
+  --color-black-30: #1212124d;
+  --color-black-50: #12121280;
+  --color-black-70: #121212b3;
+}
+
+@layer utilities {
+  .head1_sb_26 {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-size: 2.6rem;
+    line-height: 110%;
+  }
+
+  .head2_sb_22 {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-size: 2.2rem;
+    line-height: 110%;
+  }
+
+  .title1_sb_18 {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-size: 1.8rem;
+    line-height: 140%;
+  }
+
+  .title2_sb_16 {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 110%;
+  }
+
+  .title3_m_14 {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 150%;
+  }
+
+  .body1_m_14 {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 110%;
+  }
+
+  .body2_r_14 {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 150%;
+  }
+
+  .body3_r_12 {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 140%;
+  }
+
+  .body4_r_11 {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 110%;
+  }
+
+  .caption1_m_11 {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    line-height: 110%;
+  }
+
+  .caption1_l_11 {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 300;
+    font-size: 1.1rem;
+    line-height: 110%;
+  }
+}
