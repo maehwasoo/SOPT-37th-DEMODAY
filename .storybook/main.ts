@@ -1,8 +1,6 @@
 import * as path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-const configDir = path.dirname(fileURLToPath(import.meta.url));
-const srcAlias = path.resolve(configDir, '../src');
+const srcAlias = path.resolve(process.cwd(), 'src');
 
 const config = {
   stories: ['../src/stories/**/*.stories.@(ts|tsx|mdx)'],
