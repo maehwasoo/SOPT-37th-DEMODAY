@@ -15,20 +15,13 @@ export default function FilterChip({
   ...props
 }: FilterChipProps) {
   const baseClassName =
-    'title_m_12 inline-flex items-center justify-center rounded-[50px] border border-current px-[22px] py-[12px] bg-transparent disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-white)]';
+    'body_r_14 inline-flex cursor-pointer items-center justify-center h-[28px] rounded-[40px] px-[16px] py-[4px] whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-white)]';
 
   const stateClassName = active
-    ? 'text-[var(--color-37demo-red)]'
-    : 'text-[var(--color-gray-500)]';
+    ? 'bg-[var(--color-37demo-red-40)] text-[var(--color-white)] ring-1 ring-inset ring-[var(--color-37demo-red)]'
+    : 'bg-[var(--color-gray-900)] text-[var(--color-gray-500)] active:bg-[var(--color-black)] active:ring-1 active:ring-inset active:ring-[var(--color-gray-700)]';
 
-  const pressedClassName = 'active:text-[var(--color-gray-800)]';
-
-  const mergedClassName = [
-    baseClassName,
-    stateClassName,
-    pressedClassName,
-    className,
-  ]
+  const mergedClassName = [baseClassName, stateClassName, className]
     .filter(Boolean)
     .join(' ');
 

@@ -24,7 +24,7 @@ function DefaultView() {
   const [value, setValue] = useState<'all' | 'appjam' | 'makers'>('all');
 
   return (
-    <div className="flex w-[343px] flex-col gap-[12px]">
+    <div className="flex w-[375px] flex-col gap-[12px]">
       <p className="caption_r_10 text-[var(--color-white-70)]">
         탭을 눌러 :active 확인
       </p>

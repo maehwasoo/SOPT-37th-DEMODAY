@@ -18,9 +18,9 @@ export type TabsProps = {
 };
 
 const DEFAULT_ITEMS: readonly TabsItem[] = [
-  { value: 'all', label: 'ALL' },
-  { value: 'appjam', label: 'APPJAM' },
-  { value: 'makers', label: 'MAKERS' },
+  { value: 'all', label: '전체' },
+  { value: 'appjam', label: '앱잼' },
+  { value: 'makers', label: '메이커스' },
 ] as const;
 
 export default function Tabs({
@@ -75,20 +75,25 @@ export default function Tabs({
   };
 
   const tabBaseClassName =
-    'title_m_12 inline-flex flex-1 items-center justify-center h-[44px] border-b-2 border-transparent bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-white)] active:text-[var(--color-gray-800)]';
+    'inline-flex cursor-pointer items-center justify-center w-[114px] p-[10px] bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-white)]';
 
   return (
     <div
       aria-label="Tabs"
-      className={['flex w-full', className].filter(Boolean).join(' ')}
+      className={[
+        'flex w-[375px] items-end justify-center bg-[var(--color-black)] px-[16px] py-0',
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
       role="tablist"
     >
       {items.map((item, index) => {
         const selected = item.value === value;
 
         const tabStateClassName = selected
-          ? 'text-[var(--color-37demo-red)] border-[var(--color-37demo-red)]'
-          : 'text-[var(--color-gray-500)]';
+          ? 'head_b_16 text-[var(--color-white)] border-b border-[var(--color-37demo-red)]'
+          : 'body_r_16 text-[var(--color-gray-300)] active:text-[var(--color-gray-600)]';
 
         const tabClassName = [tabBaseClassName, tabStateClassName].join(' ');
 
