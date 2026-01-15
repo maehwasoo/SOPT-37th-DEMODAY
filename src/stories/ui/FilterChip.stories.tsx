@@ -29,11 +29,11 @@ function PlaygroundView() {
         칩을 눌러 :active 확인
       </p>
       <div className="flex flex-wrap gap-[8px]">
+        <FilterChip active={false}>전체</FilterChip>
         <FilterChip active={active} onClick={() => setActive((prev) => !prev)}>
-          {active ? 'ACTIVE' : 'INACTIVE'}
+          전체
         </FilterChip>
-        <FilterChip active>APPJAM</FilterChip>
-        <FilterChip active={false}>MAKERS</FilterChip>
+        <FilterChip active>전체</FilterChip>
       </div>
     </div>
   );
