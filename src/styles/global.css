@@ -7,13 +7,29 @@
     --max-width: 1440px;
   }
 
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
   html,
   body {
     font-size: 62.5%;
-    font-family: 'Pretendard', sans-serif;
+    font-family: var(--font-sans);
     width: 100%;
     min-width: var(--min-width);
     max-width: var(--max-width);
+    min-height: 100%;
     margin: 0 auto;
     scroll-behavior: smooth;
     color: var(--color-white);
