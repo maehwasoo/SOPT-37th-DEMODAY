@@ -17,7 +17,10 @@ export default function NavTop(props: NavTopProps) {
   if (props.variant === 'sub') {
     return (
       <header
-        className={['bg-[var(--color-black)] shadow_bottom p-[6px]', props.className]
+        className={[
+          'shadow_bottom bg-[var(--color-black)] p-[6px]',
+          props.className,
+        ]
           .filter(Boolean)
           .join(' ')}
       >
@@ -37,7 +40,7 @@ export default function NavTop(props: NavTopProps) {
   return (
     <header
       className={[
-        'bg-[var(--color-black)] shadow_bottom flex h-[56px] w-full items-center justify-center',
+        'shadow_bottom flex h-[56px] w-full items-center justify-center bg-[var(--color-black)]',
         props.className,
       ]
         .filter(Boolean)
