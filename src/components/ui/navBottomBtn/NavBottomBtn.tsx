@@ -1,3 +1,5 @@
+import { HomeFilledIcon, HomeOutlineIcon } from '@/components/icons';
+
 export type NavBottomBtnState = 'active' | 'inactive' | 'pressed';
 
 type NavBottomBtnProps = {
@@ -5,38 +7,6 @@ type NavBottomBtnProps = {
   label?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
-
-function HomeIconOutline({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 14 15.7885"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M1 14.7885H4.69225V8.904H9.30775V14.7885H13V5.7885L7 1.25L1 5.7885V14.7885ZM0 15.7885V5.2885L7 0L14 5.2885V15.7885H8.30775V9.904H5.69225V15.7885H0Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
-function HomeIconFilled({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 14 15.7885"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M0 15.7885V5.2885L7 0L14 5.2885V15.7885H8.30775V9.904H5.69225V15.7885H0Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
 
 export default function NavBottomBtn({
   state = 'inactive',
@@ -69,9 +39,9 @@ export default function NavBottomBtn({
       onClick={onClick}
     >
       {isActive ? (
-        <HomeIconFilled className="size-[24px]" />
+        <HomeFilledIcon width={24} height={24} />
       ) : (
-        <HomeIconOutline className="size-[24px]" />
+        <HomeOutlineIcon width={24} height={24} />
       )}
       <span className="title_m_12 text-center">{label}</span>
     </button>
