@@ -1,3 +1,5 @@
+'use client';
+
 import { HomeFilledIcon, HomeOutlineIcon } from '@/components/icons';
 
 export type NavBottomBtnState = 'active' | 'inactive' | 'pressed';
