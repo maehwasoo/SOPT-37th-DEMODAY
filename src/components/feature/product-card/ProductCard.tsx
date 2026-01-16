@@ -2,10 +2,7 @@
 
 import type { ButtonHTMLAttributes } from 'react';
 
-export type ProductCardState = 'default' | 'pressed';
-
 export type ProductCardProps = {
-  state?: ProductCardState;
   thumbnailSrc: string;
   thumbnailAlt?: string;
   title: string;
@@ -14,7 +11,6 @@ export type ProductCardProps = {
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'>;
 
 export default function ProductCard({
-  state = 'default',
   thumbnailSrc,
   thumbnailAlt = '',
   title,
@@ -24,23 +20,16 @@ export default function ProductCard({
   type = 'button',
   ...props
 }: ProductCardProps) {
-  // pressed state styles
-  const stateClassName =
-    state === 'pressed'
-      ? 'bg-[var(--color-black)] opacity-80'
-      : 'bg-[var(--color-gray-900)] active:bg-[var(--color-black)] active:opacity-80';
-
   const baseClassName = [
     'flex w-[163px] flex-col items-center gap-[10px] overflow-hidden rounded-[2px]',
     'border-0 px-0 pb-[6px] pt-0',
     'cursor-pointer text-left',
+    'bg-[var(--color-gray-900)] active:bg-[var(--color-black)] active:opacity-80',
     'disabled:cursor-not-allowed disabled:opacity-40',
     'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-white)]',
   ].join(' ');
 
-  const mergedClassName = [baseClassName, stateClassName, className]
-    .filter(Boolean)
-    .join(' ');
+  const mergedClassName = [baseClassName, className].filter(Boolean).join(' ');
 
   return (
     <button className={mergedClassName} type={type} {...props}>
