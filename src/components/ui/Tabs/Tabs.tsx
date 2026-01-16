@@ -1,0 +1,118 @@
+'use client';
+
+import { useId } from 'react';
+import type { KeyboardEvent } from 'react';
+
+export type TabsValue = 'all' | 'appjam' | 'makers';
+
+export type TabsItem = {
+  value: TabsValue;
+  label: string;
+};
+
+export type TabsProps = {
+  value: TabsValue;
+  onValueChange: (value: TabsValue) => void;
+  items?: readonly TabsItem[];
+  className?: string;
+};
+
+const DEFAULT_ITEMS: readonly TabsItem[] = [
+  { value: 'all', label: '전체' },
+  { value: 'appjam', label: '앱잼' },
+  { value: 'makers', label: '메이커스' },
+] as const;
+
+export default function Tabs({
+  value,
+  onValueChange,
+  items = DEFAULT_ITEMS,
+  className,
+}: TabsProps) {
+  const baseId = useId();
+
+  const focusTabByIndex = (index: number) => {
+    const target = items[index];
+    if (!target) return;
+
+    const el = document.getElementById(`${baseId}-tab-${target.value}`);
+    if (el instanceof HTMLElement) el.focus();
+  };
+
+  const selectByIndex = (index: number) => {
+    const target = items[index];
+    if (!target) return;
+    onValueChange(target.value);
+    requestAnimationFrame(() => focusTabByIndex(index));
+  };
+
+  const handleKeyDown = (
+    event: KeyboardEvent<HTMLButtonElement>,
+    index: number
+  ) => {
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      selectByIndex((index + 1) % items.length);
+      return;
+    }
+
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      selectByIndex((index - 1 + items.length) % items.length);
+      return;
+    }
+
+    if (event.key === 'Home') {
+      event.preventDefault();
+      selectByIndex(0);
+      return;
+    }
+
+    if (event.key === 'End') {
+      event.preventDefault();
+      selectByIndex(items.length - 1);
+    }
+  };
+
+  const tabBaseClassName =
+    'inline-flex cursor-pointer items-center justify-center w-[114px] p-[10px] bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-white)]';
+
+  return (
+    <div
+      aria-label="Tabs"
+      className={[
+        'flex w-[375px] items-end justify-center bg-[var(--color-black)] px-[16px] py-0',
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      role="tablist"
+    >
+      {items.map((item, index) => {
+        const selected = item.value === value;
+
+        const tabStateClassName = selected
+          ? 'head_b_16 text-[var(--color-white)] border-b border-[var(--color-37demo-red)]'
+          : 'body_r_16 text-[var(--color-gray-300)] active:text-[var(--color-gray-600)]';
+
+        const tabClassName = [tabBaseClassName, tabStateClassName].join(' ');
+
+        return (
+          <button
+            key={item.value}
+            aria-selected={selected}
+            className={tabClassName}
+            id={`${baseId}-tab-${item.value}`}
+            onClick={() => onValueChange(item.value)}
+            onKeyDown={(event) => handleKeyDown(event, index)}
+            role="tab"
+            tabIndex={selected ? 0 : -1}
+            type="button"
+          >
+            {item.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
