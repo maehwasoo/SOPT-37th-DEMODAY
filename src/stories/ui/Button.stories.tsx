@@ -1,14 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 
-import { Button } from '@/components';
-
-function PlaceholderIcon() {
-  return (
-    <span className="grid h-[24px] w-[24px] place-items-center rounded-[4px] bg-[var(--color-white)] text-[var(--color-black)]">
-      QR
-    </span>
-  );
-}
+import { Button, QrIcon } from '@/components';
 
 const meta = {
   title: 'ui/Button',
@@ -44,7 +36,7 @@ export const Square: Story = {
 export const Round: Story = {
   args: {
     shape: 'round',
-    leftIcon: <PlaceholderIcon />,
+    leftIcon: <QrIcon />,
     children: 'text',
   },
   render: (args) => (
