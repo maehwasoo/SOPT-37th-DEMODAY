@@ -15,9 +15,14 @@ export type NavTopProps =
 
 export default function NavTop(props: NavTopProps) {
   if (props.variant === 'sub') {
+    const onBack = props.onBack;
+
     return (
       <header
-        className={['bg-[var(--color-black)] shadow_bottom p-[6px]', props.className]
+        className={[
+          'shadow_bottom bg-[var(--color-black)] p-[6px]',
+          props.className,
+        ]
           .filter(Boolean)
           .join(' ')}
       >
@@ -26,7 +31,7 @@ export default function NavTop(props: NavTopProps) {
             aria-label="뒤로가기"
             className="text-[var(--color-white)]"
             icon={<ArrowLeftIcon />}
-            onClick={props.onBack ? () => props.onBack() : undefined}
+            onClick={onBack ? () => onBack() : undefined}
           />
           <p className="title_m_18 text-[var(--color-white)]">{props.title}</p>
         </div>
@@ -37,7 +42,7 @@ export default function NavTop(props: NavTopProps) {
   return (
     <header
       className={[
-        'bg-[var(--color-black)] shadow_bottom flex h-[56px] w-full items-center justify-center',
+        'shadow_bottom flex h-[56px] w-full items-center justify-center bg-[var(--color-black)]',
         props.className,
       ]
         .filter(Boolean)
