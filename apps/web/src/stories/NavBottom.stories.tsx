@@ -37,4 +37,3 @@ export const Leaflet: Story = {
     active: 'leaflet',
   },
 };
-
