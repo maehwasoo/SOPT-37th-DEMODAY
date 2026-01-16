@@ -1,3 +1,5 @@
+export { default as TouchArea } from './touch-area/TouchArea';
+
 export { default as Button } from './Button/Button';
 export type { ButtonProps } from './Button/Button';
 
