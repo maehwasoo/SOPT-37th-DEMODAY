@@ -10,3 +10,6 @@ export { default as Tabs } from './Tabs/Tabs';
 export type { TabsProps, TabsValue } from './Tabs/Tabs';
 
 export { default as NavBottomBtn } from './navBottomBtn/NavBottomBtn';
+
+export { default as TagProduct } from './TagProduct/TagProduct';
+export type { TagProductProps } from './TagProduct/TagProduct';
