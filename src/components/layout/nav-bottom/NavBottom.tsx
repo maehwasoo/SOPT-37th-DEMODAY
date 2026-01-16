@@ -36,18 +36,23 @@ function NavBottomButton({
       type="button"
       className={[
         'flex w-[68px] flex-col items-center gap-px px-[22px] py-[12px] text-center',
-        active ? 'text-[var(--color-37demo-red)]' : 'text-[var(--color-gray-500)]',
+        active
+          ? 'text-[var(--color-37demo-red)]'
+          : 'text-[var(--color-gray-500)]',
       ].join(' ')}
       onClick={onClick}
       aria-current={active ? 'page' : undefined}
     >
       <span className="h-[24px] w-[24px]">{icon}</span>
-      <span className="title_m_12">{label}</span>
+      <span className="title_m_12 whitespace-nowrap">{label}</span>
     </button>
   );
 }
 
-export default function NavBottom({ active = 'home', onNavigate }: NavBottomProps) {
+export default function NavBottom({
+  active = 'home',
+  onNavigate,
+}: NavBottomProps) {
   return (
     <nav
       className="shadow_top flex h-[80px] items-start justify-center bg-[var(--color-black)] px-[32px] py-[7px]"
@@ -63,7 +68,11 @@ export default function NavBottom({ active = 'home', onNavigate }: NavBottomProp
         <NavBottomButton
           active={active === 'product'}
           icon={
-            active === 'product' ? <ProductsFilledIcon /> : <ProductsOutlineIcon />
+            active === 'product' ? (
+              <ProductsFilledIcon />
+            ) : (
+              <ProductsOutlineIcon />
+            )
           }
           label="프로덕트"
           onClick={() => onNavigate?.('product')}
@@ -71,7 +80,11 @@ export default function NavBottom({ active = 'home', onNavigate }: NavBottomProp
         <NavBottomButton
           active={active === 'leaflet'}
           icon={
-            active === 'leaflet' ? <LeafletFilledIcon /> : <LeafletOutlineIcon />
+            active === 'leaflet' ? (
+              <LeafletFilledIcon />
+            ) : (
+              <LeafletOutlineIcon />
+            )
           }
           label="리플렛"
           onClick={() => onNavigate?.('leaflet')}
