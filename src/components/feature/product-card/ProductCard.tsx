@@ -50,7 +50,7 @@ export default function ProductCard({
             {category}
           </span>
         </div>
-        <p className="body_r_14 h-[40px] w-full shrink-0 overflow-hidden text-[var(--color-gray-200)]">
+        <p className="body_r_14 h-[40px] w-full shrink-0 overflow-hidden text-[#d9e0e1]">
           {description}
         </p>
       </div>
