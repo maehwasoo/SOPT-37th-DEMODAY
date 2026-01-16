@@ -9,18 +9,8 @@
     "lint": "eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "lefthook install",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,md,css}": [
-      "prettier --write"
-    ]
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.0",
