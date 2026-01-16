@@ -1,0 +1,47 @@
+import { ArrowLeftIcon } from '@/components/icons';
+import { TouchArea } from '@/components/ui';
+
+export type NavTopProps =
+  | {
+      variant?: 'main';
+      className?: string;
+    }
+  | {
+      variant: 'sub';
+      title: string;
+      className?: string;
+    };
+
+export default function NavTop(props: NavTopProps) {
+  if (props.variant === 'sub') {
+    return (
+      <header
+        className={['bg-[var(--color-black)] shadow_bottom p-[6px]', props.className]
+          .filter(Boolean)
+          .join(' ')}
+      >
+        <div className="flex w-full items-center gap-[4px]">
+          <TouchArea
+            aria-label="뒤로가기"
+            className="text-[var(--color-white)]"
+            icon={<ArrowLeftIcon />}
+          />
+          <p className="title_m_18 text-[var(--color-white)]">{props.title}</p>
+        </div>
+      </header>
+    );
+  }
+
+  return (
+    <header
+      className={[
+        'bg-[var(--color-black)] shadow_bottom flex h-[56px] w-full items-center justify-center',
+        props.className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+    >
+      <div className="black_bk_20 text-center">SYSTEM UPDATE : SUNRISE</div>
+    </header>
+  );
+}
