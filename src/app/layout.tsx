@@ -4,8 +4,6 @@ import type { Metadata } from 'next';
 
 import '@/styles/global.css';
 
-import { Footer, Header } from '@/components';
-
 export const metadata: Metadata = {
   title: 'DIVE SOPT 데모데이',
   description: '37기 DIVE SOPT 데모데이',
@@ -38,11 +36,7 @@ export default function RootLayout({
           </>
         ) : null}
       </head>
-      <body className="antialiased">
-        <Header />
-        {children}
-        <Footer />
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

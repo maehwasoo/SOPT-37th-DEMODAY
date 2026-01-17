@@ -1,4 +1,8 @@
+'use client';
+
 import type { ReactNode } from 'react';
+
+import { usePathname, useRouter } from 'next/navigation';
 
 import {
   HomeFilledIcon,
@@ -13,12 +17,21 @@ import {
 type NavBottomTab = 'home' | 'product' | 'leaflet' | 'homepage';
 type NavBottomActiveTab = Exclude<NavBottomTab, 'homepage'>;
 
+const OFFICIAL_HOMEPAGE_URL = 'https://www.sopt.org/';
+
 type NavBottomProps = {
   // active tab key
   active?: NavBottomActiveTab;
   // navigation handler
   onNavigate?: (tab: NavBottomTab) => void;
 };
+
+function resolveActiveTab(pathname: string): NavBottomActiveTab | null {
+  if (pathname.startsWith('/products')) return 'product';
+  if (pathname.startsWith('/leaflet')) return 'leaflet';
+  if (pathname === '/') return 'home';
+  return null;
+}
 
 function NavBottomButton({
   active,
@@ -49,51 +62,79 @@ function NavBottomButton({
   );
 }
 
-export default function NavBottom({
-  active = 'home',
-  onNavigate,
-}: NavBottomProps) {
+export default function NavBottom({ active, onNavigate }: NavBottomProps) {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const resolvedActive = active ?? resolveActiveTab(pathname);
+
+  const navigate = (tab: NavBottomTab) => {
+    if (onNavigate) {
+      onNavigate(tab);
+      return;
+    }
+
+    switch (tab) {
+      case 'home':
+        router.push('/');
+        return;
+      case 'product':
+        router.push('/products');
+        return;
+      case 'leaflet':
+        router.push('/leaflet');
+        return;
+      case 'homepage':
+        window.open(OFFICIAL_HOMEPAGE_URL, '_blank', 'noopener,noreferrer');
+        return;
+      default:
+        return;
+    }
+  };
+
   return (
     <nav
-      className="shadow_top flex h-[80px] items-start justify-center bg-[var(--color-black)] px-[32px] py-[7px]"
+      className="shadow_top flex h-[81px] items-start justify-center bg-[var(--color-black)] px-[32px] py-[7px]"
       aria-label="하단 탭 내비게이션"
     >
       <div className="flex items-center gap-[10px]">
         <NavBottomButton
-          active={active === 'home'}
-          icon={active === 'home' ? <HomeFilledIcon /> : <HomeOutlineIcon />}
+          active={resolvedActive === 'home'}
+          icon={
+            resolvedActive === 'home' ? <HomeFilledIcon /> : <HomeOutlineIcon />
+          }
           label="홈"
-          onClick={() => onNavigate?.('home')}
+          onClick={() => navigate('home')}
         />
         <NavBottomButton
-          active={active === 'product'}
+          active={resolvedActive === 'product'}
           icon={
-            active === 'product' ? (
+            resolvedActive === 'product' ? (
               <ProductsFilledIcon />
             ) : (
               <ProductsOutlineIcon />
             )
           }
           label="프로덕트"
-          onClick={() => onNavigate?.('product')}
+          onClick={() => navigate('product')}
         />
         <NavBottomButton
-          active={active === 'leaflet'}
+          active={resolvedActive === 'leaflet'}
           icon={
-            active === 'leaflet' ? (
+            resolvedActive === 'leaflet' ? (
               <LeafletFilledIcon />
             ) : (
               <LeafletOutlineIcon />
             )
           }
           label="리플렛"
-          onClick={() => onNavigate?.('leaflet')}
+          onClick={() => navigate('leaflet')}
         />
         <NavBottomButton
           active={false}
           icon={<OpenLinkIcon />}
           label="공식홈페이지"
-          onClick={() => onNavigate?.('homepage')}
+          onClick={() => navigate('homepage')}
         />
       </div>
     </nav>

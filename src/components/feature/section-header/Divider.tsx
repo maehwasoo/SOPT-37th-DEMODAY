@@ -53,12 +53,24 @@ export default function Divider({ className, ...props }: DividerProps) {
     <div className={mergedClassName} {...props}>
       <DividerDotLine />
       <div className="flex items-center gap-px">
-        <PlanningIcon />
-        <DesignIcon />
-        <AndroidIcon />
-        <IosIcon />
-        <WebIcon />
-        <ServerIcon />
+        <span className="h-[16px] w-[16px] shrink-0 pt-[1.85px] pr-[3.73px] pb-[1.85px] pl-[3.41px]">
+          <PlanningIcon width="100%" height="100%" className="size-full" />
+        </span>
+        <span className="h-[16px] w-[16px] shrink-0 pt-[4.53px] pr-[1.27px] pb-[4.4px] pl-[1.33px]">
+          <DesignIcon width="100%" height="100%" className="size-full" />
+        </span>
+        <span className="h-[16px] w-[16px] shrink-0 pt-[2.4px] pr-[3.24px] pb-[2.88px] pl-[3.2px]">
+          <AndroidIcon width="100%" height="100%" className="size-full" />
+        </span>
+        <span className="h-[16px] w-[16px] shrink-0 pt-[2.53px] pr-[2.53px] pb-[2.04px] pl-[2.4px]">
+          <IosIcon width="100%" height="100%" className="size-full" />
+        </span>
+        <span className="h-[16px] w-[16px] shrink-0 pt-[3.93px] pr-[1.04px] pb-[4.02px] pl-[1.07px]">
+          <WebIcon width="100%" height="100%" className="size-full" />
+        </span>
+        <span className="h-[16px] w-[16px] shrink-0 pt-[1.6px] pr-[4.8px] pb-[1.67px] pl-[4.93px]">
+          <ServerIcon width="100%" height="100%" className="size-full" />
+        </span>
       </div>
       <DividerDotLine />
     </div>

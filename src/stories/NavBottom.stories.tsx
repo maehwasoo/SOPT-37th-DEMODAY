@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import { NavBottom } from '@/components';
 
-const meta: Meta<typeof NavBottom> = {
+const meta = {
   title: 'layout/NavBottom',
   component: NavBottom,
   args: {
@@ -14,11 +14,11 @@ const meta: Meta<typeof NavBottom> = {
       <NavBottom {...args} />
     </div>
   ),
-};
+} satisfies Meta<typeof NavBottom>;
 
 export default meta;
 
-type Story = StoryObj<typeof NavBottom>;
+type Story = StoryObj<typeof meta>;
 
 export const Home: Story = {
   args: {
@@ -37,4 +37,3 @@ export const Leaflet: Story = {
     active: 'leaflet',
   },
 };
-
