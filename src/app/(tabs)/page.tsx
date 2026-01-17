@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { Button, Divider, Footer, TagMain } from '@/components';
 import { InstagramIcon, LinkIcon, YoutubeIcon } from '@/components/icons';
 
@@ -6,11 +8,13 @@ export default function Home() {
     <main className="flex flex-col gap-[40px]">
       <section className="flex w-full flex-col items-center gap-[39px]">
         <div className="relative aspect-[1125/1188] w-full overflow-hidden bg-[var(--color-gray-900)]">
-          <div className="absolute inset-0 grid place-items-center px-[24px]">
-            <p className="head_b_18 text-center text-[var(--color-gray-400)]">
-              메인 이미지 (placeholder)
-            </p>
-          </div>
+          <Image
+            src="/assets/figma/main/img_branding_main.png"
+            alt=""
+            fill
+            priority
+            className="object-cover"
+          />
         </div>
 
         <div className="w-[343px]">
@@ -24,10 +28,36 @@ export default function Home() {
 
           <section className="flex w-full flex-col items-center gap-[24px] px-[24px]">
             <div className="flex w-[286px] flex-col items-center gap-[6px]">
-              <div className="flex h-[16px] w-[286px] items-center justify-center rounded-[2px] bg-[var(--color-gray-900)]">
-                <p className="caption_r_10 text-[var(--color-gray-400)]">
-                  로고 (placeholder)
-                </p>
+              <div className="flex w-[286px] items-start gap-[4px]">
+                <div className="inline-grid grid-cols-[max-content] grid-rows-[max-content] items-start justify-items-start">
+                  <div className="col-1 row-1 h-[16.002px] w-[85.081px]">
+                    <Image
+                      src="/assets/figma/main/logo_group_129.svg"
+                      alt=""
+                      width={86}
+                      height={16}
+                      className="h-full w-full"
+                    />
+                  </div>
+                  <div className="col-1 row-1 ml-[89.93px] h-[16px] w-[85.073px]">
+                    <Image
+                      src="/assets/figma/main/logo_group_130.svg"
+                      alt=""
+                      width={86}
+                      height={16}
+                      className="h-full w-full"
+                    />
+                  </div>
+                </div>
+                <div className="h-[16.001px] w-[107px]">
+                  <Image
+                    src="/assets/figma/main/logo_group_1171275955.svg"
+                    alt=""
+                    width={107}
+                    height={16}
+                    className="h-full w-full"
+                  />
+                </div>
               </div>
               <p className="head_b_14 text-[var(--color-white)]">
                 치열한 기록들로 띄워낸 가장 완벽한 아침
@@ -153,35 +183,101 @@ export default function Home() {
                 후원 및 협력
               </p>
               <div className="flex w-[176px] flex-wrap content-end items-end justify-end gap-[12px] mix-blend-luminosity">
-                <div className="grid h-[14px] w-[50px] place-items-center rounded-[2px] bg-[var(--color-gray-900)]">
-                  <p className="caption_r_10 text-[var(--color-gray-400)]">
-                    로고
-                  </p>
+                <div className="relative h-[14px] w-[50px]">
+                  <Image
+                    src="/assets/figma/main/sponsor_image_459.png"
+                    alt=""
+                    fill
+                    className="object-contain"
+                  />
                 </div>
-                <div className="grid h-[20px] w-[50px] place-items-center rounded-[2px] bg-[var(--color-gray-900)]">
-                  <p className="caption_r_10 text-[var(--color-gray-400)]">
-                    로고
-                  </p>
+                <div className="relative h-[20px] w-[50px]">
+                  <Image
+                    src="/assets/figma/main/sponsor_kakao.png"
+                    alt=""
+                    fill
+                    className="object-contain"
+                  />
                 </div>
-                <div className="grid h-[24px] w-[50px] place-items-center rounded-[2px] bg-[var(--color-gray-900)] opacity-70">
-                  <p className="caption_r_10 text-[var(--color-gray-400)]">
-                    로고
-                  </p>
+                <div className="relative h-[24px] w-[50px] opacity-70">
+                  <div
+                    className="absolute top-0 left-0"
+                    style={{
+                      width: '51.627px',
+                      height: '14.503px',
+                      marginLeft: '-0.58px',
+                      marginTop: '10.71px',
+                      backgroundColor: 'var(--color-white)',
+                      WebkitMaskImage:
+                        "url('/assets/figma/main/sponsor_rectangle_34624742.png')",
+                      maskImage:
+                        "url('/assets/figma/main/sponsor_rectangle_34624742.png')",
+                      WebkitMaskSize: '50px 24px',
+                      maskSize: '50px 24px',
+                      WebkitMaskPosition: '0.577px -10.708px',
+                      maskPosition: '0.577px -10.708px',
+                      WebkitMaskRepeat: 'no-repeat',
+                      maskRepeat: 'no-repeat',
+                    }}
+                  />
+                  <div
+                    className="absolute top-0 left-0"
+                    style={{
+                      width: '51.627px',
+                      height: '11.588px',
+                      marginLeft: '-0.58px',
+                      marginTop: '-0.88px',
+                      backgroundColor: '#3441ff',
+                      WebkitMaskImage:
+                        "url('/assets/figma/main/sponsor_rectangle_34624742.png')",
+                      maskImage:
+                        "url('/assets/figma/main/sponsor_rectangle_34624742.png')",
+                      WebkitMaskSize: '50px 24px',
+                      maskSize: '50px 24px',
+                      WebkitMaskPosition: '0.577px 0.88px',
+                      maskPosition: '0.577px 0.88px',
+                      WebkitMaskRepeat: 'no-repeat',
+                      maskRepeat: 'no-repeat',
+                    }}
+                  />
                 </div>
-                <div className="grid h-[20px] w-[49px] place-items-center rounded-[2px] bg-[var(--color-gray-900)] opacity-70">
-                  <p className="caption_r_10 text-[var(--color-gray-400)]">
-                    로고
-                  </p>
+                <div className="relative h-[20px] w-[49px] opacity-70">
+                  <div
+                    className="absolute top-0 left-0"
+                    style={{
+                      width: '49px',
+                      height: '20px',
+                      marginLeft: '-0.03px',
+                      marginTop: '-0.21px',
+                      backgroundColor: 'var(--color-white)',
+                      WebkitMaskImage:
+                        "url('/assets/figma/main/sponsor_rectangle_34624741.png')",
+                      maskImage:
+                        "url('/assets/figma/main/sponsor_rectangle_34624741.png')",
+                      WebkitMaskSize: '49px 20px',
+                      maskSize: '49px 20px',
+                      WebkitMaskPosition: '0.031px 0.208px',
+                      maskPosition: '0.031px 0.208px',
+                      WebkitMaskRepeat: 'no-repeat',
+                      maskRepeat: 'no-repeat',
+                    }}
+                  />
                 </div>
-                <div className="grid h-[15px] w-[50px] place-items-center rounded-[2px] bg-[var(--color-gray-900)]">
-                  <p className="caption_r_10 text-[var(--color-gray-400)]">
-                    로고
-                  </p>
+                <div className="relative h-[15px] w-[50px]">
+                  <Image
+                    src="/assets/figma/main/sponsor_image_461.png"
+                    alt=""
+                    fill
+                    className="object-contain"
+                  />
                 </div>
-                <div className="grid h-[18px] w-[50px] place-items-center rounded-[2px] bg-[var(--color-gray-900)]">
-                  <p className="caption_r_10 text-[var(--color-gray-400)]">
-                    로고
-                  </p>
+                <div className="relative h-[18px] w-[50px]">
+                  <Image
+                    src="/assets/figma/main/sponsor_image_462.png"
+                    alt=""
+                    fill
+                    className="object-cover"
+                  />
                 </div>
               </div>
             </section>
