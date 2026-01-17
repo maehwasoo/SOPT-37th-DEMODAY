@@ -57,7 +57,7 @@ function NavBottomButton({
       aria-current={active ? 'page' : undefined}
     >
       <span className="h-[24px] w-[24px]">{icon}</span>
-      <span className="title_m_12">{label}</span>
+      <span className="title_m_12 whitespace-nowrap">{label}</span>
     </button>
   );
 }
