@@ -152,7 +152,7 @@ export default function Home() {
               <p className="title_m_12 text-[var(--color-gray-200)]">
                 후원 및 협력
               </p>
-              <div className="flex w-[176px] flex-wrap items-end justify-end gap-[12px] opacity-70">
+              <div className="flex w-[176px] flex-wrap content-end items-end justify-end gap-[12px] mix-blend-luminosity">
                 <div className="grid h-[14px] w-[50px] place-items-center rounded-[2px] bg-[var(--color-gray-900)]">
                   <p className="caption_r_10 text-[var(--color-gray-400)]">
                     로고
@@ -163,7 +163,12 @@ export default function Home() {
                     로고
                   </p>
                 </div>
-                <div className="grid h-[14px] w-[50px] place-items-center rounded-[2px] bg-[var(--color-gray-900)]">
+                <div className="grid h-[24px] w-[50px] place-items-center rounded-[2px] bg-[var(--color-gray-900)] opacity-70">
+                  <p className="caption_r_10 text-[var(--color-gray-400)]">
+                    로고
+                  </p>
+                </div>
+                <div className="grid h-[20px] w-[49px] place-items-center rounded-[2px] bg-[var(--color-gray-900)] opacity-70">
                   <p className="caption_r_10 text-[var(--color-gray-400)]">
                     로고
                   </p>
