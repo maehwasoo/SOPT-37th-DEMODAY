@@ -29,34 +29,34 @@ export default function Home() {
           <section className="flex w-full flex-col items-center gap-[24px] px-[24px]">
             <div className="flex w-[286px] flex-col items-center gap-[6px]">
               <div className="flex w-[286px] items-start gap-[4px]">
-                <div className="inline-grid grid-cols-[max-content] grid-rows-[max-content] items-start justify-items-start">
-                  <div className="col-1 row-1 h-[16.002px] w-[85.081px]">
-                    <Image
-                      src="/assets/figma/main/logo_group_129.svg"
-                      alt=""
-                      width={86}
-                      height={16}
-                      className="h-full w-full"
-                    />
+                <div className="inline-grid grid-cols-[max-content] grid-rows-[max-content] items-start justify-items-start leading-[0]">
+                  <div className="relative col-1 row-1 h-[16.002px] w-[85.081px]">
+                    <div className="absolute inset-[-2.67%_-2.11%_-10.06%_-0.5%]">
+                      <img
+                        src="/assets/figma/main/logo_group_129.svg"
+                        alt=""
+                        className="block size-full max-w-none"
+                      />
+                    </div>
                   </div>
-                  <div className="col-1 row-1 ml-[89.93px] h-[16px] w-[85.073px]">
-                    <Image
-                      src="/assets/figma/main/logo_group_130.svg"
-                      alt=""
-                      width={86}
-                      height={16}
-                      className="h-full w-full"
-                    />
+                  <div className="relative col-1 row-1 ml-[89.93px] h-[16px] w-[85.073px]">
+                    <div className="absolute inset-[-2.67%_-2.11%_-10.04%_-0.5%]">
+                      <img
+                        src="/assets/figma/main/logo_group_130.svg"
+                        alt=""
+                        className="block size-full max-w-none"
+                      />
+                    </div>
                   </div>
                 </div>
-                <div className="h-[16.001px] w-[107px]">
-                  <Image
-                    src="/assets/figma/main/logo_group_1171275955.svg"
-                    alt=""
-                    width={107}
-                    height={16}
-                    className="h-full w-full"
-                  />
+                <div className="relative h-[16.001px] w-[107px]">
+                  <div className="absolute inset-[-2.67%_-1.68%_-10.93%_0]">
+                    <img
+                      src="/assets/figma/main/logo_group_1171275955.svg"
+                      alt=""
+                      className="block size-full max-w-none"
+                    />
+                  </div>
                 </div>
               </div>
               <p className="head_b_14 text-[var(--color-white)]">
