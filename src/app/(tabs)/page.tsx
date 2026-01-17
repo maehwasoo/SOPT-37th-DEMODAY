@@ -132,16 +132,16 @@ export default function Home() {
                 Connect with SOPT
               </p>
 
-              <div className="flex flex-col">
-                <div className="flex w-full items-center justify-end gap-[4px] text-[var(--color-gray-400)]">
+              <div className="flex flex-col items-start">
+                <div className="flex h-[20px] w-fit items-center gap-[4px] text-[var(--color-gray-400)]">
                   <YoutubeIcon width={20} height={20} />
                   <p className="title_m_12 opacity-80">soptmedia</p>
                 </div>
-                <div className="flex w-full items-center justify-end gap-[4px] text-[var(--color-gray-400)]">
+                <div className="flex h-[20px] w-fit items-center gap-[4px] text-[var(--color-gray-400)]">
                   <InstagramIcon width={20} height={20} />
                   <p className="title_m_12 opacity-80">sopt_official</p>
                 </div>
-                <div className="flex w-full items-center justify-end gap-[4px] text-[var(--color-gray-400)]">
+                <div className="flex h-[20px] w-fit items-center gap-[4px] text-[var(--color-gray-400)]">
                   <LinkIcon width={20} height={20} />
                   <p className="title_m_12 opacity-80">sopt.org</p>
                 </div>
