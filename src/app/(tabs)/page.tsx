@@ -77,12 +77,12 @@ export default function Home() {
             <section className="flex w-full flex-col gap-[24px] px-[16px]">
               <TagMain>행사 개요</TagMain>
               <div className="flex items-end gap-[16px] px-[4px]">
-                <div className="body_r_14 flex w-[40px] flex-col gap-[6px] text-[var(--color-gray-300)]">
+                <div className="body_r_14 flex w-[40px] shrink-0 flex-col gap-[6px] text-[var(--color-gray-300)]">
                   <p>행사명</p>
                   <p>장소</p>
                   <p>일시</p>
                 </div>
-                <div className="body_r_14 flex flex-1 flex-col gap-[6px] text-[var(--color-white)]">
+                <div className="body_r_14 flex w-[199px] shrink-0 flex-col gap-[6px] text-[var(--color-white)]">
                   <p>SOPT 37기 앱잼 데모데이 : SUNRISE</p>
                   <p className="text-[var(--color-gray-100)]">마곡 NSP홀</p>
                   <p>2025.01.24(토) 10:30 ~ 17:00</p>
