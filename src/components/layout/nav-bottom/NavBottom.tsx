@@ -17,6 +17,8 @@ import {
 type NavBottomTab = 'home' | 'product' | 'leaflet' | 'homepage';
 type NavBottomActiveTab = Exclude<NavBottomTab, 'homepage'>;
 
+const OFFICIAL_HOMEPAGE_URL = 'https://www.sopt.org/';
+
 type NavBottomProps = {
   // active tab key
   active?: NavBottomActiveTab;
@@ -83,7 +85,7 @@ export default function NavBottom({ active, onNavigate }: NavBottomProps) {
         router.push('/leaflet');
         return;
       case 'homepage':
-        router.push('/homepage');
+        window.open(OFFICIAL_HOMEPAGE_URL, '_blank', 'noopener,noreferrer');
         return;
       default:
         return;
