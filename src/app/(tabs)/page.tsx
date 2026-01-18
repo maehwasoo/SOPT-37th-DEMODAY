@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className="flex flex-col gap-[40px]">
       <section className="flex w-full flex-col items-center gap-[39px]">
-        <div className="relative aspect-[1125/1188] w-full overflow-hidden bg-[var(--color-black)]">
+        <div className="relative h-[396px] w-full bg-[var(--color-black)]">
           <Image
             src="/assets/figma/main/img_branding_main.png"
             alt=""
