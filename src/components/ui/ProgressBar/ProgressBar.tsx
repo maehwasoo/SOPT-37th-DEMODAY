@@ -6,12 +6,18 @@ export type ProgressBarProps = {
   value: number;
   min?: number;
   max?: number;
+  // track layer className
+  trackClassName?: string;
+  // indicator layer className
+  indicatorClassName?: string;
 } & Omit<HTMLAttributes<HTMLDivElement>, 'children'>;
 
 export default function ProgressBar({
   value,
   min = 0,
   max = 100,
+  trackClassName,
+  indicatorClassName,
   className,
   ...props
 }: ProgressBarProps) {
@@ -36,11 +42,21 @@ export default function ProgressBar({
     >
       <div
         aria-hidden
-        className="absolute inset-0 rounded-[25px] bg-[var(--color-gray-900)]"
+        className={[
+          'absolute inset-0 rounded-[25px] bg-[var(--color-gray-900)]',
+          trackClassName,
+        ]
+          .filter(Boolean)
+          .join(' ')}
       />
       <div
         aria-hidden
-        className="absolute top-0 left-0 h-full rounded-[25px] bg-[var(--color-37demo-red)] shadow-[0px_0px_8px_0px_var(--color-37demo-red)]"
+        className={[
+          'absolute top-0 left-0 h-full rounded-[25px] bg-[var(--color-37demo-red)] shadow-[0px_0px_8px_0px_var(--color-37demo-red)]',
+          indicatorClassName,
+        ]
+          .filter(Boolean)
+          .join(' ')}
         style={{ width: `${percent}%` }}
       />
     </div>
