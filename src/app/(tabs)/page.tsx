@@ -28,11 +28,11 @@ export default function Home() {
 
           <section className="flex w-full flex-col items-center gap-[24px] px-[24px]">
             <div className="flex w-[286.002px] flex-col items-center gap-[6px]">
-              <div className="relative h-[16.002px] w-[286px] shrink-0">
+              <div className="relative h-[16.002px] w-[286px] shrink-0 overflow-visible">
                 <img
-                  src="/assets/figma/main/img_logo.svg"
+                  src="/assets/figma/main/img_logo.png"
                   alt=""
-                  className="block size-full max-w-none"
+                  className="block w-[286px] max-w-none"
                 />
               </div>
               <p className="head_b_14 text-[var(--color-white)]">
