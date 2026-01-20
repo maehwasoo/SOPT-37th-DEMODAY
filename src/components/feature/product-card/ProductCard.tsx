@@ -2,6 +2,8 @@
 
 import type { ButtonHTMLAttributes } from 'react';
 
+import Image from 'next/image';
+
 export type ProductCardProps = {
   thumbnailSrc: string;
   thumbnailAlt?: string;
@@ -34,11 +36,13 @@ export default function ProductCard({
   return (
     <button className={mergedClassName} type={type} {...props}>
       {/* thumbnail */}
-      <div className="h-[92px] w-full shrink-0">
-        <img
-          alt={thumbnailAlt}
-          className="size-full object-cover"
+      <div className="relative h-[92px] w-full shrink-0">
+        <Image
           src={thumbnailSrc}
+          alt={thumbnailAlt}
+          fill
+          className="object-cover"
+          sizes="163px"
         />
       </div>
 
