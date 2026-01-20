@@ -33,7 +33,13 @@ type ButtonAsLinkProps = ButtonBaseProps &
 export type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps;
 
 export default function Button(props: ButtonProps) {
-  const { shape = 'square', leftIcon, className, children } = props;
+  const {
+    shape = 'square',
+    leftIcon,
+    className,
+    children,
+    ...restProps
+  } = props;
 
   const baseClassName =
     'head_b_18 inline-flex items-center justify-center gap-[8px] h-[56px] text-[var(--color-white)] bg-[var(--color-37demo-red)] active:bg-[var(--color-37demo-red-80)] disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-white)]';
@@ -61,20 +67,21 @@ export default function Button(props: ButtonProps) {
     </>
   );
 
-  if ('href' in props && props.href !== undefined) {
-    const { href, ...anchorProps } = props;
+  if ('href' in restProps && restProps.href !== undefined) {
+    const { href, ...anchorProps } = restProps;
 
     return (
-      <Link href={href} className={mergedClassName} {...anchorProps}>
+      <Link href={href} {...anchorProps} className={mergedClassName}>
         {content}
       </Link>
     );
   }
 
-  const { type = 'button', ...buttonProps } = props;
+  // internal props stripping
+  const { type = 'button', ...buttonProps } = restProps;
 
   return (
-    <button className={mergedClassName} type={type} {...buttonProps}>
+    <button {...buttonProps} className={mergedClassName} type={type}>
       {content}
     </button>
   );
