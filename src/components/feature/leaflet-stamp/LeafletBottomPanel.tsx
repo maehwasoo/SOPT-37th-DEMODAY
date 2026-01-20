@@ -81,7 +81,7 @@ function LeafletBottomPanelProgress({
             <span className="h-[24px] w-[24px] text-[var(--color-white)]">
               <QrIcon />
             </span>
-            <span className="head_b_16 text-center text-[var(--color-white)]">
+            <span className="head_b_16 text-center whitespace-nowrap text-[var(--color-white)]">
               기록 스캔하기
             </span>
           </span>
