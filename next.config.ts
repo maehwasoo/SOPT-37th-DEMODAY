@@ -1,7 +1,21 @@
-import type { NextConfig } from "next";
+import { withSentryConfig } from '@sentry/nextjs';
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
 };
 
-export default nextConfig;
+const sentryWebpackPluginOptions =
+  process.env.SENTRY_ORG && process.env.SENTRY_PROJECT
+    ? {
+        org: process.env.SENTRY_ORG,
+        project: process.env.SENTRY_PROJECT,
+        silent: !process.env.CI,
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        widenClientFileUpload: Boolean(process.env.SENTRY_AUTH_TOKEN),
+      }
+    : null;
+
+export default sentryWebpackPluginOptions
+  ? withSentryConfig(nextConfig, sentryWebpackPluginOptions)
+  : nextConfig;
