@@ -28,36 +28,12 @@ export default function Home() {
 
           <section className="flex w-full flex-col items-center gap-[24px] px-[24px]">
             <div className="flex w-[286.002px] flex-col items-center gap-[6px]">
-              <div className="relative flex w-[286px] shrink-0 items-start gap-[4px]">
-                <div className="relative inline-grid shrink-0 grid-cols-[max-content] grid-rows-[max-content] items-start justify-items-start leading-[0]">
-                  <div className="relative col-1 row-1 h-[16.002px] w-[85.081px]">
-                    <div className="absolute inset-[-2.67%_-2.11%_-10.06%_-0.5%]">
-                      <img
-                        src="/assets/figma/main/logo_group_129.svg"
-                        alt=""
-                        className="block size-full max-w-none"
-                      />
-                    </div>
-                  </div>
-                  <div className="relative col-1 row-1 ml-[89.93px] h-[16px] w-[85.073px]">
-                    <div className="absolute inset-[-2.67%_-2.11%_-10.04%_-0.5%]">
-                      <img
-                        src="/assets/figma/main/logo_group_130.svg"
-                        alt=""
-                        className="block size-full max-w-none"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="relative h-[16.001px] w-[107px] shrink-0">
-                  <div className="absolute inset-[-2.67%_-1.68%_-10.93%_0]">
-                    <img
-                      src="/assets/figma/main/logo_group_1171275955.svg"
-                      alt=""
-                      className="block size-full max-w-none"
-                    />
-                  </div>
-                </div>
+              <div className="relative h-[16.002px] w-[286px] shrink-0">
+                <img
+                  src="/assets/figma/main/img_logo.svg"
+                  alt=""
+                  className="block size-full max-w-none"
+                />
               </div>
               <p className="head_b_14 text-[var(--color-white)]">
                 치열한 기록들로 띄워낸 가장 완벽한 아침
