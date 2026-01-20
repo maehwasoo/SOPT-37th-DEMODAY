@@ -31,7 +31,7 @@ export default function NavTop(props: NavTopProps) {
             aria-label="뒤로가기"
             className="text-[var(--color-white)]"
             icon={<ArrowLeftIcon />}
-            onClick={onBack ? () => onBack() : undefined}
+            onClick={onBack}
           />
           <p className="title_m_18 text-[var(--color-white)]">{props.title}</p>
         </div>
