@@ -1,5 +1,6 @@
 import LeafletBottomPanel from './LeafletBottomPanel';
 import { LEAFLET_STAMPS } from './leafletStamp.constants';
+import type { LeafletStampKey } from './leafletStamp.constants';
 import LeafletStampDetailCard from './LeafletStampDetailCard';
 import LeafletStampGrid from './LeafletStampGrid';
 
@@ -7,9 +8,11 @@ export type LeafletStampScreenProps = {
   progressCount: number;
   totalCount?: number;
   handleDown?: boolean;
+  // completed stamp keys
+  completedStampKeys?: readonly LeafletStampKey[];
 };
 
-function getCompletedKeys(progressCount: number) {
+function getCompletedKeysFromCount(progressCount: number) {
   const completedCount = Math.max(
     0,
     Math.min(progressCount, LEAFLET_STAMPS.length)
@@ -18,13 +21,28 @@ function getCompletedKeys(progressCount: number) {
   return new Set(LEAFLET_STAMPS.slice(0, completedCount).map((s) => s.key));
 }
 
+function getCompletedKeysFromKeys(
+  completedStampKeys: readonly LeafletStampKey[]
+) {
+  const knownKeys = new Set(LEAFLET_STAMPS.map((s) => s.key));
+  return new Set(completedStampKeys.filter((key) => knownKeys.has(key)));
+}
+
 export default function LeafletStampScreen({
   progressCount,
-  totalCount = 12,
+  totalCount = LEAFLET_STAMPS.length,
   handleDown,
+  completedStampKeys,
 }: LeafletStampScreenProps) {
-  const completedKeys = getCompletedKeys(progressCount);
-  const isComplete = progressCount >= totalCount;
+  const completedKeys = completedStampKeys
+    ? getCompletedKeysFromKeys(completedStampKeys)
+    : getCompletedKeysFromCount(progressCount);
+
+  const resolvedProgressCount = completedStampKeys
+    ? completedKeys.size
+    : progressCount;
+
+  const isComplete = resolvedProgressCount >= totalCount;
 
   return (
     <section className="relative h-[531px] w-full bg-[var(--color-black)]">
@@ -47,7 +65,7 @@ export default function LeafletStampScreen({
         ) : (
           <LeafletBottomPanel
             mode="progress"
-            current={progressCount}
+            current={resolvedProgressCount}
             total={totalCount}
           />
         )}
