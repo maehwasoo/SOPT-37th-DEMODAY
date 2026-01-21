@@ -45,7 +45,7 @@ export default function ProductCard({
       {/* content */}
       <div className="flex w-[139px] shrink-0 flex-col items-start gap-[8px]">
         <div className="flex w-full shrink-0 items-center gap-[8px]">
-          <p className="head_b_16 text-[var(--color-white)]">{title}</p>
+          <p className="head_b_16 text-[var(--color-gray-100)]">{title}</p>
           <span className="body_r_12 shrink-0 rounded-[2px] bg-[var(--color-black)] px-[8px] py-[2px] text-[var(--color-gray-300)]">
             {category}
           </span>

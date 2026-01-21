@@ -50,7 +50,7 @@ export default function ProductsPageClient() {
 
       {/* contents */}
       <section className="flex flex-col gap-[8px] px-[16px] pt-[14px]">
-        <p className="body_r_14 text-[var(--color-gray-400)]">
+        <p className="body_r_14 leading-[1.45] tracking-[-0.14px] text-[var(--color-gray-400)]">
           총 {filteredProducts.length}개의 서비스
         </p>
         <div className="grid w-[343px] grid-cols-2 gap-x-[17px] gap-y-[16px]">
