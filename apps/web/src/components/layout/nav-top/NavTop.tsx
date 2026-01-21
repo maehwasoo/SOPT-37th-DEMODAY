@@ -15,6 +15,8 @@ export type NavTopProps =
 
 export default function NavTop(props: NavTopProps) {
   if (props.variant === 'sub') {
+    const onBack = props.onBack;
+
     return (
       <header
         className={[
@@ -29,7 +31,7 @@ export default function NavTop(props: NavTopProps) {
             aria-label="뒤로가기"
             className="text-[var(--color-white)]"
             icon={<ArrowLeftIcon />}
-            onClick={props.onBack ? () => props.onBack() : undefined}
+            onClick={onBack}
           />
           <p className="title_m_18 text-[var(--color-white)]">{props.title}</p>
         </div>
