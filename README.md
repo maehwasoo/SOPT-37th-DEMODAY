@@ -7,6 +7,10 @@
 - `apps/web`: Next.js (프론트엔드)
 - `apps/api`: Spring Boot (백엔드)
 
+## 문서
+
+- 아키텍처/구조 문서: [`docs/README.md`](./docs/README.md)
+
 ## 로컬 실행
 
 ### 요구 사항
