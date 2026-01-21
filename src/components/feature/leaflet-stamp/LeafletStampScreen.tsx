@@ -1,5 +1,3 @@
-import NavBottom from '@/components/layout/nav-bottom/NavBottom';
-
 import LeafletBottomPanel from './LeafletBottomPanel';
 import { LEAFLET_STAMPS } from './leafletStamp.constants';
 import LeafletStampDetailCard from './LeafletStampDetailCard';
@@ -29,7 +27,7 @@ export default function LeafletStampScreen({
   const isComplete = progressCount >= totalCount;
 
   return (
-    <section className="relative h-[611px] w-[375px] bg-[var(--color-black)]">
+    <section className="relative h-[531px] w-full bg-[var(--color-black)]">
       <div className="px-[23px] pt-[25px]">
         <div className="flex flex-col items-center gap-[24px]">
           <LeafletStampDetailCard />
@@ -43,7 +41,7 @@ export default function LeafletStampScreen({
       </div>
 
       {/* bottom sheets */}
-      <div className="absolute bottom-[80px] left-0 w-full">
+      <div className="absolute bottom-0 left-0 w-full">
         {isComplete ? (
           <LeafletBottomPanel mode="complete" handleDown={handleDown} />
         ) : (
@@ -53,11 +51,6 @@ export default function LeafletStampScreen({
             total={totalCount}
           />
         )}
-      </div>
-
-      {/* bottom navigation */}
-      <div className="absolute bottom-0 left-0 w-full">
-        <NavBottom active="leaflet" />
       </div>
     </section>
   );
