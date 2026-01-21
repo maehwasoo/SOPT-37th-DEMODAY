@@ -9,7 +9,7 @@
 
 ## 문서
 
-- 아키텍처/구조 문서: [`docs/README.md`](./docs/README.md)
+- 문서(MOC): [`AGENTS.md`](./AGENTS.md)
 
 ## 로컬 실행
 
