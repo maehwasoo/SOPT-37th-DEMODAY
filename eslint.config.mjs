@@ -8,12 +8,13 @@ const eslintConfig = defineConfig([
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
-    '.next/**',
-    'out/**',
-    'build/**',
-    'storybook-static/**',
+    '**/.next/**',
+    '**/out/**',
+    '**/build/**',
+    '**/storybook-static/**',
     'debug-storybook.log',
-    'next-env.d.ts',
+    '**/next-env.d.ts',
+    '.turbo/**',
   ]),
   {
     plugins: {

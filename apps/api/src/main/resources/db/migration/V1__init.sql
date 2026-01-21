@@ -1,0 +1,2 @@
+-- Flyway baseline migration
+-- Schema will be defined in follow-up issues once QR 정책/인증 요구사항이 확정됩니다.

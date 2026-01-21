@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: sopt-demoday-postgres
+    environment:
+      POSTGRES_DB: demoday
+      POSTGRES_USER: demoday
+      POSTGRES_PASSWORD: demoday
+    ports:
+      - '5432:5432'
+    volumes:
+      - demoday-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U demoday -d demoday']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  demoday-postgres-data:
