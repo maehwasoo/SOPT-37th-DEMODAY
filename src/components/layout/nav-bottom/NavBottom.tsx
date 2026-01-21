@@ -94,7 +94,7 @@ export default function NavBottom({ active, onNavigate }: NavBottomProps) {
 
   return (
     <nav
-      className="shadow_top flex h-[81px] items-start justify-center bg-[var(--color-black)] px-[32px] py-[7px]"
+      className="shadow_top flex h-[80px] items-start justify-center bg-[var(--color-black)] px-[32px] py-[7px]"
       aria-label="하단 탭 내비게이션"
     >
       <div className="flex items-center gap-[10px]">
