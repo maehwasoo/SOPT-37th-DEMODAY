@@ -1,3 +1,14 @@
+import { Footer } from '@/components';
+
+import ProductsPageClient from './ProductsPageClient';
+
 export default function ProductsPage() {
-  return <main className="px-[16px] py-[24px]" />;
+  return (
+    <main className="bg-[var(--color-black)]">
+      <ProductsPageClient />
+      <div className="mt-[48px]">
+        <Footer />
+      </div>
+    </main>
+  );
 }
