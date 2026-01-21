@@ -5,7 +5,7 @@ import { Footer, NavBottom } from '@/components';
 export default function TabsLayout({ children }: { children: ReactNode }) {
   return (
     <div className="mx-auto w-full max-w-[375px]">
-      <div className="pb-[81px]">
+      <div className="pb-[80px]">
         {children}
         <Footer />
       </div>

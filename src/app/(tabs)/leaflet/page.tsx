@@ -1,12 +1,10 @@
-import { TagMain } from '@/components';
+import { LeafletStampScreen, NavTop } from '@/components';
 
 export default function LeafletPage() {
   return (
-    <main className="px-[16px] py-[24px]">
-      <TagMain>리플렛</TagMain>
-      <p className="body_r_14 mt-[12px] text-[var(--color-gray-300)]">
-        준비 중입니다.
-      </p>
+    <main className="bg-[var(--color-black)]">
+      <NavTop variant="main" />
+      <LeafletStampScreen progressCount={0} />
     </main>
   );
 }
