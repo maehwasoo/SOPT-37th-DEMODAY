@@ -6,6 +6,8 @@ Primary entrypoint (MOC): [`AGENTS.md`](../AGENTS.md)
 
 Architecture (reading order): [`docs/architecture/README.md`](./architecture/README.md)
 
+Leaflet stamp contract: [`docs/architecture/08-leaflet-stamp-contract.md`](./architecture/08-leaflet-stamp-contract.md)
+
 ## Rules
 
 - Keep docs **source-of-truth aligned** (describe what exists in the repo today).
