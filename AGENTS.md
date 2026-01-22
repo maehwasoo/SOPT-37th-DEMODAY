@@ -24,6 +24,7 @@ Keep this file short and link-driven.
 - Runtime & deployment: [`docs/architecture/05-runtime-and-deployment.md`](./docs/architecture/05-runtime-and-deployment.md)
 - Observability (Sentry/GA): [`docs/architecture/06-observability.md`](./docs/architecture/06-observability.md)
 - Testing & quality: [`docs/architecture/07-testing-and-quality.md`](./docs/architecture/07-testing-and-quality.md)
+- Leaflet stamp contract: [`docs/architecture/08-leaflet-stamp-contract.md`](./docs/architecture/08-leaflet-stamp-contract.md)
 
 ## 3) Quick pointers (read this when stuck)
 
