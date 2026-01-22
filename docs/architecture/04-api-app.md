@@ -38,9 +38,10 @@ Flyway migrations live under:
 
 - `apps/api/src/main/resources/db/migration`
 
-Current baseline:
+Current migrations:
 
-- `V1__init.sql`: baseline migration placeholder (schema is intentionally deferred)
+- `V1__init.sql`: baseline migration placeholder
+- `V2__leaflet_stamp.sql`: leaflet stamp schema (Participant / Session / StampClaim + code→stampKey mapping)
 
 ## Tests
 
@@ -49,9 +50,8 @@ Current baseline:
 
 ## Notes on current scope
 
-The API module is intentionally minimal at this stage (health endpoint + migration baseline).
-When domain requirements (e.g., QR policy/auth) are finalized, follow-up issues should define:
+The API module is intentionally minimal at this stage (health endpoint + leaflet stamp DB schema).
+When additional domain requirements are finalized, follow-up issues should define:
 
-- schema (Flyway migrations)
 - domain model and application boundaries
 - API endpoints consumed by `apps/web`
