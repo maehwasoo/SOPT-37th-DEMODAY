@@ -236,6 +236,7 @@ Current always-on components:
 Rule of thumb:
 
 - Fixed cost is roughly **~$0.065/hour** → **~$1.55/day** (24h)
+- Rough monthly fixed cost is **~$47/month** (730h)
 
 If you keep the infra running **until 2026-01-24**, your additional cost is approximately:
 
