@@ -58,11 +58,11 @@ export default function LeafletScanPageClient() {
   }, [router]);
 
   const goLeafletWithCode = useCallback(
-    (raw: string, method: 'camera') => {
+    (raw: string) => {
       const code = extractLeafletCode(raw, origin);
       if (!code) return;
 
-      trackEvent('leaflet_scan_success', { method });
+      trackEvent('leaflet_scan_success', { method: 'camera' });
       router.replace(`/leaflet?code=${encodeURIComponent(code)}`);
     },
     [origin, router]
@@ -102,7 +102,7 @@ export default function LeafletScanPageClient() {
             if (result && !scannedRef.current) {
               scannedRef.current = true;
               controls.stop();
-              goLeafletWithCode(result.getText(), 'camera');
+              goLeafletWithCode(result.getText());
               return;
             }
 
