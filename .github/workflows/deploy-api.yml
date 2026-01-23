@@ -1,0 +1,100 @@
+name: Deploy API (prod)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - apps/api/**
+      - .github/workflows/deploy-api.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: deploy-api-prod
+  cancel-in-progress: true
+
+env:
+  AWS_REGION: ap-northeast-2
+  S3_BUCKET: demoday-artifacts-apne2-754137958384
+  EC2_INSTANCE_ID: i-0578ba6b771e82518
+  ROLE_TO_ASSUME: arn:aws:iam::754137958384:role/demoday-github-actions-deploy-role
+  HEALTHCHECK_URL: https://api.sopt-demoday.org/api/health
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.ROLE_TO_ASSUME }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Ensure gradlew is executable
+        run: chmod +x apps/api/gradlew
+
+      - name: Build bootJar (apps/api)
+        working-directory: apps/api
+        run: ./gradlew bootJar -x test
+
+      - name: Resolve jar path
+        id: jar
+        run: |
+          JAR_PATH="$(ls apps/api/build/libs/*.jar | grep -v plain | head -n 1)"
+          echo "path=$JAR_PATH" >> "$GITHUB_OUTPUT"
+
+      - name: Upload jar to S3
+        run: |
+          aws s3 cp "${{ steps.jar.outputs.path }}" "s3://${S3_BUCKET}/api/${GITHUB_SHA}/api.jar"
+
+      - name: Deploy to EC2 via SSM
+        id: deploy
+        run: |
+          COMMAND_ID="$(
+            aws ssm send-command \
+              --region "$AWS_REGION" \
+              --instance-ids "$EC2_INSTANCE_ID" \
+              --document-name "AWS-RunShellScript" \
+              --comment "Deploy API ${GITHUB_SHA}" \
+              --parameters "commands=[\"sudo aws s3 cp s3://${S3_BUCKET}/api/${GITHUB_SHA}/api.jar /opt/demoday/api/api.jar\",\"sudo systemctl restart demoday-api\"]" \
+              --query "Command.CommandId" \
+              --output text
+          )"
+          echo "command_id=$COMMAND_ID" >> "$GITHUB_OUTPUT"
+
+          aws ssm wait command-executed \
+            --region "$AWS_REGION" \
+            --command-id "$COMMAND_ID" \
+            --instance-id "$EC2_INSTANCE_ID"
+
+          aws ssm get-command-invocation \
+            --region "$AWS_REGION" \
+            --command-id "$COMMAND_ID" \
+            --instance-id "$EC2_INSTANCE_ID" \
+            --query '{Status:Status,StandardOutputContent:StandardOutputContent,StandardErrorContent:StandardErrorContent}'
+
+      - name: Health check
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fsS "$HEALTHCHECK_URL" | grep -q "ok"; then
+              echo "Health check OK"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Health check failed"
+          exit 1
