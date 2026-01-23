@@ -27,6 +27,11 @@ export default function LeafletPageClient() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  useEffect(() => {
+    router.prefetch('/login');
+    router.prefetch('/leaflet/scan');
+  }, [router]);
+
   const [pendingCode, setPendingCode] = useState(() => {
     const raw = searchParams.get('code') ?? '';
     return raw.trim();
@@ -62,6 +67,10 @@ export default function LeafletPageClient() {
   const redirectToLogin = useCallback(() => {
     router.replace(`/login?next=${encodeURIComponent(nextPath)}`);
   }, [nextPath, router]);
+
+  const openScan = useCallback(() => {
+    router.push('/leaflet/scan');
+  }, [router]);
 
   const loadProgress = useCallback(async () => {
     const response = await leafletProgressApi();
@@ -154,6 +163,7 @@ export default function LeafletPageClient() {
         progressCount={progress?.completedCount ?? 0}
         totalCount={progress?.totalCount}
         completedStampKeys={completedStampKeys}
+        onScan={openScan}
       />
 
       {/* toast */}
