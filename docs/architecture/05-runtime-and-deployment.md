@@ -1,5 +1,9 @@
 # Runtime & Deployment
 
+For a detailed inventory of the current AWS setup and the API deploy pipeline, see:
+
+- [`docs/architecture/09-aws-infrastructure-and-deployment.md`](./09-aws-infrastructure-and-deployment.md)
+
 ## Local development (recommended)
 
 1. Start Postgres:
@@ -34,22 +38,32 @@ Vercel build configuration is defined in `vercel.json`:
 - Build target: `apps/web/package.json`
 - Builder: `@vercel/next`
 
+DNS is managed via Route 53 (see `docs/architecture/09-aws-infrastructure-and-deployment.md` for the current records).
+
 ## Deployment (api)
 
-The API is deployed outside of Vercel.
+The API is deployed outside of Vercel and runs on AWS.
 
 - Runtime target: AWS EC2 (single instance) + AWS RDS(Postgres)
 - Region: `ap-northeast-2` (Seoul)
-- Access: AWS Systems Manager (SSM) Session Manager
-- Secrets: AWS Secrets Manager (DB master password)
-- DNS/HTTPS: `api.<domain>` will be configured after the domain is decided
+- Access: AWS Systems Manager (SSM) Session Manager (SSH is also possible, but SSM is preferred)
+- Secrets: AWS Secrets Manager (RDS master password)
+- DNS/HTTPS: `https://api.sopt-demoday.org` (see Route 53 inventory in `docs/architecture/09-aws-infrastructure-and-deployment.md`)
 
 ### Notes
 
 - The API requires **Java 21** (`apps/api/build.gradle` toolchain).
-- Since the final domain is not decided yet, the infra can be created first and DNS/HTTPS can be applied later.
+- The EC2 deploy workflow expects a systemd service named `demoday-api` on the instance.
 
-### Runbook (manual)
+### Deployment automation (current)
+
+Production deploy is automated via GitHub Actions:
+
+- Workflow: `.github/workflows/deploy-api.yml`
+- Trigger: `push` to `main` (API changes only) or manual (`workflow_dispatch`)
+- Mechanism: build jar → upload to S3 → SSM send-command on EC2 → restart `demoday-api` → health check
+
+### Runbook (manual fallback)
 
 1. Provision infra (Issue #59):
    - EC2 1 instance
@@ -82,6 +96,8 @@ The API is deployed outside of Vercel.
 ### Teardown checklist (post-event)
 
 - Terminate EC2
+- Release Elastic IP (to stop public IPv4 hourly charge)
 - Delete RDS instance (and snapshots if created)
+- Delete artifacts under the S3 prefix if you don't need rollback history
 - Delete security groups (EC2 SG, RDS SG)
 - Delete IAM instance profile/role if not reused

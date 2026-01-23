@@ -22,6 +22,7 @@ Keep this file short and link-driven.
 - Web app (Next.js): [`docs/architecture/03-web-app.md`](./docs/architecture/03-web-app.md)
 - API app (Spring Boot): [`docs/architecture/04-api-app.md`](./docs/architecture/04-api-app.md)
 - Runtime & deployment: [`docs/architecture/05-runtime-and-deployment.md`](./docs/architecture/05-runtime-and-deployment.md)
+- AWS infrastructure & deployment: [`docs/architecture/09-aws-infrastructure-and-deployment.md`](./docs/architecture/09-aws-infrastructure-and-deployment.md)
 - Observability (Sentry/GA): [`docs/architecture/06-observability.md`](./docs/architecture/06-observability.md)
 - Testing & quality: [`docs/architecture/07-testing-and-quality.md`](./docs/architecture/07-testing-and-quality.md)
 - Leaflet stamp contract: [`docs/architecture/08-leaflet-stamp-contract.md`](./docs/architecture/08-leaflet-stamp-contract.md)
