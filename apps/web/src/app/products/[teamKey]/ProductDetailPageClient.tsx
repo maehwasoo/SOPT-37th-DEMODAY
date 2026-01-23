@@ -138,7 +138,7 @@ export default function ProductDetailPageClient({
 
               {memberRows.length ? (
                 <div className="flex w-full items-end gap-[16px]">
-                  <div className="flex w-[90px] flex-col items-start">
+                  <div className="flex flex-none flex-col items-start">
                     {memberRows.map((row) => {
                       const meta = ROLE_META[row.role];
 
@@ -191,7 +191,7 @@ export default function ProductDetailPageClient({
                 });
               }}
             >
-              <div className="absolute top-[14px] left-[16px] flex w-[228px] flex-col items-start">
+              <div className="absolute top-[14px] right-[78px] left-[16px] flex flex-col items-start">
                 <div className="flex items-center gap-[8px]">
                   <span className="h-[24px] w-[24px] text-[var(--color-37demo-red)]">
                     <SunriseIcon />
@@ -201,7 +201,7 @@ export default function ProductDetailPageClient({
                   </p>
                 </div>
 
-                <div className="head_b_16 mt-0 text-[var(--color-white)]">
+                <div className="head_b_16 mt-0 break-keep text-[var(--color-white)]">
                   <p className="mb-0">
                     온라인 리플렛을 통해 부스별 도장을 찍고
                   </p>
