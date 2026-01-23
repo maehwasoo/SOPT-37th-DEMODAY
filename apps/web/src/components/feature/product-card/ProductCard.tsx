@@ -23,7 +23,7 @@ export default function ProductCard({
   ...props
 }: ProductCardProps) {
   const baseClassName = [
-    'flex w-[163px] flex-col items-center gap-[10px] overflow-hidden rounded-[2px]',
+    'flex w-full flex-col gap-[10px] overflow-hidden rounded-[2px]',
     'border-0 px-0 pb-[6px] pt-0',
     'cursor-pointer text-left',
     'bg-[var(--color-gray-900)] active:bg-[var(--color-black)] active:opacity-80',
@@ -42,12 +42,12 @@ export default function ProductCard({
           alt={thumbnailAlt}
           fill
           className="object-cover"
-          sizes="163px"
+          sizes="(max-width: 440px) calc((100vw - 49px) / 2), 196px"
         />
       </div>
 
       {/* content */}
-      <div className="flex w-[139px] shrink-0 flex-col items-start gap-[8px]">
+      <div className="flex w-full shrink-0 flex-col items-start gap-[8px] px-[12px]">
         <div className="flex w-full shrink-0 items-center gap-[8px]">
           <p className="head_b_16 text-[var(--color-gray-100)]">{title}</p>
           <span className="body_r_12 shrink-0 rounded-[2px] bg-[var(--color-black)] px-[8px] py-[2px] text-[var(--color-gray-300)]">

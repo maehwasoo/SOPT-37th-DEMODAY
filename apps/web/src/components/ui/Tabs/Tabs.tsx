@@ -75,13 +75,13 @@ export default function Tabs({
   };
 
   const tabBaseClassName =
-    'inline-flex cursor-pointer items-center justify-center w-[114px] p-[10px] bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-white)]';
+    'inline-flex min-w-0 flex-1 cursor-pointer items-center justify-center p-[10px] bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-white)]';
 
   return (
     <div
       aria-label="Tabs"
       className={[
-        'flex w-[375px] items-end justify-center bg-[var(--color-black)] px-[16px] py-0',
+        'flex w-full items-end justify-center bg-[var(--color-black)] px-[16px] py-0',
         className,
       ]
         .filter(Boolean)

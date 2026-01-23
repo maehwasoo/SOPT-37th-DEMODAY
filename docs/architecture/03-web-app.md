@@ -17,18 +17,21 @@ Routes live under `apps/web/src/app`.
   - Injects GA script when `NEXT_PUBLIC_GA_ID` is set
 - Tab group layout: `apps/web/src/app/(tabs)/layout.tsx`
   - Wraps tab pages with `Footer` and fixed `NavBottom`
-  - Applies a mobile-first width constraint (`max-w-[375px]`)
+  - Applies a mobile-first width constraint (`max-w-[var(--app-max-width)]`)
+  - Adds safe-area bottom padding for fixed UI
 
 ## Route inventory (current)
 
 `(tabs)` is a route group (it does not appear in the URL path).
 
-| Route       | File                                        | Notes                                |
-| ----------- | ------------------------------------------- | ------------------------------------ |
-| `/`         | `apps/web/src/app/(tabs)/page.tsx`          | Landing page (branding + event info) |
-| `/products` | `apps/web/src/app/(tabs)/products/page.tsx` | Product list screen                  |
-| `/homepage` | `apps/web/src/app/(tabs)/homepage/page.tsx` | Placeholder page                     |
-| `/leaflet`  | `apps/web/src/app/(tabs)/leaflet/page.tsx`  | Leaflet stamp screen                 |
+| Route                  | File                                             | Notes                                |
+| ---------------------- | ------------------------------------------------ | ------------------------------------ |
+| `/`                    | `apps/web/src/app/(tabs)/page.tsx`               | Landing page (branding + event info) |
+| `/products`            | `apps/web/src/app/(tabs)/products/page.tsx`      | Product list screen                  |
+| `/products/:productId` | `apps/web/src/app/products/[productId]/page.tsx` | Product detail screen                |
+| `/homepage`            | `apps/web/src/app/(tabs)/homepage/page.tsx`      | Placeholder page                     |
+| `/leaflet`             | `apps/web/src/app/(tabs)/leaflet/page.tsx`       | Leaflet stamp screen                 |
+| `/leaflet/scan`        | `apps/web/src/app/(tabs)/leaflet/scan/page.tsx`  | Leaflet QR scan screen               |
 
 ### Error handling
 
@@ -75,6 +78,16 @@ Global styling is composed of:
 - `apps/web/src/styles/global.css`: global base styles and app-wide defaults
 - `apps/web/src/styles/theme.css`: CSS variables (colors, typography utilities)
 - `apps/web/src/styles/fonts.css`: font-face registrations
+
+### Mobile width + safe-area policy
+
+- Width target: 360–440px
+  - Max container width is controlled via `--app-max-width` (`apps/web/src/styles/global.css`)
+  - Layout wrappers use `max-w-[var(--app-max-width)]` and `mx-auto` for consistent centering
+- Safe-area support (iOS notch / home indicator)
+  - `export const viewport` enables `viewport-fit=cover` (`apps/web/src/app/layout.tsx`)
+  - `--safe-area-*` CSS variables wrap `env(safe-area-inset-*)` (`apps/web/src/styles/global.css`)
+  - Fixed bottom UI pads by `--safe-area-bottom` to avoid overlap (`apps/web/src/app/(tabs)/layout.tsx`)
 
 ## Storybook
 
