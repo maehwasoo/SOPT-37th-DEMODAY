@@ -3,8 +3,10 @@ package com.sopt.demoday.api.leaflet;
 import com.sopt.demoday.api.auth.service.AuthService;
 import com.sopt.demoday.api.auth.service.SessionCookieService;
 import com.sopt.demoday.api.common.error.ErrorResponse;
+import com.sopt.demoday.api.leaflet.code.StampCode;
 import com.sopt.demoday.api.leaflet.dto.LeafletClaimRequest;
 import com.sopt.demoday.api.leaflet.dto.LeafletProgressResponse;
+import com.sopt.demoday.api.leaflet.dto.LeafletStampCodeResponse;
 import com.sopt.demoday.api.participant.Participant;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -125,6 +127,51 @@ public class LeafletController {
 	) {
 		final Participant participant = requireParticipant(request);
 		return ResponseEntity.ok(leafletService.claim(participant, requestBody.code()));
+	}
+
+	@Operation(
+		summary = "Get stamp code for current team",
+		description = "Returns the current team's stamp code for generating a booth QR."
+	)
+	@ApiResponses({
+		@ApiResponse(
+			responseCode = "200",
+			description = "OK",
+			content = @Content(
+				mediaType = "application/json",
+				schema = @Schema(implementation = LeafletStampCodeResponse.class)
+			)
+		),
+		@ApiResponse(
+			responseCode = "401",
+			description = "Unauthorized",
+			content = @Content(
+				mediaType = "application/json",
+				schema = @Schema(implementation = ErrorResponse.class)
+			)
+		),
+		@ApiResponse(
+			responseCode = "404",
+			description = "Not Found",
+			content = @Content(
+				mediaType = "application/json",
+				schema = @Schema(implementation = ErrorResponse.class)
+			)
+		)
+	})
+	@GetMapping("/api/leaflet/stamp-code")
+	public ResponseEntity<LeafletStampCodeResponse> stampCode(
+		@Parameter(hidden = true) final HttpServletRequest request
+	) {
+		final Participant participant = requireParticipant(request);
+
+		final String stampKey = participant.getTeamKey();
+		if (!LeafletStampKeys.ALLOWLIST.contains(stampKey)) {
+			return ResponseEntity.notFound().build();
+		}
+
+		final StampCode stampCode = leafletService.getAvailableStampCodeByStampKey(stampKey);
+		return ResponseEntity.ok(new LeafletStampCodeResponse(stampCode.getCode(), stampCode.getStampKey()));
 	}
 
 	private Participant requireParticipant(final HttpServletRequest request) {
