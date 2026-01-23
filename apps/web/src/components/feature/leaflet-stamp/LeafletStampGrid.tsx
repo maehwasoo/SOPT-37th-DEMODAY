@@ -11,7 +11,7 @@ export default function LeafletStampGrid({
   completedKeys,
 }: LeafletStampGridProps) {
   return (
-    <div className="inline-grid grid-cols-4 grid-rows-3 gap-[10px]">
+    <div className="grid w-full max-w-[302px] grid-cols-4 grid-rows-3 gap-[10px]">
       {stamps.map((stamp) => (
         <LeafletStampTile
           key={stamp.key}
