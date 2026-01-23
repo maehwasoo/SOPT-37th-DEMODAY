@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import NavTop from '@/components/layout/nav-top/NavTop';
 import { loginApi } from '@/lib/api';
 
-const BRANDING_BG_SRC = '/assets/figma/main/img_branding_main.png';
+const BRANDING_BG_SRC = '/assets/figma/main/img_branding_main.webp';
 
 const TEAM_ICON_SRC = '/assets/figma/login/icon-team.svg';
 const PERSON_ICON_SRC = '/assets/figma/login/icon-person.svg';
