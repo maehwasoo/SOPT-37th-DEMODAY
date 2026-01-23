@@ -216,13 +216,11 @@ function TextInput({
   onChange: (value: string) => void;
   placeholder: string;
 }) {
-  const hasValue = value.length > 0;
-
   return (
     <div className="h-[56px] w-full rounded-[4px] bg-[var(--color-gray-900)] px-[20px] py-[14px]">
       <input
         className={[
-          hasValue ? 'body_r_16' : 'body_r_14',
+          'body_r_16',
           'h-full w-full bg-transparent text-[var(--color-white)] outline-none placeholder:text-[var(--color-gray-600)]',
         ].join(' ')}
         value={value}
