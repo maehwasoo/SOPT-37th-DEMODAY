@@ -10,6 +10,8 @@
 ## 문서
 
 - 문서(MOC): [`AGENTS.md`](./AGENTS.md)
+- 아키텍처(읽는 순서): [`docs/architecture/README.md`](./docs/architecture/README.md)
+- AWS 인프라/배포: [`docs/architecture/09-aws-infrastructure-and-deployment.md`](./docs/architecture/09-aws-infrastructure-and-deployment.md)
 
 ## 로컬 실행
 
