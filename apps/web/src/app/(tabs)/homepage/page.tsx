@@ -1,4 +1,4 @@
-import { TagMain } from '@/components';
+import TagMain from '@/components/feature/section-header/TagMain';
 
 export default function HomepagePlaceholderPage() {
   return (
