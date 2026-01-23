@@ -17,9 +17,6 @@ const eslintConfig = defineConfig([
     '.turbo/**',
   ]),
   {
-    plugins: {
-      import: (await import('eslint-plugin-import')).default,
-    },
     rules: {
       'import/order': [
         'error',
