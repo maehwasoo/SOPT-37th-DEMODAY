@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, type ReactElement } from 'react';
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -13,10 +13,11 @@ import {
   PlanningIcon,
   ServerIcon,
   SunriseIcon,
+  WebIcon,
 } from '@/components/icons';
 import { Footer, NavTop } from '@/components/layout';
 import { TagProduct } from '@/components/ui';
-import type { Product, ProductPlatform } from '@/data/products';
+import type { Product, ProductPlatform, ProductRoleKey } from '@/data/products';
 import { trackEvent } from '@/lib/ga';
 
 type ProductDetailPageClientProps = {
@@ -29,60 +30,55 @@ const PLATFORM_LABEL: Record<ProductPlatform, string> = {
   desktop_web: '데스크탑 웹',
 };
 
-const PRODUCT_DETAIL_DESCRIPTION =
-  '작품 상세 설명입니다. 저희서비스는 샬랴샬라해서 얄라쿵디더헝쿵작품 상세 설명입니다. 저희서비스는 샬랴샬라해서 얄라쿵디더헝쿵작품 상세 설명입니다. 저희서비스는 샬랴샬라해서 공백포함102자';
-
-const TEAM_ROWS = [
-  {
-    key: 'planning',
+const ROLE_META: Record<
+  ProductRoleKey,
+  { label: string; iconClassName: string; icon: ReactElement }
+> = {
+  planning: {
     label: '기획',
     iconClassName:
       'pt-[2.78px] pr-[5.6px] pb-[2.78px] pl-[5.12px] text-[var(--color-37demo-red)]',
     icon: <PlanningIcon width="100%" height="100%" className="size-full" />,
-    members: '김솝트, 최윤아',
   },
-  {
-    key: 'design',
+  design: {
     label: '디자인',
     iconClassName:
       'pt-[6.8px] pr-[1.9px] pb-[6.6px] pl-[2px] text-[var(--color-37demo-red)]',
     icon: <DesignIcon width="100%" height="100%" className="size-full" />,
-    members: '김솝트, 하수정',
   },
-  {
-    key: 'android',
-    label: '안드로이드',
-    iconClassName:
-      'pt-[3.6px] pr-[4.86px] pb-[4.32px] pl-[4.8px] text-[var(--color-37demo-red)]',
-    icon: <AndroidIcon width="100%" height="100%" className="size-full" />,
-    members: '김솝트, 박동민, 박동민, 박동민',
-  },
-  {
-    key: 'ios',
+  ios: {
     label: 'iOS',
     iconClassName:
       'pt-[3.8px] pr-[3.79px] pb-[3.06px] pl-[3.6px] text-[var(--color-37demo-red)]',
     icon: <IosIcon width="100%" height="100%" className="size-full" />,
-    members: '김솝트, 이명진, 이명진, 이명진',
   },
-  {
-    key: 'server',
+  android: {
+    label: '안드로이드',
+    iconClassName:
+      'pt-[3.6px] pr-[4.86px] pb-[4.32px] pl-[4.8px] text-[var(--color-37demo-red)]',
+    icon: <AndroidIcon width="100%" height="100%" className="size-full" />,
+  },
+  web: {
+    label: '웹',
+    iconClassName:
+      'pt-[5.9px] pr-[1.56px] pb-[6.03px] pl-[1.61px] text-[var(--color-37demo-red)]',
+    icon: <WebIcon width="100%" height="100%" className="size-full" />,
+  },
+  server: {
     label: '서버',
     iconClassName:
       'pt-[2.4px] pr-[7.2px] pb-[2.5px] pl-[7.4px] text-[var(--color-37demo-red)]',
     icon: <ServerIcon width="100%" height="100%" className="size-full" />,
-    members: '김솝트, 전재연',
   },
-] as const;
+};
 
 export default function ProductDetailPageClient({
   product,
 }: ProductDetailPageClientProps) {
   const router = useRouter();
 
-  const platformLabel = product.platform
-    ? PLATFORM_LABEL[product.platform]
-    : null;
+  const platformLabel = PLATFORM_LABEL[product.platform];
+  const memberRows = product.memberRows;
 
   useEffect(() => {
     trackEvent('product_detail_view', {
@@ -107,17 +103,21 @@ export default function ProductDetailPageClient({
           {/* title */}
           <section className="flex flex-col gap-[16px]">
             <div className="relative aspect-[343/191] w-full">
-              <Image
-                src={product.thumbnailSrc}
-                alt={product.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 440px) calc(100vw - 32px), 408px"
-                priority
-              />
+              {product.thumbnailSrc ? (
+                <Image
+                  src={product.thumbnailSrc}
+                  alt={product.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 440px) calc(100vw - 32px), 408px"
+                  priority
+                />
+              ) : (
+                <div className="h-full w-full bg-[var(--color-gray-800)]" />
+              )}
             </div>
 
-            <div className="flex h-[272px] w-full flex-col items-start gap-[12px] rounded-[2px] bg-[var(--color-gray-900)] p-[12px]">
+            <div className="flex min-h-[272px] w-full flex-col items-start gap-[12px] rounded-[2px] bg-[var(--color-gray-900)] p-[12px]">
               <div className="flex w-full flex-col items-start gap-[16px]">
                 <div className="flex items-center gap-[8px]">
                   <p className="head_b_20 text-[var(--color-white)]">
@@ -125,51 +125,59 @@ export default function ProductDetailPageClient({
                   </p>
                   <div className="flex items-start gap-[6px]">
                     <TagProduct>{product.category}</TagProduct>
-                    {platformLabel ? (
-                      <TagProduct>{platformLabel}</TagProduct>
-                    ) : null}
+                    <TagProduct>{platformLabel}</TagProduct>
                   </div>
                 </div>
 
                 <div className="flex w-full items-center justify-center border-b border-solid border-[var(--color-gray-800)] px-0 pt-0 pb-[12px]">
                   <p className="body_r_14 h-[60px] flex-1 text-[var(--color-white)]">
-                    {PRODUCT_DETAIL_DESCRIPTION}
+                    {product.description}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-end gap-[16px]">
-                <div className="flex w-[79px] flex-col items-start">
-                  {TEAM_ROWS.map((row) => (
-                    <div
-                      key={row.key}
-                      className="flex items-end gap-[2px]"
-                      aria-label={row.label}
-                    >
-                      <span
-                        aria-hidden
-                        className={[
-                          'h-[24px] w-[24px] shrink-0',
-                          row.iconClassName,
-                        ].join(' ')}
-                      >
-                        {row.icon}
-                      </span>
-                      <p className="body_r_14 text-[var(--color-gray-300)]">
-                        {row.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+              {memberRows.length ? (
+                <div className="flex items-end gap-[16px]">
+                  <div className="flex w-[79px] flex-col items-start">
+                    {memberRows.map((row) => {
+                      const meta = ROLE_META[row.role];
 
-                <div className="body_r_14 flex w-[147px] flex-col items-start gap-[4px] text-[var(--color-gray-300)]">
-                  {TEAM_ROWS.map((row) => (
-                    <p key={row.key} className="w-full">
-                      {row.members}
-                    </p>
-                  ))}
+                      return (
+                        <div
+                          key={row.role}
+                          className="flex items-end gap-[2px]"
+                          aria-label={meta.label}
+                        >
+                          <span
+                            aria-hidden
+                            className={[
+                              'h-[24px] w-[24px] shrink-0',
+                              meta.iconClassName,
+                            ].join(' ')}
+                          >
+                            {meta.icon}
+                          </span>
+                          <p className="body_r_14 text-[var(--color-gray-300)]">
+                            {meta.label}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <div className="body_r_14 flex w-[147px] flex-col items-start gap-[4px] text-[var(--color-gray-300)]">
+                    {memberRows.map((row) => {
+                      const membersText = row.members.join(' ');
+
+                      return (
+                        <p key={row.role} className="w-full">
+                          {membersText || '\u00A0'}
+                        </p>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
 
             <a
@@ -208,10 +216,16 @@ export default function ProductDetailPageClient({
           </section>
 
           {/* detail image */}
-          <div
-            className="h-[1190px] w-full bg-[var(--color-gray-200)]"
-            aria-label="상세 이미지 영역"
-          />
+          {product.detailImageSrc ? (
+            <div aria-label="상세 이미지 영역">
+              <img
+                src={product.detailImageSrc}
+                alt={`${product.title} 상세 이미지`}
+                className="h-auto w-full"
+                loading="lazy"
+              />
+            </div>
+          ) : null}
         </main>
 
         <Footer />

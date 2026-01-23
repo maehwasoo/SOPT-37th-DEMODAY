@@ -28,9 +28,7 @@ export default function ProductsPageClient() {
     return PRODUCTS.filter((product) => {
       const matchTab = activeTab === 'all' || product.track === activeTab;
       const matchPlatform =
-        activePlatform === 'all' ||
-        product.platform === undefined ||
-        product.platform === activePlatform;
+        activePlatform === 'all' || product.platform === activePlatform;
 
       return matchTab && matchPlatform;
     });
