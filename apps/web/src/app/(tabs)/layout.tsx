@@ -13,9 +13,13 @@ export default function TabsLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="mx-auto w-full max-w-[375px]">
-      <div className="pb-[80px]">
+      <div className="flex min-h-[100dvh] flex-col pb-[80px]">
         {children}
-        {hideFooter ? null : <Footer />}
+        {hideFooter ? null : (
+          <div className="mt-auto">
+            <Footer />
+          </div>
+        )}
       </div>
       <div className="fixed bottom-0 left-1/2 z-50 w-full max-w-[375px] -translate-x-1/2">
         <NavBottom />
