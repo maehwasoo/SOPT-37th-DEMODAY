@@ -74,7 +74,7 @@ export const TEAM_LIST: readonly Team[] = [
   },
   {
     key: 'clustar',
-    displayName: 'CLUSTAR',
+    displayName: 'cluSTAR',
     category: '생산성',
     shortDescription: '흩어진 메모를 빛나는 결과물로',
     track: 'appjam',
