@@ -7,8 +7,8 @@ import { useRouter } from 'next/navigation';
 import ProductCard from '@/components/feature/product-card/ProductCard';
 import FilterChip from '@/components/ui/FilterChip/FilterChip';
 import Tabs, { type TabsValue } from '@/components/ui/Tabs/Tabs';
+import { PRODUCTS } from '@/data/products';
 import { trackEvent } from '@/lib/ga';
-import { MOCK_PRODUCTS } from '@/mocks/products';
 
 const PLATFORM_FILTERS = [
   { value: 'all', label: '전체' },
@@ -25,10 +25,12 @@ export default function ProductsPageClient() {
   const [activePlatform, setActivePlatform] = useState<PlatformFilter>('all');
 
   const filteredProducts = useMemo(() => {
-    return MOCK_PRODUCTS.filter((product) => {
+    return PRODUCTS.filter((product) => {
       const matchTab = activeTab === 'all' || product.track === activeTab;
       const matchPlatform =
-        activePlatform === 'all' || product.platform === activePlatform;
+        activePlatform === 'all' ||
+        product.platform === undefined ||
+        product.platform === activePlatform;
 
       return matchTab && matchPlatform;
     });
@@ -73,7 +75,7 @@ export default function ProductsPageClient() {
         <div className="grid w-full grid-cols-2 gap-x-[17px] gap-y-[16px]">
           {filteredProducts.map((product) => (
             <ProductCard
-              key={product.id}
+              key={product.teamKey}
               thumbnailSrc={product.thumbnailSrc}
               thumbnailAlt={product.title}
               title={product.title}
@@ -81,11 +83,11 @@ export default function ProductsPageClient() {
               description={product.description}
               onClick={() => {
                 trackEvent('product_select', {
-                  product_id: product.id,
+                  product_id: product.teamKey,
                   track: product.track,
                   platform: product.platform,
                 });
-                router.push(`/products/${product.id}`);
+                router.push(`/products/${product.teamKey}`);
               }}
             />
           ))}

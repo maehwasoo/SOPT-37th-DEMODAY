@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import NavTop from '@/components/layout/nav-top/NavTop';
+import { TEAM_LIST } from '@/data/teams';
 import { loginApi } from '@/lib/api';
 import { trackEvent } from '@/lib/ga';
 
@@ -22,20 +23,10 @@ type TeamOption = {
   label: string;
 };
 
-const TEAM_OPTIONS: readonly TeamOption[] = [
-  { teamKey: 'amp', label: 'AMP' },
-  { teamKey: 'clustar', label: 'CLUSTAR' },
-  { teamKey: 'comfit', label: 'Comfit' },
-  { teamKey: 'flint', label: 'FLINT' },
-  { teamKey: 'kareer', label: 'Kareer' },
-  { teamKey: 'kiero', label: 'KIERO' },
-  { teamKey: 'makers', label: 'Makers' },
-  { teamKey: 'snappin', label: 'Snappin’' },
-  { teamKey: 'smashing', label: '스매싱' },
-  { teamKey: 'carena', label: '케어나' },
-  { teamKey: 'poti', label: '포티' },
-  { teamKey: 'cherrish', label: 'Cherrish' },
-] as const;
+const TEAM_OPTIONS: readonly TeamOption[] = TEAM_LIST.map((team) => ({
+  teamKey: team.key,
+  label: team.displayName,
+}));
 
 function sanitizeNextPath(next: string | undefined) {
   if (!next) return null;
