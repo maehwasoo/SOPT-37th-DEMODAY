@@ -1,10 +1,13 @@
 import { ArrowLeftIcon } from '@/components/icons';
 import { TouchArea } from '@/components/ui';
 
+import LeafletStampQrMenu from './components/LeafletStampQrMenu.client';
+
 export type NavTopProps =
   | {
       variant?: 'main';
       className?: string;
+      showLeafletStampQrMenu?: boolean;
     }
   | {
       variant: 'sub';
@@ -42,13 +45,15 @@ export default function NavTop(props: NavTopProps) {
   return (
     <header
       className={[
-        'shadow_bottom flex h-[56px] w-full items-center justify-center bg-[var(--color-black)]',
+        'shadow_bottom relative flex h-[56px] w-full items-center justify-center bg-[var(--color-black)]',
         props.className,
       ]
         .filter(Boolean)
         .join(' ')}
     >
       <div className="black_bk_20 text-center">SYSTEM UPDATE : SUNRISE</div>
+
+      {props.showLeafletStampQrMenu ? <LeafletStampQrMenu /> : null}
     </header>
   );
 }
