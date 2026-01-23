@@ -48,7 +48,7 @@ function NavBottomButton({
     <button
       type="button"
       className={[
-        'flex w-[68px] flex-col items-center gap-px px-[22px] py-[12px] text-center',
+        'flex w-full min-w-0 flex-col items-center gap-px px-[8px] py-[12px] text-center',
         active
           ? 'text-[var(--color-37demo-red)]'
           : 'text-[var(--color-gray-500)]',
@@ -56,8 +56,10 @@ function NavBottomButton({
       onClick={onClick}
       aria-current={active ? 'page' : undefined}
     >
-      <span className="h-[24px] w-[24px]">{icon}</span>
-      <span className="title_m_12 whitespace-nowrap">{label}</span>
+      <span className="h-[24px] w-[24px] shrink-0">{icon}</span>
+      <span className="title_m_12 leading-[1.2] whitespace-normal">
+        {label}
+      </span>
     </button>
   );
 }
@@ -94,49 +96,47 @@ export default function NavBottom({ active, onNavigate }: NavBottomProps) {
 
   return (
     <nav
-      className="shadow_top flex h-[80px] items-start justify-center bg-[var(--color-black)] px-[32px] py-[7px]"
+      className="shadow_top grid h-[var(--nav-bottom-height)] grid-cols-4 bg-[var(--color-black)] px-[16px]"
       aria-label="하단 탭 내비게이션"
     >
-      <div className="flex items-center gap-[10px]">
-        <NavBottomButton
-          active={resolvedActive === 'home'}
-          icon={
-            resolvedActive === 'home' ? <HomeFilledIcon /> : <HomeOutlineIcon />
-          }
-          label="홈"
-          onClick={() => navigate('home')}
-        />
-        <NavBottomButton
-          active={resolvedActive === 'product'}
-          icon={
-            resolvedActive === 'product' ? (
-              <ProductsFilledIcon />
-            ) : (
-              <ProductsOutlineIcon />
-            )
-          }
-          label="프로덕트"
-          onClick={() => navigate('product')}
-        />
-        <NavBottomButton
-          active={resolvedActive === 'leaflet'}
-          icon={
-            resolvedActive === 'leaflet' ? (
-              <LeafletFilledIcon />
-            ) : (
-              <LeafletOutlineIcon />
-            )
-          }
-          label="리플렛"
-          onClick={() => navigate('leaflet')}
-        />
-        <NavBottomButton
-          active={false}
-          icon={<OpenLinkIcon />}
-          label="공식홈페이지"
-          onClick={() => navigate('homepage')}
-        />
-      </div>
+      <NavBottomButton
+        active={resolvedActive === 'home'}
+        icon={
+          resolvedActive === 'home' ? <HomeFilledIcon /> : <HomeOutlineIcon />
+        }
+        label="홈"
+        onClick={() => navigate('home')}
+      />
+      <NavBottomButton
+        active={resolvedActive === 'product'}
+        icon={
+          resolvedActive === 'product' ? (
+            <ProductsFilledIcon />
+          ) : (
+            <ProductsOutlineIcon />
+          )
+        }
+        label="프로덕트"
+        onClick={() => navigate('product')}
+      />
+      <NavBottomButton
+        active={resolvedActive === 'leaflet'}
+        icon={
+          resolvedActive === 'leaflet' ? (
+            <LeafletFilledIcon />
+          ) : (
+            <LeafletOutlineIcon />
+          )
+        }
+        label="리플렛"
+        onClick={() => navigate('leaflet')}
+      />
+      <NavBottomButton
+        active={false}
+        icon={<OpenLinkIcon />}
+        label="공식홈페이지"
+        onClick={() => navigate('homepage')}
+      />
     </nav>
   );
 }

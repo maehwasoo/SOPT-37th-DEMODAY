@@ -21,7 +21,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="w-[343px]">
+        <div className="w-full px-[16px]">
           <Button href="/products">서비스 보러가기</Button>
         </div>
       </section>
@@ -138,7 +138,7 @@ export default function Home() {
 
           <Divider />
 
-          <section className="flex w-[343px] flex-col gap-[8px] pb-[48px]">
+          <section className="flex w-full flex-col gap-[8px] px-[16px] pb-[48px]">
             <section className="flex flex-col gap-[12px]">
               <p className="title_m_12 text-[var(--color-gray-200)]">
                 Connect with SOPT

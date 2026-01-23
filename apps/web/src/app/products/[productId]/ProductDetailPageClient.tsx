@@ -80,8 +80,8 @@ export default function ProductDetailPageClient({
   const platformLabel = PLATFORM_LABEL[product.platform];
 
   return (
-    <div className="mx-auto w-full max-w-[375px] bg-[var(--color-black)]">
-      <div className="fixed top-0 left-1/2 z-50 w-full max-w-[375px] -translate-x-1/2">
+    <div className="mx-auto w-full max-w-[var(--app-max-width)] bg-[var(--color-black)]">
+      <div className="fixed top-0 left-1/2 z-50 w-full max-w-[var(--app-max-width)] -translate-x-1/2 bg-[var(--color-black)] pt-[var(--safe-area-top)]">
         <NavTop
           variant="sub"
           title={product.title}
@@ -89,7 +89,7 @@ export default function ProductDetailPageClient({
         />
       </div>
 
-      <div className="flex flex-col gap-[48px] pt-[80px]">
+      <div className="flex flex-col gap-[48px] pt-[calc(80px+var(--safe-area-top))]">
         <main className="flex flex-col gap-[24px] px-[16px] py-0">
           {/* title */}
           <section className="flex flex-col gap-[16px]">
@@ -99,7 +99,7 @@ export default function ProductDetailPageClient({
                 alt={product.title}
                 fill
                 className="object-cover"
-                sizes="343px"
+                sizes="(max-width: 440px) calc(100vw - 32px), 408px"
                 priority
               />
             </div>
