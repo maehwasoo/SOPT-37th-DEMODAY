@@ -23,7 +23,7 @@ export default function NavTop(props: NavTopProps) {
     return (
       <header
         className={[
-          'shadow_bottom bg-[var(--color-black-overlay)] p-[6px] backdrop-blur-md',
+          'shadow_bottom relative z-50 bg-[var(--color-black-overlay)] p-[6px] backdrop-blur-md',
           props.className,
         ]
           .filter(Boolean)
@@ -47,7 +47,7 @@ export default function NavTop(props: NavTopProps) {
   return (
     <header
       className={[
-        'shadow_bottom relative h-[56px] w-full bg-[var(--color-black-overlay)] backdrop-blur-md',
+        'shadow_bottom relative z-50 h-[56px] w-full bg-[var(--color-black-overlay)] backdrop-blur-md',
         showQr ? '' : 'flex items-center justify-center',
         props.className,
       ]
@@ -56,7 +56,11 @@ export default function NavTop(props: NavTopProps) {
     >
       <img
         alt="SYSTEM UPDATE : SUNRISE"
-        src="/assets/leaflet/icons/sunrise-text-mask.svg"
+        src={
+          showQr
+            ? '/assets/leaflet/icons/sunrise-text.svg'
+            : '/assets/leaflet/icons/sunrise-text-mask.svg'
+        }
         className={
           showQr
             ? 'absolute top-1/2 left-[24px] h-[14.0996px] -translate-y-1/2'
