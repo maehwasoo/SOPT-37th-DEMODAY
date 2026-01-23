@@ -123,7 +123,7 @@ export default function LeafletStampQrMenu() {
       {open ? (
         <div
           className={[
-            'shadow_bottom absolute top-[56px] right-0 z-[70] min-h-[219px] w-[167px] overflow-hidden',
+            'shadow_bottom absolute top-[56px] right-0 z-[70] min-h-[219px] w-[200px] overflow-hidden',
             'flex flex-col items-center gap-[16px] bg-[var(--color-black)] px-[16px] pt-[12px] pb-[16px]',
             'rounded-bl-[32px]',
           ].join(' ')}
@@ -132,7 +132,7 @@ export default function LeafletStampQrMenu() {
         >
           <div className="flex w-full items-center gap-[8px]">
             <QrIcon className="h-[24px] w-[24px] text-[var(--color-white)]" />
-            <p className="head_b_16 text-[var(--color-white)]">
+            <p className="head_b_16 whitespace-nowrap text-[var(--color-white)]">
               기록 인증 QR코드
             </p>
           </div>
