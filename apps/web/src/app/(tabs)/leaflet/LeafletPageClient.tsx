@@ -4,11 +4,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { LeafletStampScreen } from '@/components';
 import {
   LEAFLET_STAMPS,
   type LeafletStampKey,
 } from '@/components/feature/leaflet-stamp/leafletStamp.constants';
+import LeafletStampScreen from '@/components/feature/leaflet-stamp/LeafletStampScreen';
 import { ApiError, leafletClaimApi, leafletProgressApi } from '@/lib/api';
 
 type ToastState = {

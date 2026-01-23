@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 
-import { LeafletStampScreen, NavTop } from '@/components';
+import LeafletStampScreen from '@/components/feature/leaflet-stamp/LeafletStampScreen';
+import NavTop from '@/components/layout/nav-top/NavTop';
 
 import LeafletPageClient from './LeafletPageClient';
 
