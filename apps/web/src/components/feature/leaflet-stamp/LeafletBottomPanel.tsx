@@ -3,7 +3,7 @@ import type { CSSProperties } from 'react';
 import { QrIcon, SunriseIcon } from '@/components/icons';
 import { ProgressBar } from '@/components/ui';
 
-const SUNRISE_CIRCLE_SRC = '/assets/leaflet/patterns/sunrise-circle.png';
+const SUNRISE_CIRCLE_SRC = '/assets/leaflet/patterns/sunrise-circle.webp';
 const SUNRISE_TEXT_MASK_SRC = '/assets/leaflet/icons/sunrise-text-mask.svg';
 
 type LeafletBottomPanelProgressProps = {
