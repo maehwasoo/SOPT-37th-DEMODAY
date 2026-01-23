@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { ArrowLeftIcon } from '@/components/icons';
 import { TouchArea } from '@/components/ui';
 
@@ -48,7 +50,15 @@ export default function NavTop(props: NavTopProps) {
         .filter(Boolean)
         .join(' ')}
     >
-      <div className="black_bk_20 text-center">SYSTEM UPDATE : SUNRISE</div>
+      <div className="relative h-[16px] w-[286px]">
+        <Image
+          src="/assets/figma/main/img_logo.png"
+          alt="SYSTEM UPDATE : SUNRISE"
+          fill
+          className="object-contain"
+          sizes="286px"
+        />
+      </div>
     </header>
   );
 }
