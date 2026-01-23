@@ -1,7 +1,11 @@
 import Image from 'next/image';
 
-import { Button, Divider, TagMain } from '@/components';
-import { InstagramIcon, LinkIcon, YoutubeIcon } from '@/components/icons';
+import Divider from '@/components/feature/section-header/Divider';
+import TagMain from '@/components/feature/section-header/TagMain';
+import InstagramIcon from '@/components/icons/InstagramIcon';
+import LinkIcon from '@/components/icons/LinkIcon';
+import YoutubeIcon from '@/components/icons/YoutubeIcon';
+import Button from '@/components/ui/Button/Button';
 
 export default function Home() {
   return (

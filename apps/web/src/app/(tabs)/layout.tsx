@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 
-import { Footer, NavBottom } from '@/components';
+import Footer from '@/components/layout/footer/Footer';
+import NavBottom from '@/components/layout/nav-bottom/NavBottom';
 
 export default function TabsLayout({ children }: { children: ReactNode }) {
   return (
