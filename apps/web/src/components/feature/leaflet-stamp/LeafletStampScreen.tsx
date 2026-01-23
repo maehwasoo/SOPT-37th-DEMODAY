@@ -53,12 +53,10 @@ export default function LeafletStampScreen({
       <div className="px-[23px] pt-[25px]">
         <div className="flex flex-col items-center gap-[24px]">
           <LeafletStampDetailCard />
-          {!isComplete || handleDown ? (
-            <LeafletStampGrid
-              stamps={LEAFLET_STAMPS}
-              completedKeys={completedKeys}
-            />
-          ) : null}
+          <LeafletStampGrid
+            stamps={LEAFLET_STAMPS}
+            completedKeys={completedKeys}
+          />
         </div>
       </div>
 
