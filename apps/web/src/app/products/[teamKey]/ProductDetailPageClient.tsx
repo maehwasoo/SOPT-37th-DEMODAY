@@ -129,16 +129,16 @@ export default function ProductDetailPageClient({
                   </div>
                 </div>
 
-                <div className="flex w-full items-center justify-center border-b border-solid border-[var(--color-gray-800)] px-0 pt-0 pb-[12px]">
-                  <p className="body_r_14 h-[60px] flex-1 text-[var(--color-white)]">
+                <div className="flex w-full items-center justify-center border-b border-solid border-[var(--color-gray-800)] px-0 pt-0 pb-[16px]">
+                  <p className="body_r_14 flex-1 text-[var(--color-white)]">
                     {product.description}
                   </p>
                 </div>
               </div>
 
               {memberRows.length ? (
-                <div className="flex items-end gap-[16px]">
-                  <div className="flex w-[79px] flex-col items-start">
+                <div className="flex w-full items-end gap-[16px]">
+                  <div className="flex w-[90px] flex-col items-start">
                     {memberRows.map((row) => {
                       const meta = ROLE_META[row.role];
 
@@ -165,7 +165,7 @@ export default function ProductDetailPageClient({
                     })}
                   </div>
 
-                  <div className="body_r_14 flex w-[147px] flex-col items-start gap-[4px] text-[var(--color-gray-300)]">
+                  <div className="body_r_14 flex min-w-0 flex-1 flex-col items-start gap-[4px] text-[var(--color-gray-300)]">
                     {memberRows.map((row) => {
                       const membersText = row.members.join(' ');
 
