@@ -11,8 +11,10 @@ const SUNRISE_TEXT_MASK_SRC = '/assets/leaflet/icons/sunrise-text-mask.svg';
 const DONE_BOTTOM_GRADIENT_SRC =
   '/assets/leaflet/patterns/leaflet-done-background.png';
 
-const COMPLETE_PANEL_TRANSLATE_Y_PX = 256;
-const COMPLETE_PANEL_SNAP_THRESHOLD_PX = COMPLETE_PANEL_TRANSLATE_Y_PX / 2;
+const COMPLETE_PANEL_EXPANDED_HEIGHT_PX = 428;
+const COMPLETE_PANEL_COLLAPSED_HEIGHT_PX = 172;
+const COMPLETE_PANEL_SNAP_THRESHOLD_HEIGHT_PX =
+  (COMPLETE_PANEL_EXPANDED_HEIGHT_PX + COMPLETE_PANEL_COLLAPSED_HEIGHT_PX) / 2;
 
 type LeafletBottomPanelProgressProps = {
   current: number;
@@ -106,15 +108,18 @@ function LeafletBottomPanelComplete({
 }: LeafletBottomPanelCompleteProps) {
   const [dragging, setDragging] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
-  const [dragTranslateY, setDragTranslateY] = useState<number | null>(null);
+  const [dragHeight, setDragHeight] = useState<number | null>(null);
 
-  const currentTranslateY =
-    dragTranslateY ?? (handleDown ? COMPLETE_PANEL_TRANSLATE_Y_PX : 0);
+  const currentHeight =
+    dragHeight ??
+    (handleDown
+      ? COMPLETE_PANEL_COLLAPSED_HEIGHT_PX
+      : COMPLETE_PANEL_EXPANDED_HEIGHT_PX);
 
-  const translateYRef = useRef(0);
+  const heightRef = useRef(0);
 
   const pointerStartYRef = useRef(0);
-  const translateYStartRef = useRef(0);
+  const heightStartRef = useRef(0);
 
   const startDrag = (event: PointerEvent<HTMLDivElement>) => {
     if (event.pointerType === 'mouse' && event.button !== 0) return;
@@ -123,21 +128,24 @@ function LeafletBottomPanelComplete({
     setHasInteracted(true);
     setDragging(true);
     pointerStartYRef.current = event.clientY;
-    translateYRef.current = currentTranslateY;
-    translateYStartRef.current = currentTranslateY;
-    setDragTranslateY(currentTranslateY);
+    heightRef.current = currentHeight;
+    heightStartRef.current = currentHeight;
+    setDragHeight(currentHeight);
   };
 
   const moveDrag = (event: PointerEvent<HTMLDivElement>) => {
     if (!dragging) return;
 
     const deltaY = event.clientY - pointerStartYRef.current;
-    const nextTranslateY = Math.min(
-      COMPLETE_PANEL_TRANSLATE_Y_PX,
-      Math.max(0, translateYStartRef.current + deltaY)
+    const nextHeight = Math.min(
+      COMPLETE_PANEL_EXPANDED_HEIGHT_PX,
+      Math.max(
+        COMPLETE_PANEL_COLLAPSED_HEIGHT_PX,
+        heightStartRef.current - deltaY
+      )
     );
-    translateYRef.current = nextTranslateY;
-    setDragTranslateY(nextTranslateY);
+    heightRef.current = nextHeight;
+    setDragHeight(nextHeight);
   };
 
   const endDrag = () => {
@@ -145,37 +153,31 @@ function LeafletBottomPanelComplete({
 
     setDragging(false);
 
-    const translateY = translateYRef.current;
-    const nextHandleDown = translateY > COMPLETE_PANEL_SNAP_THRESHOLD_PX;
-    const snappedTranslateY = nextHandleDown
-      ? COMPLETE_PANEL_TRANSLATE_Y_PX
-      : 0;
-    translateYRef.current = snappedTranslateY;
-    setDragTranslateY(snappedTranslateY);
+    const height = heightRef.current;
+    const nextHandleDown = height < COMPLETE_PANEL_SNAP_THRESHOLD_HEIGHT_PX;
+    const snappedHeight = nextHandleDown
+      ? COMPLETE_PANEL_COLLAPSED_HEIGHT_PX
+      : COMPLETE_PANEL_EXPANDED_HEIGHT_PX;
+    heightRef.current = snappedHeight;
+    setDragHeight(snappedHeight);
     onHandleDownChange?.(nextHandleDown);
   };
 
   const shouldPlayIntroAnimation =
-    !handleDown && !hasInteracted && dragTranslateY === null;
+    !handleDown && !hasInteracted && dragHeight === null;
 
   return (
     <div
       className={[
-        'shadow_top relative h-[428px] w-full overflow-hidden rounded-tl-[32px] rounded-tr-[32px] bg-[var(--color-black)]',
+        'shadow_top relative w-full overflow-hidden rounded-tl-[32px] rounded-tr-[32px] bg-[var(--color-black)]',
         dragging
           ? 'transition-none'
-          : 'transition-transform duration-[260ms] ease-out motion-reduce:transition-none',
-        handleDown
-          ? 'translate-y-[256px]'
-          : shouldPlayIntroAnimation
-            ? 'leaflet_bottom_panel_slide_up'
-            : 'translate-y-0',
+          : 'transition-[height] duration-[260ms] ease-out motion-reduce:transition-none',
+        shouldPlayIntroAnimation ? 'leaflet_bottom_panel_slide_up' : '',
       ].join(' ')}
       style={{
         touchAction: 'none',
-        ...(dragTranslateY === null
-          ? {}
-          : { transform: `translate3d(0, ${dragTranslateY}px, 0)` }),
+        height: `${currentHeight}px`,
       }}
       onPointerDown={startDrag}
       onPointerMove={moveDrag}
