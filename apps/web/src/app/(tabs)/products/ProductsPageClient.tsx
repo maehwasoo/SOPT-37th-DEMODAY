@@ -36,9 +36,9 @@ export default function ProductsPageClient() {
   return (
     <>
       {/* filters */}
-      <section className="shadow_bottom sticky top-0 z-40 flex flex-col items-center gap-[16px] bg-[var(--color-black)] px-0 pt-[8px] pb-[16px]">
+      <section className="shadow_bottom sticky top-[var(--safe-area-top)] z-40 flex flex-col items-center gap-[16px] bg-[var(--color-black)] px-0 pt-[8px] pb-[16px]">
         <Tabs value={activeTab} onValueChange={setActiveTab} />
-        <div className="flex w-[343px] items-center gap-[8px]">
+        <div className="flex w-full flex-wrap items-center gap-[8px] px-[16px]">
           {PLATFORM_FILTERS.map((item) => (
             <FilterChip
               key={item.value}
@@ -57,7 +57,7 @@ export default function ProductsPageClient() {
         <p className="body_r_14 leading-[1.45] tracking-[-0.14px] text-[var(--color-gray-400)]">
           총 {filteredProducts.length}개의 서비스
         </p>
-        <div className="grid w-[343px] grid-cols-2 gap-x-[17px] gap-y-[16px]">
+        <div className="grid w-full grid-cols-2 gap-x-[17px] gap-y-[16px]">
           {filteredProducts.map((product) => (
             <ProductCard
               key={product.id}

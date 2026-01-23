@@ -134,7 +134,7 @@ export default function LeafletScanPageClient() {
   }, [goLeafletWithCode]);
 
   return (
-    <main className="bg-[var(--color-black)]">
+    <main className="bg-[var(--color-black)] pt-[var(--safe-area-top)]">
       <NavTop
         variant="sub"
         title="기록 스캔"
