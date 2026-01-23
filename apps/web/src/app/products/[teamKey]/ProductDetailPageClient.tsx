@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 
 import {
   AndroidIcon,
-  ArrowRightIcon,
   DesignIcon,
   IosIcon,
   PlanningIcon,
@@ -117,7 +116,7 @@ export default function ProductDetailPageClient({
               )}
             </div>
 
-            <div className="flex min-h-[272px] w-full flex-col items-start gap-[12px] rounded-[2px] bg-[var(--color-gray-900)] p-[12px]">
+            <div className="flex w-full flex-col items-start gap-[12px] rounded-[2px] bg-[var(--color-gray-900)] p-[12px]">
               <div className="flex w-full flex-col items-start gap-[16px]">
                 <div className="flex items-start gap-[8px]">
                   <p className="head_b_20 text-[var(--color-white)]">
@@ -210,7 +209,19 @@ export default function ProductDetailPageClient({
               </div>
 
               <div className="absolute top-1/2 right-[22px] flex h-[56px] w-[56px] -translate-y-1/2 items-center justify-center text-[var(--color-37demo-red)]">
-                <ArrowRightIcon width={10} height={18} />
+                <svg
+                  width={10}
+                  height={18}
+                  viewBox="0 0 23.3333 42"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden
+                >
+                  <path
+                    d="M2.3926 42L23.3333 21L2.3926 0L0 2.39945L18.548 21L0 39.6005L2.3926 42Z"
+                    fill="currentColor"
+                  />
+                </svg>
               </div>
             </a>
           </section>
