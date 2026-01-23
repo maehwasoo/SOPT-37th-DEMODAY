@@ -43,8 +43,6 @@ export default function LeafletScanPageClient() {
   const [status, setStatus] = useState<ScanStatus>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const [manualCode, setManualCode] = useState('');
-
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const controlsRef = useRef<{ stop: () => void } | null>(null);
   const scannedRef = useRef(false);
@@ -60,7 +58,7 @@ export default function LeafletScanPageClient() {
   }, [router]);
 
   const goLeafletWithCode = useCallback(
-    (raw: string, method: 'camera' | 'manual') => {
+    (raw: string, method: 'camera') => {
       const code = extractLeafletCode(raw, origin);
       if (!code) return;
 
@@ -124,7 +122,7 @@ export default function LeafletScanPageClient() {
         trackEvent('leaflet_scan_error');
         setStatus('error');
         setErrorMessage(
-          '카메라 스캔을 시작할 수 없습니다. 코드 입력을 이용해 주세요.'
+          '카메라 스캔을 시작할 수 없습니다. 카메라 권한을 확인해 주세요.'
         );
         void error;
       }
@@ -167,39 +165,10 @@ export default function LeafletScanPageClient() {
               {status !== 'scanning' ? (
                 <div className="absolute inset-0 flex items-center justify-center px-[16px] text-center">
                   <p className="body_r_14 text-[var(--color-gray-200)]">
-                    {errorMessage ??
-                      '스캔을 시작할 수 없습니다. 아래에서 코드를 입력해 주세요.'}
+                    {errorMessage ?? '카메라를 준비 중입니다.'}
                   </p>
                 </div>
               ) : null}
-            </div>
-          </div>
-
-          <div className="mt-[8px] flex flex-col gap-[8px]">
-            <label className="caption_r_10 text-[var(--color-gray-400)]">
-              QR이 인식되지 않는다면 코드로 입력해 주세요.
-            </label>
-            <div className="flex gap-[8px]">
-              <input
-                className="body_r_14 h-[44px] w-full rounded-[8px] bg-[var(--color-gray-900)] px-[12px] text-[var(--color-white)] placeholder:text-[var(--color-gray-500)]"
-                placeholder="예: preview-amp"
-                value={manualCode}
-                onChange={(event) => setManualCode(event.target.value)}
-              />
-              <button
-                type="button"
-                className={[
-                  'head_b_14 h-[44px] shrink-0 rounded-[8px] px-[12px]',
-                  manualCode.trim()
-                    ? 'bg-[var(--color-37demo-red)] text-[var(--color-white)]'
-                    : 'cursor-not-allowed bg-[var(--color-gray-800)] text-[var(--color-gray-600)]',
-                  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-white)]',
-                ].join(' ')}
-                disabled={!manualCode.trim()}
-                onClick={() => goLeafletWithCode(manualCode, 'manual')}
-              >
-                확인
-              </button>
             </div>
           </div>
         </div>
