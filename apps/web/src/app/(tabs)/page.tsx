@@ -13,11 +13,12 @@ export default function Home() {
       <section className="flex w-full flex-col items-center gap-[39px]">
         <div className="relative h-[396px] w-full bg-[var(--color-black)]">
           <Image
-            src="/assets/figma/main/img_branding_main.png"
+            src="/assets/figma/main/img_branding_main.webp"
             alt=""
             fill
             priority
             className="object-cover"
+            sizes="(max-width: 375px) 100vw, 375px"
           />
         </div>
 
@@ -167,18 +168,20 @@ export default function Home() {
               <div className="flex w-[176px] flex-wrap content-end items-end justify-end gap-[12px] mix-blend-luminosity">
                 <div className="relative h-[14px] w-[50px]">
                   <Image
-                    src="/assets/figma/main/sponsor_image_459.png"
+                    src="/assets/figma/main/sponsor_image_459.webp"
                     alt=""
                     fill
                     className="object-contain"
+                    sizes="50px"
                   />
                 </div>
                 <div className="relative h-[20px] w-[50px]">
                   <Image
-                    src="/assets/figma/main/sponsor_kakao.png"
+                    src="/assets/figma/main/sponsor_kakao.webp"
                     alt=""
                     fill
                     className="object-contain"
+                    sizes="50px"
                   />
                 </div>
                 <div className="relative h-[24px] w-[50px] opacity-70">
@@ -247,18 +250,20 @@ export default function Home() {
                 </div>
                 <div className="relative h-[15px] w-[50px]">
                   <Image
-                    src="/assets/figma/main/sponsor_image_461.png"
+                    src="/assets/figma/main/sponsor_image_461.webp"
                     alt=""
                     fill
                     className="object-contain"
+                    sizes="50px"
                   />
                 </div>
                 <div className="relative h-[18px] w-[50px]">
                   <Image
-                    src="/assets/figma/main/sponsor_image_462.png"
+                    src="/assets/figma/main/sponsor_image_462.webp"
                     alt=""
                     fill
                     className="object-cover"
+                    sizes="50px"
                   />
                 </div>
               </div>
