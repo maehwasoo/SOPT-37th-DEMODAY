@@ -75,7 +75,7 @@ function SelectCard({
                   <img alt="" className="h-full w-full" src={TEAM_ICON_SRC} />
                 </span>
               </span>
-              <span className="head_b_18 absolute top-[120.5px] left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-[var(--color-white)]">
+              <span className="head_b_18 absolute inset-x-0 top-[120.5px] -translate-y-1/2 text-center whitespace-nowrap text-[var(--color-white)]">
                 앱잼 참여 팀
               </span>
             </button>
@@ -96,7 +96,7 @@ function SelectCard({
                   <img alt="" className="h-full w-full" src={PERSON_ICON_SRC} />
                 </span>
               </span>
-              <span className="head_b_18 absolute top-[120.5px] left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-[var(--color-white)]">
+              <span className="head_b_18 absolute inset-x-0 top-[120.5px] -translate-y-1/2 text-center whitespace-nowrap text-[var(--color-white)]">
                 관람객
               </span>
             </button>
