@@ -4,7 +4,8 @@ import type { ReactNode } from 'react';
 
 import { usePathname } from 'next/navigation';
 
-import { Footer, NavBottom } from '@/components';
+import Footer from '@/components/layout/footer/Footer';
+import NavBottom from '@/components/layout/nav-bottom/NavBottom';
 
 export default function TabsLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
