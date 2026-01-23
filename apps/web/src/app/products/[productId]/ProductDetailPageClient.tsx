@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
@@ -14,6 +16,7 @@ import {
 } from '@/components/icons';
 import { Footer, NavTop } from '@/components/layout';
 import { TagProduct } from '@/components/ui';
+import { trackEvent } from '@/lib/ga';
 import type { Product, ProductPlatform } from '@/mocks/products';
 
 type ProductDetailPageClientProps = {
@@ -78,6 +81,14 @@ export default function ProductDetailPageClient({
   const router = useRouter();
 
   const platformLabel = PLATFORM_LABEL[product.platform];
+
+  useEffect(() => {
+    trackEvent('product_detail_view', {
+      product_id: product.id,
+      track: product.track,
+      platform: product.platform,
+    });
+  }, [product.id, product.platform, product.track]);
 
   return (
     <div className="mx-auto w-full max-w-[var(--app-max-width)] bg-[var(--color-black)]">
@@ -161,6 +172,12 @@ export default function ProductDetailPageClient({
               href="/leaflet"
               className="relative h-[100px] w-full rounded-[2px] bg-[var(--color-37demo-red-20)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-white)]"
               aria-label="온라인 리플렛 페이지로 이동"
+              onClick={() => {
+                trackEvent('leaflet_entry_click', {
+                  source: 'product_detail_cta',
+                  product_id: product.id,
+                });
+              }}
             >
               <div className="absolute top-[14px] left-[16px] flex w-[228px] flex-col items-start">
                 <div className="flex items-center gap-[8px]">
