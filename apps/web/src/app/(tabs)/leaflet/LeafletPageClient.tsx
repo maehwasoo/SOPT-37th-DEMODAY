@@ -70,11 +70,6 @@ export default function LeafletPageClient() {
     router.replace(`/login?next=${encodeURIComponent(nextPath)}`);
   }, [nextPath, router]);
 
-  const openScan = useCallback(() => {
-    trackEvent('leaflet_scan_open', { source: 'leaflet' });
-    router.push('/leaflet/scan');
-  }, [router]);
-
   const loadProgress = useCallback(async () => {
     const response = await leafletProgressApi();
     setProgress(response);
@@ -172,7 +167,6 @@ export default function LeafletPageClient() {
         progressCount={progress?.completedCount ?? 0}
         totalCount={progress?.totalCount}
         completedStampKeys={completedStampKeys}
-        onScan={openScan}
       />
 
       {/* toast */}

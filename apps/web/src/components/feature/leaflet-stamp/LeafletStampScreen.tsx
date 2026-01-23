@@ -8,8 +8,6 @@ export type LeafletStampScreenProps = {
   progressCount: number;
   totalCount?: number;
   handleDown?: boolean;
-  // scan CTA handler
-  onScan?: () => void;
   // completed stamp keys
   completedStampKeys?: readonly LeafletStampKey[];
 };
@@ -34,7 +32,6 @@ export default function LeafletStampScreen({
   progressCount,
   totalCount = LEAFLET_STAMPS.length,
   handleDown,
-  onScan,
   completedStampKeys,
 }: LeafletStampScreenProps) {
   const completedKeys = completedStampKeys
@@ -70,7 +67,6 @@ export default function LeafletStampScreen({
             mode="progress"
             current={resolvedProgressCount}
             total={totalCount}
-            onScan={onScan}
           />
         )}
       </div>
