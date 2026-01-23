@@ -299,7 +299,7 @@ function AppjamCard({
                 onClick={onNext}
                 disabled={!canNext}
               >
-                다음
+                로그인
               </button>
             </div>
           </div>
@@ -372,7 +372,7 @@ function VisitorCard({
             onClick={onNext}
             disabled={!canNext}
           >
-            다음
+            로그인
           </button>
         </div>
       </div>
