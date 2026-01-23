@@ -180,6 +180,7 @@ Required GitHub Actions variables (repo-level):
 - `DEMODAY_API_EC2_INSTANCE_ID` (target instance id)
 - `DEMODAY_DEPLOY_ROLE_ARN` (OIDC assume role ARN)
 - `DEMODAY_API_HEALTHCHECK_URL` (example: `https://api.sopt-demoday.org/api/health`)
+- `DEMODAY_API_PREVIEW_HEALTHCHECK_URL` (optional; defaults to `https://api-preview.sopt-demoday.org/api/health`)
 
 Where to configure:
 
@@ -205,6 +206,20 @@ Actions (simplified):
    - `systemctl restart demoday-api`
 4. Health check:
    - `https://api.sopt-demoday.org/api/health` expects `ok`
+
+### Preview deploy (develop → api-preview)
+
+Preview deploy is also automated via GitHub Actions:
+
+- Workflow: `.github/workflows/deploy-api-preview.yml`
+- Trigger: `push` to `develop` (API changes only) or manual (`workflow_dispatch`)
+- Artifact path:
+  - `s3://${S3_BUCKET}/api-preview/${GITHUB_SHA}/api.jar`
+- Deploy (SSM on EC2):
+  - Download jar to `/opt/demoday/api-preview/api.jar`
+  - `systemctl restart demoday-api-preview`
+- Health check:
+  - `https://api-preview.sopt-demoday.org/api/health` expects `ok`
 
 ## Observability / audit
 
