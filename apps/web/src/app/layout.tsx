@@ -8,6 +8,10 @@ import '@/styles/global.css';
 export const metadata: Metadata = {
   title: 'DIVE SOPT 데모데이',
   description: '37기 DIVE SOPT 데모데이',
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-icon.png',
+  },
 };
 
 export const viewport: Viewport = {
