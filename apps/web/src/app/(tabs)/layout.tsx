@@ -21,7 +21,7 @@ export default function TabsLayout({ children }: { children: ReactNode }) {
           </div>
         )}
       </div>
-      <div className="fixed bottom-0 left-1/2 z-50 w-full max-w-[var(--app-max-width)] -translate-x-1/2 bg-[var(--color-black)] pb-[var(--safe-area-bottom)]">
+      <div className="fixed bottom-0 left-1/2 z-50 w-full max-w-[var(--app-max-width)] -translate-x-1/2 bg-[var(--color-black-overlay)] pb-[var(--safe-area-bottom)] backdrop-blur-md">
         <NavBottom />
       </div>
     </div>

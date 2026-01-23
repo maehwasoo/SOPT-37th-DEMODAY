@@ -23,7 +23,7 @@ export default function NavTop(props: NavTopProps) {
     return (
       <header
         className={[
-          'shadow_bottom bg-[var(--color-black)] p-[6px]',
+          'shadow_bottom bg-[var(--color-black-overlay)] p-[6px] backdrop-blur-md',
           props.className,
         ]
           .filter(Boolean)
@@ -45,7 +45,7 @@ export default function NavTop(props: NavTopProps) {
   return (
     <header
       className={[
-        'shadow_bottom relative flex h-[56px] w-full items-center justify-center bg-[var(--color-black)]',
+        'shadow_bottom relative flex h-[56px] w-full items-center justify-center bg-[var(--color-black-overlay)] backdrop-blur-md',
         props.className,
       ]
         .filter(Boolean)

@@ -92,7 +92,7 @@ export default function ProductDetailPageClient({
 
   return (
     <div className="mx-auto w-full max-w-[var(--app-max-width)] bg-[var(--color-black)]">
-      <div className="fixed top-0 left-1/2 z-50 w-full max-w-[var(--app-max-width)] -translate-x-1/2 bg-[var(--color-black)] pt-[var(--safe-area-top)]">
+      <div className="fixed top-0 left-1/2 z-50 w-full max-w-[var(--app-max-width)] -translate-x-1/2 bg-[var(--color-black-overlay)] pt-[var(--safe-area-top)] backdrop-blur-md">
         <NavTop
           variant="sub"
           title={product.title}
