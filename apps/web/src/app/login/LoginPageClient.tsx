@@ -166,10 +166,15 @@ function TeamDropdown({
           {selected ? selected.label : '소속 팀을 선택해 주세요'}
         </span>
 
-        <span className="relative h-[24px] w-[24px]">
-          <span className={open ? 'block rotate-90' : 'block -rotate-90'}>
-            <img alt="" className="h-[18px] w-[10px]" src={CHEVRON_ICON_SRC} />
-          </span>
+        <span className="flex h-[24px] w-[24px] items-center justify-center">
+          <img
+            alt=""
+            className={[
+              'h-[18px] w-[10px]',
+              open ? 'rotate-90' : '-rotate-90',
+            ].join(' ')}
+            src={CHEVRON_ICON_SRC}
+          />
         </span>
       </button>
 
