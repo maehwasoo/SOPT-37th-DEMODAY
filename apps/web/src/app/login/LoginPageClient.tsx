@@ -78,8 +78,10 @@ function SelectCard({
               ].join(' ')}
               onClick={() => onSelectType('appjam')}
             >
-              <span className="absolute top-[calc(50%-22.5px)] left-1/2 h-[181.5px] w-[181.5px] -translate-x-1/2 -translate-y-1/2">
-                <img alt="" className="h-full w-full" src={TEAM_ICON_SRC} />
+              <span className="absolute top-[calc(50%-22.5px)] left-1/2 h-[181.5px] w-[181.5px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
+                <span className="absolute top-[25%] right-0 bottom-[25%] left-0">
+                  <img alt="" className="h-full w-full" src={TEAM_ICON_SRC} />
+                </span>
               </span>
               <span className="head_b_18 absolute top-[120.5px] left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-[var(--color-white)]">
                 앱잼 참여 팀
@@ -97,8 +99,10 @@ function SelectCard({
               ].join(' ')}
               onClick={() => onSelectType('visitor')}
             >
-              <span className="absolute top-[calc(50%-22.5px)] left-1/2 h-[181.5px] w-[181.5px] -translate-x-1/2 -translate-y-1/2">
-                <img alt="" className="h-full w-full" src={PERSON_ICON_SRC} />
+              <span className="absolute top-[calc(50%-22.5px)] left-1/2 h-[181.5px] w-[181.5px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
+                <span className="absolute inset-[16.67%]">
+                  <img alt="" className="h-full w-full" src={PERSON_ICON_SRC} />
+                </span>
               </span>
               <span className="head_b_18 absolute top-[120.5px] left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-[var(--color-white)]">
                 관람객
