@@ -13,24 +13,16 @@ type LeafletStampTileProps = {
   completed: boolean;
 };
 
-function getStampMaskStyle({
-  x = 0,
-  y = 0,
-}: {
-  x?: number;
-  y?: number;
-}): CSSProperties {
-  const position = `${x}px ${y}px`;
-
+function getStampMaskStyle(): CSSProperties {
   return {
     WebkitMaskImage: `url('${LEAFLET_STAMP_ASSETS.stampMask}')`,
     WebkitMaskRepeat: 'no-repeat',
-    WebkitMaskSize: '68px 68px',
-    WebkitMaskPosition: position,
+    WebkitMaskSize: '100% 100%',
+    WebkitMaskPosition: '0px 0px',
     maskImage: `url('${LEAFLET_STAMP_ASSETS.stampMask}')`,
     maskRepeat: 'no-repeat',
-    maskSize: '68px 68px',
-    maskPosition: position,
+    maskSize: '100% 100%',
+    maskPosition: '0px 0px',
   };
 }
 
@@ -246,32 +238,29 @@ export default function LeafletStampTile({
 
   return (
     <div
-      className="relative h-[68px] w-[68px]"
+      className="relative aspect-square w-full"
       data-name={`leaflet_stamp_${stamp.key}`}
     >
       {/* stamp base */}
       <img alt="" className="absolute inset-0 h-full w-full" src={baseSrc} />
 
       {/* logo area */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={getStampMaskStyle({})}
-      >
+      <div aria-hidden className="absolute inset-0" style={getStampMaskStyle()}>
         <StampLogoLayers stampKey={stamp.key} />
       </div>
 
       {/* bottom gradient */}
-      <div
-        aria-hidden
-        className={[
-          'absolute bottom-0 left-0 w-[68px]',
-          completed ? 'h-[36px]' : 'h-[40px]',
-          'bg-gradient-to-b from-[rgba(40,44,45,0)]',
-          completed ? 'to-[rgba(40,44,45,0.8)]' : 'to-[rgba(40,44,45,0.9)]',
-        ].join(' ')}
-        style={getStampMaskStyle({ y: completed ? -32 : -28 })}
-      />
+      <div aria-hidden className="absolute inset-0" style={getStampMaskStyle()}>
+        <div
+          aria-hidden
+          className={[
+            'absolute bottom-0 left-0 w-full',
+            completed ? 'h-[52.94%]' : 'h-[58.82%]',
+            'bg-gradient-to-b from-[rgba(40,44,45,0)]',
+            completed ? 'to-[rgba(40,44,45,0.8)]' : 'to-[rgba(40,44,45,0.9)]',
+          ].join(' ')}
+        />
+      </div>
 
       {/* completed overlay */}
       {completed ? (
@@ -279,16 +268,16 @@ export default function LeafletStampTile({
           <div
             aria-hidden
             className="absolute inset-0 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]"
-            style={getStampMaskStyle({})}
+            style={getStampMaskStyle()}
           />
           <div
             aria-hidden
             className="absolute inset-0 bg-[rgba(255,89,118,0.4)] backdrop-blur-[4px]"
-            style={getStampMaskStyle({})}
+            style={getStampMaskStyle()}
           />
           <div
             aria-hidden
-            className="absolute top-[6px] left-1/2 h-[38px] w-[38px] -translate-x-1/2"
+            className="absolute top-[8.82%] left-1/2 h-[55.88%] w-[55.88%] -translate-x-1/2"
           >
             <img
               alt=""
@@ -300,7 +289,7 @@ export default function LeafletStampTile({
       ) : null}
 
       {/* label */}
-      <div className="head_b_14 absolute inset-x-0 top-[54px] -translate-y-1/2 text-center whitespace-nowrap text-[var(--color-white)]">
+      <div className="head_b_14 absolute inset-x-0 top-[79.41%] -translate-y-1/2 text-center [font-size:clamp(12px,3.8vw,14px)] whitespace-nowrap text-[var(--color-white)]">
         {stamp.label}
       </div>
     </div>
