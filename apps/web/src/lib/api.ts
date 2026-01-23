@@ -136,6 +136,11 @@ export type LeafletProgressResponse = {
   completedStampKeys: string[];
 };
 
+export type LeafletStampCodeResponse = {
+  code: string;
+  stampKey: string;
+};
+
 export async function loginApi(input: {
   teamKey: string;
   name: string;
@@ -158,5 +163,11 @@ export async function leafletClaimApi(input: {
   return apiFetchJson('/api/leaflet/claim', {
     method: 'POST',
     body: JSON.stringify(input),
+  });
+}
+
+export async function leafletStampCodeApi(): Promise<LeafletStampCodeResponse> {
+  return apiFetchJson('/api/leaflet/stamp-code', {
+    method: 'GET',
   });
 }
