@@ -48,6 +48,7 @@ export default function LeafletPageClient() {
   const retryRef = useRef<(() => void) | null>(null);
 
   const [loading, setLoading] = useState(false);
+  const [completeHandleDown, setCompleteHandleDown] = useState(false);
 
   const nextPath = useMemo(() => {
     if (pendingCode) {
@@ -81,6 +82,9 @@ export default function LeafletPageClient() {
 
     const response = await leafletClaimApi({ code });
     setProgress(response);
+    if (response.completedCount >= response.totalCount) {
+      setCompleteHandleDown(false);
+    }
 
     trackEvent('leaflet_claim', { status: 'success' });
 
@@ -161,11 +165,17 @@ export default function LeafletPageClient() {
     return progress.completedStampKeys.filter(isLeafletStampKey);
   }, [progress]);
 
+  const isComplete = Boolean(
+    progress && progress.completedCount >= progress.totalCount
+  );
+
   return (
     <>
       <LeafletStampScreen
         progressCount={progress?.completedCount ?? 0}
         totalCount={progress?.totalCount}
+        handleDown={isComplete ? completeHandleDown : undefined}
+        onHandleDownChange={isComplete ? setCompleteHandleDown : undefined}
         completedStampKeys={completedStampKeys}
       />
 

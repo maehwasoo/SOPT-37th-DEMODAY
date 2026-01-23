@@ -1,4 +1,6 @@
-import type { CSSProperties } from 'react';
+'use client';
+
+import { useRef, useState, type CSSProperties, type PointerEvent } from 'react';
 
 import Link from 'next/link';
 
@@ -10,6 +12,9 @@ const SUNRISE_TEXT_MASK_SRC = '/assets/leaflet/icons/sunrise-text-mask.svg';
 const DONE_BOTTOM_GRADIENT_SRC =
   '/assets/leaflet/patterns/leaflet-done-background.png';
 
+const COMPLETE_PANEL_TRANSLATE_Y_PX = 256;
+const COMPLETE_PANEL_SNAP_THRESHOLD_PX = COMPLETE_PANEL_TRANSLATE_Y_PX / 2;
+
 type LeafletBottomPanelProgressProps = {
   current: number;
   total: number;
@@ -17,6 +22,7 @@ type LeafletBottomPanelProgressProps = {
 
 type LeafletBottomPanelCompleteProps = {
   handleDown?: boolean;
+  onHandleDownChange?: (nextHandleDown: boolean) => void;
 };
 
 type LeafletBottomPanelProps =
@@ -97,15 +103,85 @@ function LeafletBottomPanelProgress({
 
 function LeafletBottomPanelComplete({
   handleDown,
+  onHandleDownChange,
 }: LeafletBottomPanelCompleteProps) {
+  const [dragging, setDragging] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const [dragTranslateY, setDragTranslateY] = useState<number | null>(null);
+
+  const currentTranslateY =
+    dragTranslateY ?? (handleDown ? COMPLETE_PANEL_TRANSLATE_Y_PX : 0);
+
+  const translateYRef = useRef(0);
+
+  const pointerStartYRef = useRef(0);
+  const translateYStartRef = useRef(0);
+
+  const startDrag = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setHasInteracted(true);
+    setDragging(true);
+    pointerStartYRef.current = event.clientY;
+    translateYRef.current = currentTranslateY;
+    translateYStartRef.current = currentTranslateY;
+    setDragTranslateY(currentTranslateY);
+  };
+
+  const moveDrag = (event: PointerEvent<HTMLDivElement>) => {
+    if (!dragging) return;
+
+    const deltaY = event.clientY - pointerStartYRef.current;
+    const nextTranslateY = Math.min(
+      COMPLETE_PANEL_TRANSLATE_Y_PX,
+      Math.max(0, translateYStartRef.current + deltaY)
+    );
+    translateYRef.current = nextTranslateY;
+    setDragTranslateY(nextTranslateY);
+  };
+
+  const endDrag = () => {
+    if (!dragging) return;
+
+    setDragging(false);
+
+    const translateY = translateYRef.current;
+    const nextHandleDown = translateY > COMPLETE_PANEL_SNAP_THRESHOLD_PX;
+    const snappedTranslateY = nextHandleDown
+      ? COMPLETE_PANEL_TRANSLATE_Y_PX
+      : 0;
+    translateYRef.current = snappedTranslateY;
+    setDragTranslateY(snappedTranslateY);
+    onHandleDownChange?.(nextHandleDown);
+  };
+
+  const shouldPlayIntroAnimation =
+    !handleDown && !hasInteracted && dragTranslateY === null;
+
   return (
     <div
       className={[
         'shadow_top relative h-[428px] w-full overflow-hidden rounded-tl-[32px] rounded-tr-[32px] bg-[var(--color-black)]',
-        handleDown ? 'translate-y-[256px]' : 'leaflet_bottom_panel_slide_up',
-      ]
-        .filter(Boolean)
-        .join(' ')}
+        dragging
+          ? 'transition-none'
+          : 'transition-transform duration-[260ms] ease-out motion-reduce:transition-none',
+        handleDown
+          ? 'translate-y-[256px]'
+          : shouldPlayIntroAnimation
+            ? 'leaflet_bottom_panel_slide_up'
+            : 'translate-y-0',
+      ].join(' ')}
+      style={{
+        touchAction: 'none',
+        ...(dragTranslateY === null
+          ? {}
+          : { transform: `translate3d(0, ${dragTranslateY}px, 0)` }),
+      }}
+      onPointerDown={startDrag}
+      onPointerMove={moveDrag}
+      onPointerUp={endDrag}
+      onPointerCancel={endDrag}
     >
       {/* bottom gradient */}
       <div
@@ -196,5 +272,10 @@ export default function LeafletBottomPanel(props: LeafletBottomPanelProps) {
     );
   }
 
-  return <LeafletBottomPanelComplete handleDown={props.handleDown} />;
+  return (
+    <LeafletBottomPanelComplete
+      handleDown={props.handleDown}
+      onHandleDownChange={props.onHandleDownChange}
+    />
+  );
 }
