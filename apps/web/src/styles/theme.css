@@ -127,11 +127,11 @@
 
   @keyframes leaflet-bottom-panel-slide-up {
     from {
-      transform: translateY(256px);
+      height: 172px;
     }
 
     to {
-      transform: translateY(0);
+      height: 428px;
     }
   }
 
