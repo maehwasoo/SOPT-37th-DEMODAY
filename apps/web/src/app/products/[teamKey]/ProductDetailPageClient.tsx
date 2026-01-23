@@ -5,6 +5,7 @@ import { useEffect, type ReactElement } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
+import FadeInView from '@/components/common/FadeInView';
 import {
   AndroidIcon,
   DesignIcon,
@@ -228,14 +229,16 @@ export default function ProductDetailPageClient({
 
           {/* detail image */}
           {product.detailImageSrc ? (
-            <div aria-label="상세 이미지 영역">
-              <img
-                src={product.detailImageSrc}
-                alt={`${product.title} 상세 이미지`}
-                className="h-auto w-full"
-                loading="lazy"
-              />
-            </div>
+            <FadeInView>
+              <div aria-label="상세 이미지 영역">
+                <img
+                  src={product.detailImageSrc}
+                  alt={`${product.title} 상세 이미지`}
+                  className="h-auto w-full"
+                  loading="lazy"
+                />
+              </div>
+            </FadeInView>
           ) : null}
         </main>
 
