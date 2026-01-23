@@ -5,7 +5,7 @@ import type { ButtonHTMLAttributes } from 'react';
 import Image from 'next/image';
 
 export type ProductCardProps = {
-  thumbnailSrc: string;
+  thumbnailSrc: string | null;
   thumbnailAlt?: string;
   title: string;
   category: string;
@@ -37,13 +37,17 @@ export default function ProductCard({
     <button className={mergedClassName} type={type} {...props}>
       {/* thumbnail */}
       <div className="relative h-[92px] w-full shrink-0">
-        <Image
-          src={thumbnailSrc}
-          alt={thumbnailAlt}
-          fill
-          className="object-cover"
-          sizes="(max-width: 440px) calc((100vw - 49px) / 2), 196px"
-        />
+        {thumbnailSrc ? (
+          <Image
+            src={thumbnailSrc}
+            alt={thumbnailAlt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 440px) calc((100vw - 49px) / 2), 196px"
+          />
+        ) : (
+          <div className="h-full w-full bg-[var(--color-gray-800)]" />
+        )}
       </div>
 
       {/* content */}
