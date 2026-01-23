@@ -1,10 +1,10 @@
 package com.sopt.demoday.api.common.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
-import io.swagger.v3.oas.annotations.security.SecuritySchemeIn;
-import io.swagger.v3.oas.annotations.security.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.servers.Server;
 
 import org.springframework.context.annotation.Configuration;
@@ -25,9 +25,8 @@ import org.springframework.context.annotation.Configuration;
 	name = "SessionCookie",
 	type = SecuritySchemeType.APIKEY,
 	in = SecuritySchemeIn.COOKIE,
-	name = "sid",
+	paramName = "sid",
 	description = "HttpOnly session cookie. Cookie name can be changed via app.session.cookie-name."
 )
 public class OpenApiConfig {
 }
-
