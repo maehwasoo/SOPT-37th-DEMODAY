@@ -102,7 +102,7 @@ export const TEAM_LIST: readonly Team[] = [
   },
   {
     key: 'makers',
-    displayName: 'SOPT Makers',
+    displayName: 'Makers',
     category: '라이프스타일',
     shortDescription: 'SOPT를 SOPT답게',
     track: 'makers',
