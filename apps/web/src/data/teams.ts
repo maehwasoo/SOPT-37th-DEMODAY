@@ -32,7 +32,7 @@ export const TEAM_LIST: readonly Team[] = [
   },
   {
     key: 'carena',
-    displayName: '케어나',
+    displayName: 'CareNA',
     category: '건강/피트니스',
     shortDescription: '건강검진 결과를 쉽게, 관리까지 한 번에',
     track: 'appjam',
