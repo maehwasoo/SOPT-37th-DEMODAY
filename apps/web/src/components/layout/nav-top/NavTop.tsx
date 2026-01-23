@@ -42,10 +42,13 @@ export default function NavTop(props: NavTopProps) {
     );
   }
 
+  const showQr = Boolean(props.showLeafletStampQrMenu);
+
   return (
     <header
       className={[
-        'shadow_bottom relative flex h-[56px] w-full items-center justify-center bg-[var(--color-black-overlay)] backdrop-blur-md',
+        'shadow_bottom relative h-[56px] w-full bg-[var(--color-black-overlay)] backdrop-blur-md',
+        showQr ? '' : 'flex items-center justify-center',
         props.className,
       ]
         .filter(Boolean)
@@ -54,10 +57,14 @@ export default function NavTop(props: NavTopProps) {
       <img
         alt="SYSTEM UPDATE : SUNRISE"
         src="/assets/leaflet/icons/sunrise-text-mask.svg"
-        className="h-[38.5px] w-[286px]"
+        className={
+          showQr
+            ? 'absolute top-1/2 left-[24px] h-[14.0996px] -translate-y-1/2'
+            : 'h-[38.5px] w-[286px]'
+        }
       />
 
-      {props.showLeafletStampQrMenu ? <LeafletStampQrMenu /> : null}
+      {showQr ? <LeafletStampQrMenu /> : null}
     </header>
   );
 }

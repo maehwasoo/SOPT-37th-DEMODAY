@@ -147,7 +147,7 @@ export default function LeafletScanPageClient() {
         }}
       />
 
-      <div className="px-[16px] pt-[16px]">
+      <div className="px-[16px] pt-[24px]">
         <div className="flex flex-col gap-[12px]">
           <p className="body_r_14 text-[var(--color-gray-200)]">
             카메라로 QR을 스캔하면 자동으로 리플렛에 기록됩니다.
