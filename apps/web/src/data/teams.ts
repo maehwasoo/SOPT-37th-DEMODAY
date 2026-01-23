@@ -32,7 +32,7 @@ export const TEAM_LIST: readonly Team[] = [
   },
   {
     key: 'carena',
-    displayName: '케어나',
+    displayName: 'CareNA',
     category: '건강/피트니스',
     shortDescription: '건강검진 결과를 쉽게, 관리까지 한 번에',
     track: 'appjam',
@@ -74,7 +74,7 @@ export const TEAM_LIST: readonly Team[] = [
   },
   {
     key: 'clustar',
-    displayName: 'CLUSTAR',
+    displayName: 'cluSTAR',
     category: '생산성',
     shortDescription: '흩어진 메모를 빛나는 결과물로',
     track: 'appjam',
@@ -102,7 +102,7 @@ export const TEAM_LIST: readonly Team[] = [
   },
   {
     key: 'makers',
-    displayName: 'SOPT Makers',
+    displayName: 'Makers',
     category: '라이프스타일',
     shortDescription: 'SOPT를 SOPT답게',
     track: 'makers',

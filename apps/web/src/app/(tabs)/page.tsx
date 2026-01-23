@@ -109,7 +109,7 @@ export default function Home() {
               <p className="body_r_14 w-full text-[var(--color-gray-300)]">
                 이번 앱잼 데모데이 &lt;System Update: SUNRISE&gt;에서는 SOPT의
                 꽃 앱잼(APPJAM) 뿐만 아니라 SOPT를 위한 프로덕트를 만드는
-                메이커스(SOPT Makers)의 결과물까지 함께 만나보실 수 있습니다.
+                메이커스(Makers)의 결과물까지 함께 만나보실 수 있습니다.
               </p>
             </section>
 
