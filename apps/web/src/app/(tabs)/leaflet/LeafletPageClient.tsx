@@ -27,6 +27,11 @@ export default function LeafletPageClient() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  useEffect(() => {
+    router.prefetch('/login');
+    router.prefetch('/leaflet/scan');
+  }, [router]);
+
   const [pendingCode, setPendingCode] = useState(() => {
     const raw = searchParams.get('code') ?? '';
     return raw.trim();
