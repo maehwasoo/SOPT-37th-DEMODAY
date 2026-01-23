@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { QrIcon, SunriseIcon } from '@/components/icons';
 import { ProgressBar } from '@/components/ui';
 
-const SUNRISE_CIRCLE_SRC = '/assets/leaflet/patterns/sunrise-circle.webp';
 const SUNRISE_TEXT_MASK_SRC = '/assets/leaflet/icons/sunrise-text-mask.svg';
 const DONE_BOTTOM_GRADIENT_SRC =
   '/assets/leaflet/patterns/leaflet-done-background.png';
@@ -215,34 +214,6 @@ function LeafletBottomPanelComplete({
           <p className="black_bk_20 text-center text-[var(--color-white)]">
             DIVE SOPT 데모데이 업데이트 완료
           </p>
-        </div>
-      </div>
-
-      {/* sunrise circles */}
-      <div
-        aria-hidden
-        className="absolute top-[330px] left-0 z-0 h-[98px] w-full overflow-hidden"
-      >
-        <div className="absolute top-0 left-[-232.05px] h-[114.874px] w-[852.233px] opacity-15">
-          <img
-            alt=""
-            className="h-full w-full object-cover"
-            src={SUNRISE_CIRCLE_SRC}
-          />
-        </div>
-        <div className="absolute top-[12.61px] left-[-161.03px] h-[95.728px] w-[710.194px] opacity-25">
-          <img
-            alt=""
-            className="h-full w-full object-cover"
-            src={SUNRISE_CIRCLE_SRC}
-          />
-        </div>
-        <div className="absolute top-[23.62px] left-[-101.85px] h-[79.773px] w-[591.828px] opacity-50">
-          <img
-            alt=""
-            className="h-full w-full object-cover"
-            src={SUNRISE_CIRCLE_SRC}
-          />
         </div>
       </div>
 
