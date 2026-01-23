@@ -1,13 +1,13 @@
 import LoginPageClient from './LoginPageClient';
 
-export default function LoginPage({
+export default async function LoginPage({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     next?: string;
-  };
+  }>;
 }) {
-  const next = searchParams?.next;
+  const next = (await searchParams)?.next;
 
   return (
     <main className="bg-[var(--color-black)]">
