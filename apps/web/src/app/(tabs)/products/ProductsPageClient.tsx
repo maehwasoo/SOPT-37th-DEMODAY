@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 import ProductCard from '@/components/feature/product-card/ProductCard';
 import FilterChip from '@/components/ui/FilterChip/FilterChip';
 import Tabs, { type TabsValue } from '@/components/ui/Tabs/Tabs';
@@ -17,6 +19,7 @@ const PLATFORM_FILTERS = [
 type PlatformFilter = (typeof PLATFORM_FILTERS)[number]['value'];
 
 export default function ProductsPageClient() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabsValue>('all');
   const [activePlatform, setActivePlatform] = useState<PlatformFilter>('all');
 
@@ -63,6 +66,7 @@ export default function ProductsPageClient() {
               title={product.title}
               category={product.category}
               description={product.description}
+              onClick={() => router.push(`/products/${product.id}`)}
             />
           ))}
         </div>
