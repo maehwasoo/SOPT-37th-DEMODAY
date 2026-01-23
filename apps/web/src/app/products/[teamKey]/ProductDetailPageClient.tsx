@@ -16,8 +16,8 @@ import {
 } from '@/components/icons';
 import { Footer, NavTop } from '@/components/layout';
 import { TagProduct } from '@/components/ui';
+import type { Product, ProductPlatform } from '@/data/products';
 import { trackEvent } from '@/lib/ga';
-import type { Product, ProductPlatform } from '@/mocks/products';
 
 type ProductDetailPageClientProps = {
   product: Product;
@@ -80,15 +80,17 @@ export default function ProductDetailPageClient({
 }: ProductDetailPageClientProps) {
   const router = useRouter();
 
-  const platformLabel = PLATFORM_LABEL[product.platform];
+  const platformLabel = product.platform
+    ? PLATFORM_LABEL[product.platform]
+    : null;
 
   useEffect(() => {
     trackEvent('product_detail_view', {
-      product_id: product.id,
+      product_id: product.teamKey,
       track: product.track,
       platform: product.platform,
     });
-  }, [product.id, product.platform, product.track]);
+  }, [product.platform, product.teamKey, product.track]);
 
   return (
     <div className="mx-auto w-full max-w-[var(--app-max-width)] bg-[var(--color-black)]">
@@ -123,7 +125,9 @@ export default function ProductDetailPageClient({
                   </p>
                   <div className="flex items-start gap-[6px]">
                     <TagProduct>{product.category}</TagProduct>
-                    <TagProduct>{platformLabel}</TagProduct>
+                    {platformLabel ? (
+                      <TagProduct>{platformLabel}</TagProduct>
+                    ) : null}
                   </div>
                 </div>
 
@@ -175,7 +179,7 @@ export default function ProductDetailPageClient({
               onClick={() => {
                 trackEvent('leaflet_entry_click', {
                   source: 'product_detail_cta',
-                  product_id: product.id,
+                  product_id: product.teamKey,
                 });
               }}
             >
