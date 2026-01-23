@@ -1,3 +1,5 @@
+'use client';
+
 import LeafletBottomPanel from './LeafletBottomPanel';
 import { LEAFLET_STAMPS } from './leafletStamp.constants';
 import type { LeafletStampKey } from './leafletStamp.constants';
@@ -8,6 +10,7 @@ export type LeafletStampScreenProps = {
   progressCount: number;
   totalCount?: number;
   handleDown?: boolean;
+  onHandleDownChange?: (nextHandleDown: boolean) => void;
   // completed stamp keys
   completedStampKeys?: readonly LeafletStampKey[];
 };
@@ -32,6 +35,7 @@ export default function LeafletStampScreen({
   progressCount,
   totalCount = LEAFLET_STAMPS.length,
   handleDown,
+  onHandleDownChange,
   completedStampKeys,
 }: LeafletStampScreenProps) {
   const completedKeys = completedStampKeys
@@ -61,7 +65,11 @@ export default function LeafletStampScreen({
       {/* bottom sheets */}
       <div className="absolute bottom-0 left-0 w-full">
         {isComplete ? (
-          <LeafletBottomPanel mode="complete" handleDown={handleDown} />
+          <LeafletBottomPanel
+            mode="complete"
+            handleDown={handleDown}
+            onHandleDownChange={onHandleDownChange}
+          />
         ) : (
           <LeafletBottomPanel
             mode="progress"
