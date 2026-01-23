@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 
 import NavTop from '@/components/layout/nav-top/NavTop';
 import { loginApi } from '@/lib/api';
+import { trackEvent } from '@/lib/ga';
 
 const BRANDING_BG_SRC = '/assets/figma/main/img_branding_main.png';
 
@@ -417,9 +418,21 @@ export default function LoginPageClient({ next }: { next?: string }) {
     setErrorMessage(null);
 
     try {
+      trackEvent('login_submit', {
+        participant_type: participantType ?? 'unknown',
+        team_key: input.teamKey,
+      });
       await loginApi({ teamKey: input.teamKey, name: trimmedName });
+      trackEvent('login_success', {
+        participant_type: participantType ?? 'unknown',
+        team_key: input.teamKey,
+      });
       navigateAfterLogin();
     } catch {
+      trackEvent('login_failure', {
+        participant_type: participantType ?? 'unknown',
+        team_key: input.teamKey,
+      });
       setErrorMessage('로그인에 실패했습니다. 다시 시도해 주세요.');
     } finally {
       setSubmitting(false);

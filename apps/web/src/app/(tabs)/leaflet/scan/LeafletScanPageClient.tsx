@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import NavTop from '@/components/layout/nav-top/NavTop';
+import { trackEvent } from '@/lib/ga';
 
 type ScanStatus = 'idle' | 'scanning' | 'unsupported' | 'error';
 
@@ -59,10 +60,11 @@ export default function LeafletScanPageClient() {
   }, [router]);
 
   const goLeafletWithCode = useCallback(
-    (raw: string) => {
+    (raw: string, method: 'camera' | 'manual') => {
       const code = extractLeafletCode(raw, origin);
       if (!code) return;
 
+      trackEvent('leaflet_scan_success', { method });
       router.replace(`/leaflet?code=${encodeURIComponent(code)}`);
     },
     [origin, router]
@@ -76,6 +78,7 @@ export default function LeafletScanPageClient() {
 
       if (typeof window === 'undefined') return;
       if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
+        trackEvent('leaflet_scan_unsupported', { reason: 'insecure_context' });
         setStatus('unsupported');
         setErrorMessage('카메라는 HTTPS 환경에서만 사용할 수 있습니다.');
         return;
@@ -85,6 +88,7 @@ export default function LeafletScanPageClient() {
       if (!video) return;
 
       setStatus('scanning');
+      trackEvent('leaflet_scan_start');
 
       try {
         const { BrowserQRCodeReader } = await import('@zxing/browser');
@@ -100,7 +104,7 @@ export default function LeafletScanPageClient() {
             if (result && !scannedRef.current) {
               scannedRef.current = true;
               controls.stop();
-              goLeafletWithCode(result.getText());
+              goLeafletWithCode(result.getText(), 'camera');
               return;
             }
 
@@ -117,6 +121,7 @@ export default function LeafletScanPageClient() {
         controlsRef.current = controls;
       } catch (error) {
         if (cancelled) return;
+        trackEvent('leaflet_scan_error');
         setStatus('error');
         setErrorMessage(
           '카메라 스캔을 시작할 수 없습니다. 코드 입력을 이용해 주세요.'
@@ -191,7 +196,7 @@ export default function LeafletScanPageClient() {
                   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-white)]',
                 ].join(' ')}
                 disabled={!manualCode.trim()}
-                onClick={() => goLeafletWithCode(manualCode)}
+                onClick={() => goLeafletWithCode(manualCode, 'manual')}
               >
                 확인
               </button>

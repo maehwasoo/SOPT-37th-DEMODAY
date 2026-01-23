@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { QrIcon } from '@/components/icons';
 import { TouchArea } from '@/components/ui';
 import { ApiError, leafletStampCodeApi } from '@/lib/api';
+import { trackEvent } from '@/lib/ga';
 
 type Status = 'idle' | 'loading' | 'ready' | 'error';
 
@@ -94,6 +95,8 @@ export default function LeafletStampQrMenu() {
   const onDownload = () => {
     if (!qrDataUrl) return;
 
+    trackEvent('leaflet_qr_download', { stamp_key: stampKey ?? undefined });
+
     const a = document.createElement('a');
     a.href = qrDataUrl;
     a.download = stampKey ? `leaflet-${stampKey}-qr.png` : 'leaflet-qr.png';
@@ -108,7 +111,13 @@ export default function LeafletStampQrMenu() {
         aria-label="기록 인증 QR 코드"
         className="absolute top-1/2 right-[20px] -translate-y-1/2 text-[var(--color-white)]"
         icon={<QrIcon />}
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => {
+          const nextOpen = !open;
+          setOpen(nextOpen);
+          trackEvent(
+            nextOpen ? 'leaflet_qr_menu_open' : 'leaflet_qr_menu_close'
+          );
+        }}
       />
 
       {open ? (

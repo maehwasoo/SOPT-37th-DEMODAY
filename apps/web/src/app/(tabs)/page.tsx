@@ -5,7 +5,8 @@ import TagMain from '@/components/feature/section-header/TagMain';
 import InstagramIcon from '@/components/icons/InstagramIcon';
 import LinkIcon from '@/components/icons/LinkIcon';
 import YoutubeIcon from '@/components/icons/YoutubeIcon';
-import Button from '@/components/ui/Button/Button';
+
+import HomeCtaButton from './HomeCtaButton.client';
 
 export default function Home() {
   return (
@@ -22,7 +23,7 @@ export default function Home() {
         </div>
 
         <div className="w-[343px]">
-          <Button href="/products">서비스 보러가기</Button>
+          <HomeCtaButton />
         </div>
       </section>
 
