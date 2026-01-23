@@ -9,6 +9,7 @@ const SUNRISE_TEXT_MASK_SRC = '/assets/leaflet/icons/sunrise-text-mask.svg';
 type LeafletBottomPanelProgressProps = {
   current: number;
   total: number;
+  onScan?: () => void;
 };
 
 type LeafletBottomPanelCompleteProps = {
@@ -35,6 +36,7 @@ function getSunriseTextMaskStyle(): CSSProperties {
 function LeafletBottomPanelProgress({
   current,
   total,
+  onScan,
 }: LeafletBottomPanelProgressProps) {
   return (
     <div className="shadow_top flex h-[172px] w-full flex-col items-center gap-[24px] overflow-hidden rounded-tl-[32px] rounded-tr-[32px] bg-[var(--color-black)] px-0 pt-[8px] pb-0">
@@ -71,6 +73,8 @@ function LeafletBottomPanelProgress({
       <button
         type="button"
         className="relative h-[74px] w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-white)]"
+        onClick={onScan}
+        disabled={!onScan}
       >
         <span
           aria-hidden
