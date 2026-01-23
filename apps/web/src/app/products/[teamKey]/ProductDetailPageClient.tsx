@@ -119,7 +119,7 @@ export default function ProductDetailPageClient({
 
             <div className="flex min-h-[272px] w-full flex-col items-start gap-[12px] rounded-[2px] bg-[var(--color-gray-900)] p-[12px]">
               <div className="flex w-full flex-col items-start gap-[16px]">
-                <div className="flex items-center gap-[8px]">
+                <div className="flex items-start gap-[8px]">
                   <p className="head_b_20 text-[var(--color-white)]">
                     {product.title}
                   </p>
