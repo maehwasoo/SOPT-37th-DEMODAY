@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from 'react';
 
-import { FilterChip, ProductCard, Tabs } from '@/components';
-import type { TabsValue } from '@/components';
+import ProductCard from '@/components/feature/product-card/ProductCard';
+import FilterChip from '@/components/ui/FilterChip/FilterChip';
+import Tabs, { type TabsValue } from '@/components/ui/Tabs/Tabs';
 import { MOCK_PRODUCTS } from '@/mocks/products';
 
 const PLATFORM_FILTERS = [
