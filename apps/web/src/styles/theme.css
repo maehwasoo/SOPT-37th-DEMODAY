@@ -123,4 +123,24 @@
   .shadow_bottom {
     box-shadow: var(--shadow-bottom);
   }
+
+  @keyframes leaflet-bottom-panel-slide-up {
+    from {
+      transform: translateY(256px);
+    }
+
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .leaflet_bottom_panel_slide_up {
+    animation: leaflet-bottom-panel-slide-up 260ms ease-out;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leaflet_bottom_panel_slide_up {
+    animation: none;
+  }
 }

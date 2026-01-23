@@ -98,7 +98,7 @@ function LeafletBottomPanelComplete({
     <div
       className={[
         'shadow_top relative h-[428px] w-full overflow-hidden rounded-tl-[32px] rounded-tr-[32px] bg-[var(--color-black)]',
-        handleDown ? 'translate-y-[256px]' : '',
+        handleDown ? 'translate-y-[256px]' : 'leaflet_bottom_panel_slide_up',
       ]
         .filter(Boolean)
         .join(' ')}
