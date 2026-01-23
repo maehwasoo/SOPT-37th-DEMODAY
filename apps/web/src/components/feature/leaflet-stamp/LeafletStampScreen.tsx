@@ -45,7 +45,7 @@ export default function LeafletStampScreen({
   const isComplete = resolvedProgressCount >= totalCount;
 
   return (
-    <section className="relative h-[calc(100dvh-136px)] w-full bg-[var(--color-black)]">
+    <section className="relative h-[calc(100dvh-(56px+var(--safe-area-top))-(var(--nav-bottom-height)+var(--safe-area-bottom)))] w-full bg-[var(--color-black)]">
       <div className="px-[23px] pt-[25px]">
         <div className="flex flex-col items-center gap-[24px]">
           <LeafletStampDetailCard />
