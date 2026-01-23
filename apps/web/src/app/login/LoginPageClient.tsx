@@ -173,7 +173,7 @@ function TeamDropdown({
 
       {open ? (
         <div
-          className="absolute top-[calc(100%+8px)] left-0 z-20 w-full rounded-[4px] border border-[var(--color-gray-900)] bg-[var(--color-gray-900)] py-[12px]"
+          className="absolute top-[calc(100%+8px)] left-0 z-20 w-full rounded-[4px] border border-[var(--color-black)] bg-[var(--color-black)] py-[12px]"
           role="listbox"
         >
           {TEAM_OPTIONS.map((option) => {
@@ -211,10 +211,15 @@ function TextInput({
   onChange: (value: string) => void;
   placeholder: string;
 }) {
+  const hasValue = value.length > 0;
+
   return (
     <div className="h-[56px] w-full rounded-[4px] bg-[var(--color-gray-900)] px-[20px] py-[14px]">
       <input
-        className="body_r_16 h-full w-full bg-transparent text-[var(--color-white)] outline-none placeholder:text-[var(--color-gray-600)]"
+        className={[
+          hasValue ? 'body_r_16' : 'body_r_14',
+          'h-full w-full bg-transparent text-[var(--color-white)] outline-none placeholder:text-[var(--color-gray-600)]',
+        ].join(' ')}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
@@ -299,7 +304,7 @@ function AppjamCard({
                 onClick={onNext}
                 disabled={!canNext}
               >
-                로그인
+                다음
               </button>
             </div>
           </div>
@@ -308,7 +313,7 @@ function AppjamCard({
 
       {/* detail */}
       <div className="w-[343px] bg-[var(--color-gray-900)] py-[8px] pr-[10px] pl-[8px]">
-        <div className="flex items-center gap-[4px]">
+        <div className="flex w-full items-center justify-center gap-[4px]">
           <img
             alt=""
             className="h-[19px] w-[19px] shrink-0"
@@ -372,7 +377,7 @@ function VisitorCard({
             onClick={onNext}
             disabled={!canNext}
           >
-            로그인
+            다음
           </button>
         </div>
       </div>
@@ -455,7 +460,7 @@ export default function LoginPageClient({ next }: { next?: string }) {
 
         {step === 'appjam' ? (
           <>
-            <div className="absolute top-[176px] left-1/2 flex w-[343px] -translate-x-1/2 flex-col gap-[16px]">
+            <div className="absolute top-[176px] left-1/2 flex w-[343px] -translate-x-1/2 flex-col gap-[36px]">
               <AppjamCard
                 teamKey={appjamTeamKey}
                 name={name}
