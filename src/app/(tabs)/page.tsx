@@ -93,7 +93,7 @@ export default function Home() {
                 <div className="body_r_14 flex w-[199px] shrink-0 flex-col gap-[6px] text-[var(--color-white)]">
                   <p>SOPT 37기 앱잼 데모데이 : SUNRISE</p>
                   <p className="text-[var(--color-gray-100)]">마곡 NSP홀</p>
-                  <p>2025.01.24(토) 10:30 ~ 17:00</p>
+                  <p>2025.01.24(토) 10:20 ~ 17:00</p>
                 </div>
               </div>
             </section>
