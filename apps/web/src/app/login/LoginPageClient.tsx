@@ -177,7 +177,7 @@ function TeamDropdown({
 
       {open ? (
         <div
-          className="absolute top-[calc(100%+8px)] left-0 z-20 w-full rounded-[4px] border border-[var(--color-black)] bg-[var(--color-black)] py-[12px]"
+          className="absolute top-[calc(100%+8px)] left-0 z-20 max-h-[360px] w-full overflow-y-auto overscroll-contain rounded-[4px] border border-[var(--color-black)] bg-[var(--color-black)] py-[12px]"
           role="listbox"
         >
           {TEAM_OPTIONS.map((option) => {
