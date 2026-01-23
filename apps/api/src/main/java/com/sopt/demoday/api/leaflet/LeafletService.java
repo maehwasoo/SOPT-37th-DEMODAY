@@ -46,6 +46,17 @@ public class LeafletService {
 		);
 	}
 
+	@Transactional(readOnly = true)
+	public StampCode getAvailableStampCodeByStampKey(final String stampKey) {
+		final OffsetDateTime now = OffsetDateTime.now();
+
+		return stampCodeRepository.findAllByStampKeyOrderByCreatedAtDesc(stampKey)
+			.stream()
+			.filter(value -> value.isAvailable(now))
+			.findFirst()
+			.orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "LEAFLET_CODE_NOT_FOUND", "Invalid code"));
+	}
+
 	@Transactional
 	public LeafletProgressResponse claim(final Participant participant, final String codeInput) {
 		final String code = codeInput == null ? "" : codeInput.trim();
