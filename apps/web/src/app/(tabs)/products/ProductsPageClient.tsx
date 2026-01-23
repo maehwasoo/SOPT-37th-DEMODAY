@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import ProductCard from '@/components/feature/product-card/ProductCard';
 import FilterChip from '@/components/ui/FilterChip/FilterChip';
 import Tabs, { type TabsValue } from '@/components/ui/Tabs/Tabs';
+import { trackEvent } from '@/lib/ga';
 import { MOCK_PRODUCTS } from '@/mocks/products';
 
 const PLATFORM_FILTERS = [
@@ -37,13 +38,25 @@ export default function ProductsPageClient() {
     <>
       {/* filters */}
       <section className="shadow_bottom sticky top-0 z-40 flex flex-col items-center gap-[16px] bg-[var(--color-black)] px-0 pt-[8px] pb-[16px]">
-        <Tabs value={activeTab} onValueChange={setActiveTab} />
+        <Tabs
+          value={activeTab}
+          onValueChange={(value) => {
+            setActiveTab(value);
+            trackEvent('product_filter_change', { filter: 'track', value });
+          }}
+        />
         <div className="flex w-[343px] items-center gap-[8px]">
           {PLATFORM_FILTERS.map((item) => (
             <FilterChip
               key={item.value}
               active={activePlatform === item.value}
-              onClick={() => setActivePlatform(item.value)}
+              onClick={() => {
+                setActivePlatform(item.value);
+                trackEvent('product_filter_change', {
+                  filter: 'platform',
+                  value: item.value,
+                });
+              }}
               type="button"
             >
               {item.label}
@@ -66,7 +79,14 @@ export default function ProductsPageClient() {
               title={product.title}
               category={product.category}
               description={product.description}
-              onClick={() => router.push(`/products/${product.id}`)}
+              onClick={() => {
+                trackEvent('product_select', {
+                  product_id: product.id,
+                  track: product.track,
+                  platform: product.platform,
+                });
+                router.push(`/products/${product.id}`);
+              }}
             />
           ))}
         </div>

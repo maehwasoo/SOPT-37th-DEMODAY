@@ -2,6 +2,7 @@ import Script from 'next/script';
 
 import type { Metadata } from 'next';
 
+import GaRouteTracker from '@/components/analytics/GaRouteTracker';
 import '@/styles/global.css';
 
 export const metadata: Metadata = {
@@ -30,13 +31,16 @@ export default function RootLayout({
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${gaId}');
+                gtag('config', '${gaId}', { send_page_view: false });
               `}
             </Script>
           </>
         ) : null}
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <GaRouteTracker gaId={gaId} />
+        {children}
+      </body>
     </html>
   );
 }
