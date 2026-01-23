@@ -448,7 +448,7 @@ export default function LoginPageClient({ next }: { next?: string }) {
 
         {/* contents */}
         {step === 'select' ? (
-          <div className="absolute top-1/2 left-1/2 w-[343px] -translate-x-1/2 -translate-y-1/2 translate-y-[10.5px]">
+          <div className="absolute top-[176px] left-1/2 w-[343px] -translate-x-1/2">
             <SelectCard
               participantType={participantType}
               onSelectType={(type) => {
