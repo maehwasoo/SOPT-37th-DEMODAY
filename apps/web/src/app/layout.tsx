@@ -1,6 +1,6 @@
 import Script from 'next/script';
 
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 
 import GaRouteTracker from '@/components/analytics/GaRouteTracker';
 import '@/styles/global.css';
@@ -8,6 +8,12 @@ import '@/styles/global.css';
 export const metadata: Metadata = {
   title: 'DIVE SOPT 데모데이',
   description: '37기 DIVE SOPT 데모데이',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({
@@ -20,6 +26,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+        <meta
+          name="format-detection"
+          content="telephone=no,email=no,address=no"
+        />
         {gaId ? (
           <>
             <Script

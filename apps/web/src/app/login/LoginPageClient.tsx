@@ -438,10 +438,10 @@ export default function LoginPageClient({ next }: { next?: string }) {
   };
 
   return (
-    <div className="mx-auto w-full max-w-[375px]">
+    <div className="mx-auto w-full max-w-[var(--app-max-width)]">
       <div className="relative h-[667px] min-h-[667px] w-full overflow-hidden bg-[var(--color-black)]">
         {/* nav top */}
-        <div className="absolute top-0 left-0 w-full">
+        <div className="absolute top-0 left-0 w-full bg-[var(--color-black-overlay)] pt-[var(--safe-area-top)] backdrop-blur-md">
           <NavTop variant="main" />
         </div>
 
