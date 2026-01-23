@@ -37,7 +37,7 @@ export default function ProductsPageClient() {
   return (
     <>
       {/* filters */}
-      <section className="shadow_bottom sticky top-[var(--safe-area-top)] z-40 flex flex-col items-center gap-[16px] bg-[var(--color-black)] px-0 pt-[8px] pb-[16px]">
+      <section className="shadow_bottom sticky top-0 z-40 flex flex-col items-center gap-[16px] bg-[var(--color-black-overlay)] px-0 pt-[calc(var(--safe-area-top)+8px)] pb-[16px] backdrop-blur-md">
         <Tabs
           value={activeTab}
           onValueChange={(value) => {
