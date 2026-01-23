@@ -96,7 +96,7 @@ export default function Home() {
                   <p>장소</p>
                   <p>일시</p>
                 </div>
-                <div className="body_r_14 flex w-[199px] shrink-0 flex-col gap-[6px] text-[var(--color-white)]">
+                <div className="body_r_14 flex min-w-0 flex-1 flex-col gap-[6px] text-[var(--color-white)]">
                   <p>SOPT 37기 앱잼 데모데이 : SUNRISE</p>
                   <p className="text-[var(--color-gray-100)]">마곡 NSP홀</p>
                   <p>2026.01.24(토) 10:30 ~ 17:00</p>
