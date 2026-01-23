@@ -8,6 +8,8 @@ Architecture (reading order): [`docs/architecture/README.md`](./architecture/REA
 
 Leaflet stamp contract: [`docs/architecture/08-leaflet-stamp-contract.md`](./architecture/08-leaflet-stamp-contract.md)
 
+AWS infrastructure & deployment: [`docs/architecture/09-aws-infrastructure-and-deployment.md`](./architecture/09-aws-infrastructure-and-deployment.md)
+
 ## Rules
 
 - Keep docs **source-of-truth aligned** (describe what exists in the repo today).
