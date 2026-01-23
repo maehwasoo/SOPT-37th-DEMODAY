@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import { NavTop } from '@/components';
+import NavTop from '@/components/layout/nav-top/NavTop';
 import { loginApi } from '@/lib/api';
 
 const BRANDING_BG_SRC = '/assets/figma/main/img_branding_main.png';
