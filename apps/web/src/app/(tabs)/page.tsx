@@ -90,7 +90,7 @@ export default function Home() {
           <section className="flex w-full flex-col gap-[56px]">
             <section className="flex w-full flex-col gap-[24px] px-[16px]">
               <TagMain>행사 개요</TagMain>
-              <div className="flex items-end gap-[16px] px-[4px]">
+              <div className="flex items-center gap-[16px] px-[4px]">
                 <div className="body_r_14 flex w-[40px] shrink-0 flex-col gap-[6px] text-[var(--color-gray-300)]">
                   <p>행사명</p>
                   <p>장소</p>
