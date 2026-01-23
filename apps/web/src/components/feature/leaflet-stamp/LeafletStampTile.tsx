@@ -1,8 +1,10 @@
-import type { CSSProperties } from 'react';
+'use client';
+
+import { useMemo, type CSSProperties } from 'react';
 
 import {
   LEAFLET_STAMP_ASSETS,
-  LEAFLET_STAMP_SYMBOL_BY_KEY,
+  LEAFLET_STAMP_SYMBOLS,
 } from './leafletStamp.assets';
 import type { LeafletStamp, LeafletStampKey } from './leafletStamp.constants';
 
@@ -222,6 +224,11 @@ function StampLogoLayers({ stampKey }: { stampKey: LeafletStampKey }) {
   }
 }
 
+function getRandomCompletedSymbolSrc() {
+  const index = Math.floor(Math.random() * LEAFLET_STAMP_SYMBOLS.length);
+  return LEAFLET_STAMP_SYMBOLS[index] ?? LEAFLET_STAMP_SYMBOLS[0];
+}
+
 export default function LeafletStampTile({
   stamp,
   completed,
@@ -232,7 +239,10 @@ export default function LeafletStampTile({
       ? LEAFLET_STAMP_ASSETS.stampBaseDefaultMakers
       : LEAFLET_STAMP_ASSETS.stampBaseDefault;
 
-  const symbolSrc = LEAFLET_STAMP_SYMBOL_BY_KEY[stamp.key];
+  const symbolSrc = useMemo(() => {
+    if (!completed) return LEAFLET_STAMP_SYMBOLS[0];
+    return getRandomCompletedSymbolSrc();
+  }, [completed, stamp.key]);
 
   return (
     <div

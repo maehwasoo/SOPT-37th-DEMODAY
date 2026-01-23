@@ -1,5 +1,3 @@
-import type { LeafletStampKey } from './leafletStamp.constants';
-
 const STAMP_ASSET_ROOT = '/assets/leaflet/stamps';
 
 export const LEAFLET_STAMP_ASSETS = {
@@ -39,17 +37,8 @@ export const LEAFLET_STAMP_ASSETS = {
   symbolC: `${STAMP_ASSET_ROOT}/stamp-symbol-c.svg`,
 } as const;
 
-export const LEAFLET_STAMP_SYMBOL_BY_KEY: Record<LeafletStampKey, string> = {
-  amp: LEAFLET_STAMP_ASSETS.symbolA,
-  carena: LEAFLET_STAMP_ASSETS.symbolA,
-  cherrish: LEAFLET_STAMP_ASSETS.symbolB,
-  clustar: LEAFLET_STAMP_ASSETS.symbolC,
-  snappin: LEAFLET_STAMP_ASSETS.symbolB,
-  comfit: LEAFLET_STAMP_ASSETS.symbolB,
-  flint: LEAFLET_STAMP_ASSETS.symbolC,
-  kareer: LEAFLET_STAMP_ASSETS.symbolA,
-  smashing: LEAFLET_STAMP_ASSETS.symbolC,
-  kiero: LEAFLET_STAMP_ASSETS.symbolA,
-  poti: LEAFLET_STAMP_ASSETS.symbolB,
-  makers: LEAFLET_STAMP_ASSETS.symbolC,
-};
+export const LEAFLET_STAMP_SYMBOLS = [
+  LEAFLET_STAMP_ASSETS.symbolA,
+  LEAFLET_STAMP_ASSETS.symbolB,
+  LEAFLET_STAMP_ASSETS.symbolC,
+] as const;
