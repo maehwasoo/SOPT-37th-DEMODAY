@@ -123,7 +123,7 @@ export default function LeafletStampQrMenu() {
       {open ? (
         <div
           className={[
-            'shadow_bottom absolute top-[56px] right-0 z-[70] h-[219px] w-[167px] overflow-hidden',
+            'shadow_bottom absolute top-[56px] right-0 z-[70] min-h-[219px] w-[167px] overflow-hidden',
             'flex flex-col items-center gap-[16px] bg-[var(--color-black)] px-[16px] pt-[12px] pb-[16px]',
             'rounded-bl-[32px]',
           ].join(' ')}
