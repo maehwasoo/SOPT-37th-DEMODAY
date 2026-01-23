@@ -110,7 +110,7 @@ function LeafletBottomPanelComplete({
       {/* bottom gradient */}
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-0 left-0 h-[98px] w-full"
+        className="pointer-events-none absolute bottom-0 left-0 z-10 h-[98px] w-full"
       >
         <img
           alt=""
@@ -122,11 +122,11 @@ function LeafletBottomPanelComplete({
       {/* handle */}
       <div
         aria-hidden
-        className="absolute top-[8px] left-1/2 h-[4px] w-[100px] -translate-x-1/2 rounded-[10px] bg-[var(--color-gray-900)]"
+        className="absolute top-[8px] left-1/2 z-20 h-[4px] w-[100px] -translate-x-1/2 rounded-[10px] bg-[var(--color-gray-900)]"
       />
 
       {/* title */}
-      <div className="absolute top-[20px] left-1/2 flex w-[311px] -translate-x-1/2 flex-col items-center">
+      <div className="absolute top-[20px] left-1/2 z-20 flex w-[311px] -translate-x-1/2 flex-col items-center">
         <div className="flex flex-col items-center">
           <div className="flex items-center gap-[8px]">
             <span className="h-[24px] w-[24px] text-[var(--color-37demo-red)]">
@@ -145,7 +145,7 @@ function LeafletBottomPanelComplete({
       {/* sunrise circles */}
       <div
         aria-hidden
-        className="absolute top-[330px] left-0 h-[98px] w-full overflow-hidden"
+        className="absolute top-[330px] left-0 z-0 h-[98px] w-full overflow-hidden"
       >
         <div className="absolute top-0 left-[-232.05px] h-[114.874px] w-[852.233px] opacity-15">
           <img
@@ -173,11 +173,11 @@ function LeafletBottomPanelComplete({
       {/* sun */}
       <div
         aria-hidden
-        className="absolute top-[96px] left-1/2 h-[311px] w-[311px] -translate-x-1/2 rounded-[500px] bg-[var(--color-37demo-red)] shadow-[0px_0px_16px_0px_var(--color-37demo-red)]"
+        className="absolute top-[96px] left-1/2 z-0 h-[311px] w-[311px] -translate-x-1/2 rounded-[500px] bg-[var(--color-37demo-red)] shadow-[0px_0px_16px_0px_var(--color-37demo-red)]"
       />
 
       {/* sunrise text */}
-      <div className="absolute top-[338px] left-1/2 h-[42px] w-[312px] -translate-x-1/2 shadow-[0px_0px_16px_0px_var(--color-37demo-red)]">
+      <div className="absolute top-[338px] left-1/2 z-20 h-[42px] w-[312px] -translate-x-1/2 shadow-[0px_0px_16px_0px_var(--color-37demo-red)]">
         <div className="absolute inset-0" style={getSunriseTextMaskStyle()}>
           <div
             aria-hidden
