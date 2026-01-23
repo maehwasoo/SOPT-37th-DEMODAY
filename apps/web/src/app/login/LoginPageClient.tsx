@@ -78,7 +78,7 @@ function SelectCard({
               ].join(' ')}
               onClick={() => onSelectType('appjam')}
             >
-              <span className="absolute top-[calc(50%-22.5px)] left-1/2 h-[181.5px] w-[181.5px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
+              <span className="absolute top-[calc(50%-22.5px)] left-[calc(50%-1px)] h-[66px] w-[66px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
                 <span className="absolute top-[25%] right-0 bottom-[25%] left-0">
                   <img alt="" className="h-full w-full" src={TEAM_ICON_SRC} />
                 </span>
@@ -99,7 +99,7 @@ function SelectCard({
               ].join(' ')}
               onClick={() => onSelectType('visitor')}
             >
-              <span className="absolute top-[calc(50%-22.5px)] left-1/2 h-[181.5px] w-[181.5px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
+              <span className="absolute top-[calc(50%-22.5px)] left-[calc(50%-1px)] h-[66px] w-[66px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
                 <span className="absolute inset-[16.67%]">
                   <img alt="" className="h-full w-full" src={PERSON_ICON_SRC} />
                 </span>
@@ -448,7 +448,7 @@ export default function LoginPageClient({ next }: { next?: string }) {
 
         {/* contents */}
         {step === 'select' ? (
-          <div className="absolute top-1/2 left-1/2 w-[343px] -translate-x-1/2 -translate-y-1/2 translate-y-[10.5px]">
+          <div className="absolute top-[176px] left-1/2 w-[343px] -translate-x-1/2">
             <SelectCard
               participantType={participantType}
               onSelectType={(type) => {

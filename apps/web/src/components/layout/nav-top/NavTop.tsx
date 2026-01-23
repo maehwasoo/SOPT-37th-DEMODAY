@@ -51,7 +51,11 @@ export default function NavTop(props: NavTopProps) {
         .filter(Boolean)
         .join(' ')}
     >
-      <div className="black_bk_20 text-center">SYSTEM UPDATE : SUNRISE</div>
+      <img
+        alt="SYSTEM UPDATE : SUNRISE"
+        src="/assets/leaflet/icons/sunrise-text-mask.svg"
+        className="h-[38.5px] w-[286px]"
+      />
 
       {props.showLeafletStampQrMenu ? <LeafletStampQrMenu /> : null}
     </header>
