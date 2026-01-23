@@ -4,6 +4,8 @@ import type { ReactNode } from 'react';
 
 import { usePathname, useRouter } from 'next/navigation';
 
+import { trackEvent } from '@/lib/ga';
+
 import {
   HomeFilledIcon,
   HomeOutlineIcon,
@@ -69,6 +71,8 @@ export default function NavBottom({ active, onNavigate }: NavBottomProps) {
   const resolvedActive = active ?? resolveActiveTab(pathname);
 
   const navigate = (tab: NavBottomTab) => {
+    trackEvent('nav_click', { tab });
+
     if (onNavigate) {
       onNavigate(tab);
       return;
@@ -85,6 +89,10 @@ export default function NavBottom({ active, onNavigate }: NavBottomProps) {
         router.push('/leaflet');
         return;
       case 'homepage':
+        trackEvent('outbound_click', {
+          url: OFFICIAL_HOMEPAGE_URL,
+          source: 'nav_bottom',
+        });
         window.open(OFFICIAL_HOMEPAGE_URL, '_blank', 'noopener,noreferrer');
         return;
       default:

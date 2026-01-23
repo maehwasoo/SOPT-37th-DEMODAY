@@ -10,6 +10,7 @@ import {
 } from '@/components/feature/leaflet-stamp/leafletStamp.constants';
 import LeafletStampScreen from '@/components/feature/leaflet-stamp/LeafletStampScreen';
 import { ApiError, leafletClaimApi, leafletProgressApi } from '@/lib/api';
+import { trackEvent } from '@/lib/ga';
 
 type ToastState = {
   variant: 'info' | 'error';
@@ -65,6 +66,7 @@ export default function LeafletPageClient() {
   }, []);
 
   const redirectToLogin = useCallback(() => {
+    trackEvent('auth_redirect', { source: 'leaflet' });
     router.replace(`/login?next=${encodeURIComponent(nextPath)}`);
   }, [nextPath, router]);
 
@@ -79,6 +81,8 @@ export default function LeafletPageClient() {
 
     const response = await leafletClaimApi({ code });
     setProgress(response);
+
+    trackEvent('leaflet_claim', { status: 'success' });
 
     setPendingCode('');
     router.replace('/leaflet');
@@ -97,6 +101,7 @@ export default function LeafletPageClient() {
       await loadProgress();
     } catch (error) {
       if (error instanceof ApiError && error.status === 401) {
+        trackEvent('leaflet_claim', { status: 'unauthorized' });
         redirectToLogin();
         return;
       }
@@ -106,6 +111,7 @@ export default function LeafletPageClient() {
         error.status === 409 &&
         error.errorCode === 'LEAFLET_CLAIM_DUPLICATE'
       ) {
+        trackEvent('leaflet_claim', { status: 'duplicate' });
         showToast({ variant: 'info', message: '이미 적립된 기록입니다.' });
         setPendingCode('');
         router.replace('/leaflet');
@@ -118,6 +124,7 @@ export default function LeafletPageClient() {
         error.status === 404 &&
         error.errorCode === 'LEAFLET_CODE_NOT_FOUND'
       ) {
+        trackEvent('leaflet_claim', { status: 'not_found' });
         showToast({
           variant: 'error',
           message: '유효하지 않은 QR 코드입니다.',
@@ -128,6 +135,7 @@ export default function LeafletPageClient() {
         return;
       }
 
+      trackEvent('leaflet_claim', { status: 'error' });
       retryRef.current = () => {
         setToast(null);
         void run();
