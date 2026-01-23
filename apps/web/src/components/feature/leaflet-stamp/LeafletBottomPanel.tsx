@@ -7,6 +7,8 @@ import { ProgressBar } from '@/components/ui';
 
 const SUNRISE_CIRCLE_SRC = '/assets/leaflet/patterns/sunrise-circle.webp';
 const SUNRISE_TEXT_MASK_SRC = '/assets/leaflet/icons/sunrise-text-mask.svg';
+const DONE_BOTTOM_GRADIENT_SRC =
+  '/assets/leaflet/patterns/leaflet-done-background.png';
 
 type LeafletBottomPanelProgressProps = {
   current: number;
@@ -105,6 +107,18 @@ function LeafletBottomPanelComplete({
         .filter(Boolean)
         .join(' ')}
     >
+      {/* bottom gradient */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-0 left-0 h-[98px] w-full"
+      >
+        <img
+          alt=""
+          className="h-full w-full object-fill"
+          src={DONE_BOTTOM_GRADIENT_SRC}
+        />
+      </div>
+
       {/* handle */}
       <div
         aria-hidden
