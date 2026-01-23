@@ -171,7 +171,7 @@ export default function LeafletPageClient() {
 
       {/* toast */}
       {toast ? (
-        <div className="fixed bottom-[calc(var(--nav-bottom-height)+var(--safe-area-bottom)+12px)] left-1/2 z-[60] w-[calc(100%-32px)] max-w-[calc(var(--app-max-width)-32px)] -translate-x-1/2">
+        <div className="fixed bottom-[calc(var(--nav-bottom-height)+12px)] left-1/2 z-[60] w-[calc(100%-32px)] max-w-[calc(var(--app-max-width)-32px)] -translate-x-1/2">
           <div
             className={[
               'shadow_top flex items-center justify-between gap-[12px] rounded-[8px] border px-[16px] py-[12px]',

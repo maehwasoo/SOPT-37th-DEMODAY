@@ -50,7 +50,7 @@ function NavBottomButton({
     <button
       type="button"
       className={[
-        'flex w-full min-w-0 flex-col items-center gap-px px-[8px] py-[12px] text-center',
+        'flex h-full w-full min-w-0 flex-col items-center justify-center gap-0 px-[8px] text-center',
         active
           ? 'text-[var(--color-37demo-red)]'
           : 'text-[var(--color-gray-500)]',
@@ -58,10 +58,8 @@ function NavBottomButton({
       onClick={onClick}
       aria-current={active ? 'page' : undefined}
     >
-      <span className="h-[24px] w-[24px] shrink-0">{icon}</span>
-      <span className="title_m_12 leading-[1.2] whitespace-normal">
-        {label}
-      </span>
+      <span className="h-[20px] w-[20px] shrink-0">{icon}</span>
+      <span className="title_m_12 leading-[1] whitespace-normal">{label}</span>
     </button>
   );
 }
@@ -104,13 +102,17 @@ export default function NavBottom({ active, onNavigate }: NavBottomProps) {
 
   return (
     <nav
-      className="shadow_top grid h-[var(--nav-bottom-height)] grid-cols-4 bg-[var(--color-black-overlay)] px-[16px]"
+      className="shadow_top grid h-[calc(var(--nav-bottom-height)-var(--safe-area-bottom))] grid-cols-4 px-[16px]"
       aria-label="하단 탭 내비게이션"
     >
       <NavBottomButton
         active={resolvedActive === 'home'}
         icon={
-          resolvedActive === 'home' ? <HomeFilledIcon /> : <HomeOutlineIcon />
+          resolvedActive === 'home' ? (
+            <HomeFilledIcon width={20} height={20} />
+          ) : (
+            <HomeOutlineIcon width={20} height={20} />
+          )
         }
         label="홈"
         onClick={() => navigate('home')}
@@ -119,9 +121,9 @@ export default function NavBottom({ active, onNavigate }: NavBottomProps) {
         active={resolvedActive === 'product'}
         icon={
           resolvedActive === 'product' ? (
-            <ProductsFilledIcon />
+            <ProductsFilledIcon width={20} height={20} />
           ) : (
-            <ProductsOutlineIcon />
+            <ProductsOutlineIcon width={20} height={20} />
           )
         }
         label="프로덕트"
@@ -131,9 +133,9 @@ export default function NavBottom({ active, onNavigate }: NavBottomProps) {
         active={resolvedActive === 'leaflet'}
         icon={
           resolvedActive === 'leaflet' ? (
-            <LeafletFilledIcon />
+            <LeafletFilledIcon width={20} height={20} />
           ) : (
-            <LeafletOutlineIcon />
+            <LeafletOutlineIcon width={20} height={20} />
           )
         }
         label="리플렛"
@@ -141,7 +143,7 @@ export default function NavBottom({ active, onNavigate }: NavBottomProps) {
       />
       <NavBottomButton
         active={false}
-        icon={<OpenLinkIcon />}
+        icon={<OpenLinkIcon width={20} height={20} />}
         label="공식홈페이지"
         onClick={() => navigate('homepage')}
       />
