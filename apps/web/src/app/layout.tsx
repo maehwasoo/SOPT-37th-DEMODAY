@@ -7,16 +7,16 @@ import '@/styles/global.css';
 
 export const metadata: Metadata = {
   title: 'DIVE SOPT 데모데이',
-  description: '37기 DIVE SOPT 데모데이',
+  description: '37기 DIVE SOPT 데모데이 공식 웹 페이지',
   openGraph: {
     title: 'DIVE SOPT 데모데이',
-    description: '37기 DIVE SOPT 데모데이',
+    description: '37기 DIVE SOPT 데모데이 공식 웹 페이지',
     images: ['/assets/figma/main/img_branding_main.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'DIVE SOPT 데모데이',
-    description: '37기 DIVE SOPT 데모데이',
+    description: '37기 DIVE SOPT 데모데이 공식 웹 페이지',
     images: ['/assets/figma/main/img_branding_main.png'],
   },
   icons: {
