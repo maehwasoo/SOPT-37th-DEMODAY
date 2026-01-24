@@ -154,7 +154,7 @@ export default function Home() {
 
           <Divider />
 
-          <FadeInView className="w-full" delay={0.1} distance={0}>
+          <FadeInView className="w-full" delay={0.1}>
             <section className="flex w-full flex-col gap-[8px] px-[16px] pb-[48px]">
               <section className="flex flex-col gap-[12px]">
                 <p className="title_m_12 text-[var(--color-gray-200)]">
@@ -181,7 +181,7 @@ export default function Home() {
                 <p className="title_m_12 text-[var(--color-gray-200)]">
                   후원 및 협력
                 </p>
-                <div className="flex w-[176px] flex-wrap content-end items-end justify-end gap-[12px] mix-blend-luminosity">
+                <div className="flex w-[176px] flex-wrap content-end items-end justify-end gap-[12px] grayscale">
                   <div className="relative h-[14px] w-[50px]">
                     <Image
                       src="/assets/figma/main/sponsor_image_459.webp"
