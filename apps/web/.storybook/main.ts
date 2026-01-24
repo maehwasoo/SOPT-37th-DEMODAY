@@ -5,6 +5,7 @@ const srcAlias = path.resolve(process.cwd(), 'src');
 const config = {
   stories: ['../src/stories/**/*.stories.@(ts|tsx|mdx)'],
   addons: [],
+  staticDirs: ['../public'],
   framework: {
     name: '@storybook/nextjs',
     options: {},

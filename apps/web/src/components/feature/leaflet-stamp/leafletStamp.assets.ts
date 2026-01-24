@@ -3,6 +3,8 @@ const STAMP_ASSET_ROOT = '/assets/leaflet/stamps';
 export const LEAFLET_STAMP_ASSETS = {
   // stamp frames
   stampMask: `${STAMP_ASSET_ROOT}/stamp-mask.svg`,
+  stampOutlineDefault: `${STAMP_ASSET_ROOT}/stamp-outline-default.svg`,
+  stampOutlineComplete: `${STAMP_ASSET_ROOT}/stamp-outline-complete.svg`,
   stampBaseDefault: `${STAMP_ASSET_ROOT}/stamp-base-default.svg`,
   stampBaseDefaultMakers: `${STAMP_ASSET_ROOT}/stamp-base-default-makers.svg`,
   stampBaseComplete: `${STAMP_ASSET_ROOT}/stamp-base-complete.svg`,
