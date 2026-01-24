@@ -31,7 +31,7 @@ export type Product = {
 const PRODUCT_ASSET_BASE = '/assets/product_detail';
 
 const THUMBNAIL_SRC_BY_TEAM_KEY: Record<TeamKey, string | null> = {
-  smashing: null,
+  smashing: `${PRODUCT_ASSET_BASE}/thumb/smashing.webp`,
   carena: `${PRODUCT_ASSET_BASE}/thumb/carena.webp`,
   kiero: `${PRODUCT_ASSET_BASE}/thumb/kiero.webp`,
   comfit: `${PRODUCT_ASSET_BASE}/thumb/comfit.webp`,
@@ -46,7 +46,7 @@ const THUMBNAIL_SRC_BY_TEAM_KEY: Record<TeamKey, string | null> = {
 };
 
 const DETAIL_IMAGE_SRC_BY_TEAM_KEY: Record<TeamKey, string | null> = {
-  smashing: null,
+  smashing: `${PRODUCT_ASSET_BASE}/detail/smashing.webp`,
   carena: `${PRODUCT_ASSET_BASE}/detail/carena.webp`,
   kiero: `${PRODUCT_ASSET_BASE}/detail/kiero.webp`,
   comfit: `${PRODUCT_ASSET_BASE}/detail/comfit.webp`,
