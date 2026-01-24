@@ -42,7 +42,7 @@ const THUMBNAIL_SRC_BY_TEAM_KEY: Record<TeamKey, string | null> = {
   flint: `${PRODUCT_ASSET_BASE}/thumb/flint.webp`,
   poti: `${PRODUCT_ASSET_BASE}/thumb/poti.webp`,
   kareer: `${PRODUCT_ASSET_BASE}/thumb/kareer.webp`,
-  makers: null,
+  makers: `${PRODUCT_ASSET_BASE}/thumb/makers.webp`,
 };
 
 const DETAIL_IMAGE_SRC_BY_TEAM_KEY: Record<TeamKey, string | null> = {

@@ -5,6 +5,7 @@ import { useEffect, type ReactElement } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
+import FadeInView from '@/components/common/FadeInView';
 import {
   AndroidIcon,
   DesignIcon,
@@ -118,11 +119,11 @@ export default function ProductDetailPageClient({
 
             <div className="flex w-full flex-col items-start gap-[12px] rounded-[2px] bg-[var(--color-gray-900)] p-[12px]">
               <div className="flex w-full flex-col items-start gap-[16px]">
-                <div className="flex items-start gap-[8px]">
+                <div className="flex items-center gap-[8px]">
                   <p className="head_b_20 text-[var(--color-white)]">
                     {product.title}
                   </p>
-                  <div className="flex items-start gap-[6px]">
+                  <div className="flex items-center gap-[6px]">
                     <TagProduct>{product.category}</TagProduct>
                     <TagProduct>{platformLabel}</TagProduct>
                   </div>
@@ -208,7 +209,7 @@ export default function ProductDetailPageClient({
                 </div>
               </div>
 
-              <div className="absolute top-1/2 right-[22px] flex h-[56px] w-[56px] -translate-y-1/2 items-center justify-center text-[var(--color-37demo-red)]">
+              <div className="absolute top-1/2 right-[22px] flex h-[56px] w-[56px] -translate-y-1/2 items-center justify-end pr-[9px] text-[var(--color-37demo-red)]">
                 <svg
                   width={10}
                   height={18}
@@ -228,14 +229,16 @@ export default function ProductDetailPageClient({
 
           {/* detail image */}
           {product.detailImageSrc ? (
-            <div aria-label="상세 이미지 영역">
-              <img
-                src={product.detailImageSrc}
-                alt={`${product.title} 상세 이미지`}
-                className="h-auto w-full"
-                loading="lazy"
-              />
-            </div>
+            <FadeInView>
+              <div aria-label="상세 이미지 영역">
+                <img
+                  src={product.detailImageSrc}
+                  alt={`${product.title} 상세 이미지`}
+                  className="h-auto w-full"
+                  loading="lazy"
+                />
+              </div>
+            </FadeInView>
           ) : null}
         </main>
 
