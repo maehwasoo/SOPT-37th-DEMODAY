@@ -225,11 +225,11 @@ export default function LeafletStampTile({
   stamp,
   completed,
 }: LeafletStampTileProps) {
-  const baseSrc = completed
-    ? LEAFLET_STAMP_ASSETS.stampBaseComplete
+  const outlineSrc = completed
+    ? LEAFLET_STAMP_ASSETS.stampOutlineComplete
     : stamp.key === 'makers'
-      ? LEAFLET_STAMP_ASSETS.stampBaseDefaultMakers
-      : LEAFLET_STAMP_ASSETS.stampBaseDefault;
+      ? LEAFLET_STAMP_ASSETS.stampOutlineDefaultMakers
+      : LEAFLET_STAMP_ASSETS.stampOutlineDefault;
 
   const symbolSrc = useMemo(() => {
     if (!completed) return LEAFLET_STAMP_SYMBOLS[0];
@@ -242,7 +242,11 @@ export default function LeafletStampTile({
       data-name={`leaflet_stamp_${stamp.key}`}
     >
       {/* stamp base */}
-      <img alt="" className="absolute inset-0 h-full w-full" src={baseSrc} />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-[#F9FAFA]"
+        style={getStampMaskStyle()}
+      />
 
       {/* logo area */}
       <div aria-hidden className="absolute inset-0" style={getStampMaskStyle()}>
@@ -292,6 +296,9 @@ export default function LeafletStampTile({
       <div className="head_b_14 absolute inset-x-0 top-[79.41%] -translate-y-1/2 text-center [font-size:clamp(12px,3.8vw,14px)] whitespace-nowrap text-[var(--color-white)]">
         {stamp.label}
       </div>
+
+      {/* stamp outline */}
+      <img alt="" className="absolute inset-0 h-full w-full" src={outlineSrc} />
     </div>
   );
 }
