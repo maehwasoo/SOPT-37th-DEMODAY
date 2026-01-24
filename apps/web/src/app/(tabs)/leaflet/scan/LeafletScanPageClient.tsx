@@ -90,7 +90,9 @@ export default function LeafletScanPageClient() {
 
       try {
         const { BrowserQRCodeReader } = await import('@zxing/browser');
-        const reader = new BrowserQRCodeReader();
+        const reader = new BrowserQRCodeReader(undefined, {
+          delayBetweenScanAttempts: 100,
+        });
 
         const controls = await reader.decodeFromVideoDevice(
           undefined,
