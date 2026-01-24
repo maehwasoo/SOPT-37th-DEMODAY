@@ -165,7 +165,7 @@ const PRODUCT_INFO_BY_TEAM_KEY = {
       { role: 'planning', members: ['봉윤서', '홍승원'] },
       { role: 'design', members: ['박민주', '한다현'] },
       { role: 'web', members: ['이훈진', '김윤지', '장정훈', '손하은'] },
-      { role: 'server', members: ['김도훈', '권형미'] },
+      { role: 'server', members: ['김도훈', '권형미', '이정연'] },
     ],
   },
   makers: {
