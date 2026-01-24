@@ -102,7 +102,7 @@ export default function NavBottom({ active, onNavigate }: NavBottomProps) {
 
   return (
     <nav
-      className="shadow_top grid h-[var(--nav-bottom-height)] grid-cols-4 px-[16px]"
+      className="shadow_top grid h-[calc(var(--nav-bottom-height)-var(--safe-area-bottom))] grid-cols-4 px-[16px]"
       aria-label="하단 탭 내비게이션"
     >
       <NavBottomButton
