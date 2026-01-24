@@ -209,7 +209,7 @@ export default function ProductDetailPageClient({
                 </div>
               </div>
 
-              <div className="absolute top-1/2 right-[22px] flex h-[56px] w-[56px] -translate-y-1/2 items-center justify-center text-[var(--color-37demo-red)]">
+              <div className="absolute top-1/2 right-[22px] flex h-[56px] w-[56px] -translate-y-1/2 items-center justify-end pr-[9px] text-[var(--color-37demo-red)]">
                 <svg
                   width={10}
                   height={18}
