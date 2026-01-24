@@ -221,6 +221,20 @@ function getRandomCompletedSymbolSrc() {
   return LEAFLET_STAMP_SYMBOLS[index] ?? LEAFLET_STAMP_SYMBOLS[0];
 }
 
+function getCompletedSymbolAspectRatio(src: string) {
+  // SVG viewBox ratio
+  switch (src) {
+    case LEAFLET_STAMP_ASSETS.symbolA:
+      return 25.9354 / 30.4;
+    case LEAFLET_STAMP_ASSETS.symbolB:
+      return 29.1023 / 28.7533;
+    case LEAFLET_STAMP_ASSETS.symbolC:
+      return 35.4734 / 19;
+    default:
+      return 1;
+  }
+}
+
 export default function LeafletStampTile({
   stamp,
   completed,
@@ -233,6 +247,8 @@ export default function LeafletStampTile({
     if (!completed) return LEAFLET_STAMP_SYMBOLS[0];
     return getRandomCompletedSymbolSrc();
   }, [completed, stamp.key]);
+
+  const symbolAspectRatio = getCompletedSymbolAspectRatio(symbolSrc);
 
   return (
     <div
@@ -279,13 +295,21 @@ export default function LeafletStampTile({
           />
           <div
             aria-hidden
-            className="absolute top-[8.82%] left-1/2 h-[55.88%] w-[55.88%] -translate-x-1/2"
+            className="absolute inset-0"
+            style={getStampMaskStyle()}
           >
-            <img
-              alt=""
-              className="h-full w-full object-contain"
-              src={symbolSrc}
-            />
+            <div className="absolute top-[8.82%] left-1/2 h-[55.88%] w-[55.88%] -translate-x-1/2">
+              <div
+                className="absolute top-[12.17%] bottom-[12.17%] left-1/2 -translate-x-1/2"
+                style={{ aspectRatio: symbolAspectRatio }}
+              >
+                <img
+                  alt=""
+                  className="h-full w-full object-contain"
+                  src={symbolSrc}
+                />
+              </div>
+            </div>
           </div>
         </>
       ) : null}
