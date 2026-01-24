@@ -3,6 +3,8 @@ import { TouchArea } from '@/components/ui';
 
 import LeafletStampQrMenu from './components/LeafletStampQrMenu.client';
 
+const TOP_LOGO_SRC = '/assets/figma/main/img_logo.png';
+
 export type NavTopProps =
   | {
       variant?: 'main';
@@ -56,15 +58,19 @@ export default function NavTop(props: NavTopProps) {
     >
       <img
         alt="SYSTEM UPDATE : SUNRISE"
-        src={
-          showQr
-            ? '/assets/leaflet/icons/sunrise-text.svg'
-            : '/assets/leaflet/icons/sunrise-text-mask.svg'
-        }
+        src={TOP_LOGO_SRC}
         className={
           showQr
-            ? 'absolute top-1/2 left-[24px] h-[14.0996px] -translate-y-1/2'
-            : 'h-[38.5px] w-[286px]'
+            ? 'absolute top-1/2 left-[24px] h-[14.0996px] w-auto shrink-0 -translate-y-1/2'
+            : 'w-[286px] shrink-0'
+        }
+        style={
+          showQr
+            ? {
+                filter:
+                  'drop-shadow(1px 0 0 #000) drop-shadow(-1px 0 0 #000) drop-shadow(0 1px 0 #000) drop-shadow(0 -1px 0 #000)',
+              }
+            : undefined
         }
       />
 
