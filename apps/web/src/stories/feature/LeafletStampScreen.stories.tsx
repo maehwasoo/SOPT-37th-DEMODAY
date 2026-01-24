@@ -56,7 +56,7 @@ export const Progress11Of12: Story = {
 };
 
 export const CompleteHandleUp: Story = {
-  args: { progressCount: 12, handleDown: false },
+  args: { progressCount: 12, handleDown: true },
   render: (args) => (
     <LeafletFrame>
       <NavTop variant="main" />
