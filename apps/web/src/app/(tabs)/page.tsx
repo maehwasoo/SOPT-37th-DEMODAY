@@ -154,7 +154,7 @@ export default function Home() {
 
           <Divider />
 
-          <FadeInView className="w-full" delay={0.1}>
+          <FadeInView className="w-full" delay={0.1} distance={0}>
             <section className="flex w-full flex-col gap-[8px] px-[16px] pb-[48px]">
               <section className="flex flex-col gap-[12px]">
                 <p className="title_m_12 text-[var(--color-gray-200)]">
