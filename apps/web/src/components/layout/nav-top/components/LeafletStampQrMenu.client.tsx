@@ -35,7 +35,7 @@ export default function LeafletStampQrMenu() {
         const QRCode = await import('qrcode');
         const dataUrl = await QRCode.toDataURL(qrValue, {
           width: 512,
-          margin: 2,
+          margin: 4,
           color: { dark: '#000000', light: '#FFFFFF' },
         });
 
