@@ -35,7 +35,7 @@ export default function LeafletStampQrMenu() {
         const QRCode = await import('qrcode');
         const dataUrl = await QRCode.toDataURL(qrValue, {
           width: 512,
-          margin: 0,
+          margin: 4,
           color: { dark: '#000000', light: '#FFFFFF' },
         });
 
@@ -137,7 +137,7 @@ export default function LeafletStampQrMenu() {
             </p>
           </div>
 
-          <div className="flex size-[94px] items-center justify-center bg-[var(--color-white)] p-[2px]">
+          <div className="flex size-[160px] items-center justify-center bg-[var(--color-white)] p-[8px]">
             {qrDataUrl ? (
               <img
                 alt="기록 인증 QR 코드"
