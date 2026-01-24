@@ -34,9 +34,9 @@ export const LEAFLET_STAMP_ASSETS = {
   makers: `${STAMP_ASSET_ROOT}/logo-makers.webp`,
 
   // symbols
-  symbolA: `${STAMP_ASSET_ROOT}/stamp-symbol-a.svg`,
-  symbolB: `${STAMP_ASSET_ROOT}/stamp-symbol-b.svg`,
-  symbolC: `${STAMP_ASSET_ROOT}/stamp-symbol-c.svg`,
+  symbolA: `${STAMP_ASSET_ROOT}/symbol1.svg`,
+  symbolB: `${STAMP_ASSET_ROOT}/symbol2.svg`,
+  symbolC: `${STAMP_ASSET_ROOT}/symbol3.svg`,
 } as const;
 
 export const LEAFLET_STAMP_SYMBOLS = [
