@@ -227,9 +227,7 @@ export default function LeafletStampTile({
 }: LeafletStampTileProps) {
   const outlineSrc = completed
     ? LEAFLET_STAMP_ASSETS.stampOutlineComplete
-    : stamp.key === 'makers'
-      ? LEAFLET_STAMP_ASSETS.stampOutlineDefaultMakers
-      : LEAFLET_STAMP_ASSETS.stampOutlineDefault;
+    : LEAFLET_STAMP_ASSETS.stampOutlineDefault;
 
   const symbolSrc = useMemo(() => {
     if (!completed) return LEAFLET_STAMP_SYMBOLS[0];
