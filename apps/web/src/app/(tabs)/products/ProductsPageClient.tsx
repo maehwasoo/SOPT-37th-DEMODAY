@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
+import FadeInView from '@/components/common/FadeInView';
 import ProductCard from '@/components/feature/product-card/ProductCard';
 import FilterChip from '@/components/ui/FilterChip/FilterChip';
 import Tabs, { type TabsValue } from '@/components/ui/Tabs/Tabs';
@@ -71,23 +72,29 @@ export default function ProductsPageClient() {
           총 {filteredProducts.length}개의 서비스
         </p>
         <div className="grid w-full grid-cols-2 gap-x-[17px] gap-y-[16px]">
-          {filteredProducts.map((product) => (
-            <ProductCard
+          {filteredProducts.map((product, index) => (
+            <FadeInView
               key={product.teamKey}
-              thumbnailSrc={product.thumbnailSrc}
-              thumbnailAlt={product.title}
-              title={product.title}
-              category={product.category}
-              description={product.description}
-              onClick={() => {
-                trackEvent('product_select', {
-                  product_id: product.teamKey,
-                  track: product.track,
-                  platform: product.platform,
-                });
-                router.push(`/products/${product.teamKey}`);
-              }}
-            />
+              distance={20}
+              duration={0.5}
+              delay={Math.min(index * 0.03, 0.3)}
+            >
+              <ProductCard
+                thumbnailSrc={product.thumbnailSrc}
+                thumbnailAlt={product.title}
+                title={product.title}
+                category={product.category}
+                description={product.description}
+                onClick={() => {
+                  trackEvent('product_select', {
+                    product_id: product.teamKey,
+                    track: product.track,
+                    platform: product.platform,
+                  });
+                  router.push(`/products/${product.teamKey}`);
+                }}
+              />
+            </FadeInView>
           ))}
         </div>
       </section>
