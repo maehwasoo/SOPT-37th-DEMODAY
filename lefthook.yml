@@ -1,5 +1,5 @@
 pre-commit:
   commands:
     lint-staged:
-      run: npx lint-staged
+      run: pnpm exec lint-staged
       stage_fixed: true
