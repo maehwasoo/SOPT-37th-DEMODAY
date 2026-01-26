@@ -29,6 +29,7 @@
 .DS_Store
 *.pem
 .cache
+AGENTS.md
 
 # debug
 npm-debug.log*

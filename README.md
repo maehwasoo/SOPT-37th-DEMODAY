@@ -7,30 +7,84 @@
 - `apps/web`: Next.js (프론트엔드)
 - `apps/api`: Spring Boot (백엔드)
 
-## 문서
+## Architecture
 
-- 문서(MOC): [`AGENTS.md`](./AGENTS.md)
-- 아키텍처(읽는 순서): [`docs/architecture/README.md`](./docs/architecture/README.md)
-- AWS 인프라/배포: [`docs/architecture/09-aws-infrastructure-and-deployment.md`](./docs/architecture/09-aws-infrastructure-and-deployment.md)
+### Runtime (prod + preview)
 
-## 로컬 실행
+```mermaid
+flowchart LR
+  Dev["Developer"]
+  U["User / Browser"]
+  R53["Route 53 (Public DNS)"]
+  EIP["Elastic IP (API EC2)"]
 
-### 요구 사항
+  subgraph Tooling["UI Documentation"]
+    SB["Storybook (local)"]
+  end
 
-- Node.js + pnpm
-- Java 21
-- Docker (Postgres)
+  subgraph Vercel["Frontend (Vercel)"]
+    Web["Next.js Web App"]
+  end
 
-### 실행
+  subgraph AWS["Backend (AWS)"]
+    subgraph EC2Host["EC2 (single instance)"]
+      Nginx["Nginx (reverse proxy, 80/443, TLS via Certbot)"]
+      APIProd["Spring Boot API (prod, 127.0.0.1:8080)"]
+      APIPreview["Spring Boot API (preview, 127.0.0.1:8081)"]
+    end
 
-1. Postgres 실행: `docker compose up -d`
-2. 의존성 설치: `pnpm install`
-3. 개발 서버 실행: `pnpm dev`
+    RDS[(RDS PostgreSQL)]
+  end
 
-### 접속
+  subgraph SaaS["Observability & Analytics"]
+    Sentry["Sentry"]
+    GA["Google Analytics"]
+  end
 
-- Web: `http://localhost:3000`
-- API: `http://localhost:8080` (health: `/api/health`)
-- Swagger UI: `http://localhost:8080/swagger-ui/index.html`
+  Dev -.->|Runs locally| SB
+  SB -.->|Shared UI components| Web
 
-> `apps/web`는 로컬 개발 시 `/api/*` 요청을 `http://localhost:8080/api/*`로 프록시합니다.
+  U -->|DNS| R53
+  R53 -->|CNAME www / preview| Web
+  R53 -->|A api / api-preview| EIP
+
+  U -->|HTTPS| Web
+  Web -->|HTTPS api.sopt-demoday.org| EIP
+  Web -->|HTTPS api-preview.sopt-demoday.org| EIP
+
+  EIP -->|80/443| Nginx
+  Nginx -->|proxy_pass| APIProd
+  Nginx -->|proxy_pass| APIPreview
+
+  APIProd -->|JDBC 5432| RDS
+  APIPreview -->|JDBC 5432| RDS
+
+  Web -.->|Errors & Performance| Sentry
+  Web -.->|Pageviews & Events| GA
+```
+
+### Deployment (API)
+
+```mermaid
+flowchart TB
+  Dev["Developer"] -->|Push| GitHub["GitHub"]
+  GitHub --> GHA["GitHub Actions"]
+
+  subgraph AWS["AWS"]
+    IAM["Assume Role (OIDC)"]
+    S3[(S3 artifacts)]
+    SSM["SSM Run Command"]
+    EC2["EC2 instance"]
+    Systemd["systemd"]
+  end
+
+  GHA -->|OIDC| IAM
+  GHA -->|Upload api.jar| S3
+  GHA -->|ssm send-command| SSM
+  SSM -->|Runs on instance| EC2
+  EC2 -->|Download api.jar| S3
+  EC2 -->|systemctl restart| Systemd
+
+  Systemd -->|prod| APIProd["demoday-api (:8080)"]
+  Systemd -->|preview| APIPreview["demoday-api-preview (:8081)"]
+```
