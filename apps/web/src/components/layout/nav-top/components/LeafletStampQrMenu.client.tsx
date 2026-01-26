@@ -4,10 +4,12 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { QrIcon } from '@/components/icons';
 import { TouchArea } from '@/components/ui';
-import { ApiError, leafletStampCodeApi } from '@/lib/api';
+import { ApiError, isApiAvailable, leafletStampCodeApi } from '@/lib/api';
 import { trackEvent } from '@/lib/ga';
 
 type Status = 'idle' | 'loading' | 'ready' | 'error';
+
+const LEAFLET_API_AVAILABLE = isApiAvailable();
 
 export default function LeafletStampQrMenu() {
   const [open, setOpen] = useState(false);
@@ -20,6 +22,8 @@ export default function LeafletStampQrMenu() {
   const downloadable = useMemo(() => Boolean(qrDataUrl), [qrDataUrl]);
 
   useEffect(() => {
+    if (!LEAFLET_API_AVAILABLE) return;
+
     let cancelled = false;
 
     const run = async () => {
@@ -103,6 +107,7 @@ export default function LeafletStampQrMenu() {
     a.click();
   };
 
+  if (!LEAFLET_API_AVAILABLE) return null;
   if (status === 'error' || status === 'idle') return null;
 
   return (

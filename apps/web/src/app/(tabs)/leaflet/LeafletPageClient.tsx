@@ -9,7 +9,12 @@ import {
   type LeafletStampKey,
 } from '@/components/feature/leaflet-stamp/leafletStamp.constants';
 import LeafletStampScreen from '@/components/feature/leaflet-stamp/LeafletStampScreen';
-import { ApiError, leafletClaimApi, leafletProgressApi } from '@/lib/api';
+import {
+  ApiError,
+  isApiAvailable,
+  leafletClaimApi,
+  leafletProgressApi,
+} from '@/lib/api';
 import { trackEvent } from '@/lib/ga';
 
 type ToastState = {
@@ -22,6 +27,8 @@ function isLeafletStampKey(value: string): value is LeafletStampKey {
   const known = new Set(LEAFLET_STAMPS.map((s) => s.key));
   return known.has(value as LeafletStampKey);
 }
+
+const LEAFLET_API_AVAILABLE = isApiAvailable();
 
 export default function LeafletPageClient() {
   const router = useRouter();
@@ -156,6 +163,25 @@ export default function LeafletPageClient() {
   }, [claim, loadProgress, pendingCode, redirectToLogin, router, showToast]);
 
   useEffect(() => {
+    if (!LEAFLET_API_AVAILABLE) {
+      setProgress({
+        totalCount: LEAFLET_STAMPS.length,
+        completedCount: 0,
+        completedStampKeys: [],
+      });
+
+      if (pendingCode) {
+        showToast({
+          variant: 'info',
+          message: '현재 기록 적립이 종료되었습니다.',
+        });
+        setPendingCode('');
+        router.replace('/leaflet');
+      }
+
+      return;
+    }
+
     void run();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
