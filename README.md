@@ -9,23 +9,29 @@
 
 ## Architecture
 
-### Runtime (high-level)
+### Runtime (concept-level, prod + preview)
 
 ```mermaid
 flowchart LR
   Dev["Developer"]
   U["User / Browser"]
+  DNS["Public DNS<br/>(example.com)"]
 
   subgraph Tooling["UI Documentation"]
     SB["Storybook (local)"]
   end
 
-  subgraph Vercel["Frontend (Vercel)"]
-    Web["Next.js Web App"]
+  subgraph Frontend["Frontend Hosting"]
+    WebProd["Web App (prod)<br/>www.example.com"]
+    WebPreview["Web App (preview)<br/>preview.example.com"]
   end
 
   subgraph Backend["Backend (optional)"]
-    API["Spring Boot API"]
+    ApiEndpointProd["API Endpoint (prod)<br/>api.example.com<br/>Reverse Proxy / TLS"]
+    ApiEndpointPreview["API Endpoint (preview)<br/>api-preview.example.com<br/>Reverse Proxy / TLS"]
+
+    APIProd["Spring Boot API (prod)"]
+    APIPreview["Spring Boot API (preview)"]
     DB[(PostgreSQL)]
   end
 
@@ -35,38 +41,54 @@ flowchart LR
   end
 
   Dev -.->|Runs locally| SB
-  SB -.->|Shared UI components| Web
+  SB -.->|Shared UI components| WebProd
+  SB -.->|Shared UI components| WebPreview
 
-  U -->|HTTPS| Web
-  Web -->|HTTPS API (optional)| API
-  API -->|SQL| DB
+  U -->|DNS lookup| DNS
+  DNS -->|HTTPS| WebProd
+  DNS -->|HTTPS| WebPreview
+  DNS -->|HTTPS| ApiEndpointProd
+  DNS -->|HTTPS| ApiEndpointPreview
 
-  Web -.->|Errors & Performance| Sentry
-  Web -.->|Pageviews & Events| GA
+  WebProd -->|HTTPS| ApiEndpointProd
+  WebPreview -->|HTTPS| ApiEndpointPreview
+
+  ApiEndpointProd -->|Proxy| APIProd
+  ApiEndpointPreview -->|Proxy| APIPreview
+
+  APIProd -->|SQL| DB
+  APIPreview -->|SQL| DB
+
+  WebProd -.->|Errors & Performance| Sentry
+  WebPreview -.->|Errors & Performance| Sentry
+  WebProd -.->|Pageviews & Events| GA
+  WebPreview -.->|Pageviews & Events| GA
 ```
 
-### Deployment (API)
+### Deployment (API, optional)
+
+> 본 문서의 도메인은 모두 예시(`example.com`)이며, 실제 운영 환경에서는 별도 도메인/인프라로 구성할 수 있습니다.
 
 ```mermaid
 flowchart TB
   Dev["Developer"] -->|Push| GitHub["GitHub"]
-  GitHub --> GHA["GitHub Actions"]
+  GitHub --> CI["CI/CD (GitHub Actions)"]
 
-  subgraph AWS["AWS"]
-    IAM["Assume Role (OIDC)"]
-    S3[(S3 artifacts)]
-    SSM["SSM Run Command"]
-    EC2["EC2 instance"]
-    Systemd["systemd"]
+  subgraph Cloud["Cloud Provider"]
+    OIDC["OIDC Assume Role"]
+    ArtifactStore[(Artifact Storage)]
+    RemoteCmd["Remote Command"]
+    VM["Compute VM"]
+    ProcMgr["Process Manager"]
   end
 
-  GHA -->|OIDC| IAM
-  GHA -->|Upload api.jar| S3
-  GHA -->|ssm send-command| SSM
-  SSM -->|Runs on instance| EC2
-  EC2 -->|Download api.jar| S3
-  EC2 -->|systemctl restart| Systemd
+  CI -->|OIDC| OIDC
+  CI -->|Upload artifact| ArtifactStore
+  CI -->|Trigger| RemoteCmd
+  RemoteCmd -->|Runs on instance| VM
+  VM -->|Download artifact| ArtifactStore
+  VM -->|Restart| ProcMgr
 
-  Systemd -->|prod| APIProd[":8080"]
-  Systemd -->|preview| APIPreview[":8081"]
+  ProcMgr -->|prod| APIProd["API (prod)"]
+  ProcMgr -->|preview| APIPreview["API (preview)"]
 ```
