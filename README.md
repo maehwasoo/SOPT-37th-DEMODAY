@@ -23,6 +23,9 @@
 
 ### 실행
 
+0. Set required env vars:
+   - `POSTGRES_PASSWORD=<local-password>`
+   - `SPRING_DATASOURCE_PASSWORD=<same-as-POSTGRES_PASSWORD>`
 1. Postgres 실행: `docker compose up -d`
 2. 의존성 설치: `pnpm install`
 3. 개발 서버 실행: `pnpm dev`

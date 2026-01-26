@@ -22,7 +22,10 @@ env:
   S3_BUCKET: ${{ vars.DEMODAY_ARTIFACTS_S3_BUCKET }}
   EC2_INSTANCE_ID: ${{ vars.DEMODAY_API_EC2_INSTANCE_ID }}
   ROLE_TO_ASSUME: ${{ vars.DEMODAY_DEPLOY_ROLE_ARN }}
-  HEALTHCHECK_URL: ${{ vars.DEMODAY_API_PREVIEW_HEALTHCHECK_URL || 'https://api-preview.sopt-demoday.org/api/health' }}
+  HEALTHCHECK_URL: ${{ vars.DEMODAY_API_PREVIEW_HEALTHCHECK_URL }}
+  ARTIFACT_PREFIX: ${{ vars.DEMODAY_API_PREVIEW_ARTIFACT_PREFIX }}
+  REMOTE_DEPLOY_DIR: ${{ vars.DEMODAY_API_PREVIEW_REMOTE_DEPLOY_DIR }}
+  SYSTEMD_SERVICE: ${{ vars.DEMODAY_API_PREVIEW_SYSTEMD_SERVICE }}
 
 jobs:
   deploy:
@@ -59,18 +62,27 @@ jobs:
 
       - name: Upload jar to S3 (preview)
         run: |
-          aws s3 cp "${{ steps.jar.outputs.path }}" "s3://${S3_BUCKET}/api-preview/${GITHUB_SHA}/api.jar"
+          : "${S3_BUCKET:?S3_BUCKET is required}"
+          : "${ARTIFACT_PREFIX:?ARTIFACT_PREFIX is required}"
+          aws s3 cp "${{ steps.jar.outputs.path }}" "s3://${S3_BUCKET}/${ARTIFACT_PREFIX}/${GITHUB_SHA}/api.jar"
 
       - name: Deploy to EC2 via SSM (preview)
         id: deploy
         run: |
+          : "${AWS_REGION:?AWS_REGION is required}"
+          : "${S3_BUCKET:?S3_BUCKET is required}"
+          : "${EC2_INSTANCE_ID:?EC2_INSTANCE_ID is required}"
+          : "${ARTIFACT_PREFIX:?ARTIFACT_PREFIX is required}"
+          : "${REMOTE_DEPLOY_DIR:?REMOTE_DEPLOY_DIR is required}"
+          : "${SYSTEMD_SERVICE:?SYSTEMD_SERVICE is required}"
+
           COMMAND_ID="$(
             aws ssm send-command \
               --region "$AWS_REGION" \
               --instance-ids "$EC2_INSTANCE_ID" \
               --document-name "AWS-RunShellScript" \
               --comment "Deploy API preview ${GITHUB_SHA}" \
-              --parameters "commands=[\"sudo mkdir -p /opt/demoday/api-preview\",\"sudo aws s3 cp s3://${S3_BUCKET}/api-preview/${GITHUB_SHA}/api.jar /opt/demoday/api-preview/api.jar\",\"sudo systemctl restart demoday-api-preview\"]" \
+              --parameters "commands=[\"sudo mkdir -p ${REMOTE_DEPLOY_DIR}\",\"sudo aws s3 cp s3://${S3_BUCKET}/${ARTIFACT_PREFIX}/${GITHUB_SHA}/api.jar ${REMOTE_DEPLOY_DIR}/api.jar\",\"sudo systemctl restart ${SYSTEMD_SERVICE}\"]" \
               --query "Command.CommandId" \
               --output text
           )"
@@ -89,6 +101,7 @@ jobs:
 
       - name: Health check (preview)
         run: |
+          : "${HEALTHCHECK_URL:?HEALTHCHECK_URL is required}"
           for i in $(seq 1 30); do
             if curl -fsS "$HEALTHCHECK_URL" | grep -q "ok"; then
               echo "Health check OK"

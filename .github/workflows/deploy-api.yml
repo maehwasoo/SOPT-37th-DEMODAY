@@ -23,6 +23,9 @@ env:
   EC2_INSTANCE_ID: ${{ vars.DEMODAY_API_EC2_INSTANCE_ID }}
   ROLE_TO_ASSUME: ${{ vars.DEMODAY_DEPLOY_ROLE_ARN }}
   HEALTHCHECK_URL: ${{ vars.DEMODAY_API_HEALTHCHECK_URL }}
+  ARTIFACT_PREFIX: ${{ vars.DEMODAY_API_ARTIFACT_PREFIX }}
+  REMOTE_DEPLOY_DIR: ${{ vars.DEMODAY_API_REMOTE_DEPLOY_DIR }}
+  SYSTEMD_SERVICE: ${{ vars.DEMODAY_API_SYSTEMD_SERVICE }}
 
 jobs:
   deploy:
@@ -59,18 +62,27 @@ jobs:
 
       - name: Upload jar to S3
         run: |
-          aws s3 cp "${{ steps.jar.outputs.path }}" "s3://${S3_BUCKET}/api/${GITHUB_SHA}/api.jar"
+          : "${S3_BUCKET:?S3_BUCKET is required}"
+          : "${ARTIFACT_PREFIX:?ARTIFACT_PREFIX is required}"
+          aws s3 cp "${{ steps.jar.outputs.path }}" "s3://${S3_BUCKET}/${ARTIFACT_PREFIX}/${GITHUB_SHA}/api.jar"
 
       - name: Deploy to EC2 via SSM
         id: deploy
         run: |
+          : "${AWS_REGION:?AWS_REGION is required}"
+          : "${S3_BUCKET:?S3_BUCKET is required}"
+          : "${EC2_INSTANCE_ID:?EC2_INSTANCE_ID is required}"
+          : "${ARTIFACT_PREFIX:?ARTIFACT_PREFIX is required}"
+          : "${REMOTE_DEPLOY_DIR:?REMOTE_DEPLOY_DIR is required}"
+          : "${SYSTEMD_SERVICE:?SYSTEMD_SERVICE is required}"
+
           COMMAND_ID="$(
             aws ssm send-command \
               --region "$AWS_REGION" \
               --instance-ids "$EC2_INSTANCE_ID" \
               --document-name "AWS-RunShellScript" \
               --comment "Deploy API ${GITHUB_SHA}" \
-              --parameters "commands=[\"sudo aws s3 cp s3://${S3_BUCKET}/api/${GITHUB_SHA}/api.jar /opt/demoday/api/api.jar\",\"sudo systemctl restart demoday-api\"]" \
+              --parameters "commands=[\"sudo aws s3 cp s3://${S3_BUCKET}/${ARTIFACT_PREFIX}/${GITHUB_SHA}/api.jar ${REMOTE_DEPLOY_DIR}/api.jar\",\"sudo systemctl restart ${SYSTEMD_SERVICE}\"]" \
               --query "Command.CommandId" \
               --output text
           )"
@@ -89,6 +101,7 @@ jobs:
 
       - name: Health check
         run: |
+          : "${HEALTHCHECK_URL:?HEALTHCHECK_URL is required}"
           for i in $(seq 1 30); do
             if curl -fsS "$HEALTHCHECK_URL" | grep -q "ok"; then
               echo "Health check OK"
