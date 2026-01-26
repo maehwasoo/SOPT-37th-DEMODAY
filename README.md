@@ -7,10 +7,6 @@
 - `apps/web`: Next.js (프론트엔드)
 - `apps/api`: Spring Boot (백엔드)
 
-## 문서
-
-- 문서(MOC): [`AGENTS.md`](./AGENTS.md)
-
 ## Architecture (High-level)
 
 > This diagram is intentionally high-level (redacted) and focuses on request flow + UI documentation + observability/analytics.
