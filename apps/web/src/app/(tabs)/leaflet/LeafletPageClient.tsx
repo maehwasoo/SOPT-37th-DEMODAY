@@ -170,13 +170,21 @@ export default function LeafletPageClient() {
         completedStampKeys: [],
       });
 
+      showToast({
+        variant: 'info',
+        message: '현재 기록 적립이 종료되었습니다.',
+      });
+
       if (pendingCode) {
-        showToast({
-          variant: 'info',
-          message: '현재 기록 적립이 종료되었습니다.',
-        });
         setPendingCode('');
-        router.replace('/leaflet');
+
+        const url = new URL(window.location.href);
+        url.searchParams.delete('code');
+        window.history.replaceState(
+          null,
+          '',
+          `${url.pathname}${url.search}${url.hash}`
+        );
       }
 
       return;
