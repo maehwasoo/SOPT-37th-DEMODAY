@@ -28,6 +28,13 @@ export class ApiError extends Error {
   }
 }
 
+// Build-time API availability
+export function isApiAvailable() {
+  // Local dev rewrite proxy (/api/* -> localhost)
+  if (process.env.NODE_ENV === 'development') return true;
+  return Boolean(process.env.NEXT_PUBLIC_API_ORIGIN);
+}
+
 function resolveApiUrl(path: string) {
   const apiOrigin = process.env.NEXT_PUBLIC_API_ORIGIN;
   if (!apiOrigin) return path;

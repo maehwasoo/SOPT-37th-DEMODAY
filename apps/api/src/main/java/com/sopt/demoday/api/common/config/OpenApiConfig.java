@@ -16,11 +16,10 @@ import org.springframework.context.annotation.Configuration;
 		description = "SOPT 37th Demoday API",
 		version = "v1"
 	),
-	servers = {
-		@Server(url = "http://localhost:8080", description = "Local"),
-		@Server(url = "https://api.sopt-demoday.org", description = "Production")
-	}
-)
+		servers = {
+			@Server(url = "http://localhost:8080", description = "Local")
+		}
+	)
 @SecurityScheme(
 	name = "SessionCookie",
 	type = SecuritySchemeType.APIKEY,
