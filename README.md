@@ -13,6 +13,44 @@
 - 아키텍처(읽는 순서): [`docs/architecture/README.md`](./docs/architecture/README.md)
 - AWS 인프라/배포: [`docs/architecture/09-aws-infrastructure-and-deployment.md`](./docs/architecture/09-aws-infrastructure-and-deployment.md)
 
+## Architecture (High-level)
+
+> This diagram is intentionally high-level (redacted) and focuses on request flow + UI documentation + observability/analytics.
+
+```mermaid
+flowchart LR
+  Dev["Developer"]
+  U["User / Browser"]
+
+  subgraph Tooling["UI Documentation"]
+    SB["Storybook"]
+  end
+
+  subgraph Vercel["Frontend (Vercel)"]
+    Web["Next.js Web App"]
+  end
+
+  subgraph AWS["Backend (AWS)"]
+    API["Spring Boot API (EC2)"]
+    RDS[(RDS PostgreSQL)]
+  end
+
+  subgraph SaaS["Observability & Analytics"]
+    Sentry["Sentry"]
+    GA["Google Analytics"]
+  end
+
+  Dev -.->|Runs locally| SB
+  SB -.->|Shared UI components| Web
+
+  U -->|HTTPS| Web
+  Web -->|HTTPS API| API
+  API -->|SQL| RDS
+
+  Web -.->|Errors & Performance| Sentry
+  Web -.->|Pageviews & Events| GA
+```
+
 ## 로컬 실행
 
 ### 요구 사항
@@ -35,5 +73,6 @@
 - Web: `http://localhost:3000`
 - API: `http://localhost:8080` (health: `/api/health`)
 - Swagger UI: `http://localhost:8080/swagger-ui/index.html`
+- Storybook: `http://localhost:6006` (run: `pnpm storybook`)
 
 > `apps/web`는 로컬 개발 시 `/api/*` 요청을 `http://localhost:8080/api/*`로 프록시합니다.
