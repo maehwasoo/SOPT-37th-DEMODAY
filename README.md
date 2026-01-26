@@ -63,9 +63,6 @@ flowchart LR
   Web -.->|Pageviews & Events| GA
 ```
 
-- EC2 SG inbound: `80/443` public, `22` allowlisted (SSH).
-- RDS: public access `false`; SG inbound `5432` is restricted to the EC2 security group only.
-
 ### Deployment (API)
 
 ```mermaid
