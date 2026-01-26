@@ -9,7 +9,7 @@
 
 ## Architecture
 
-### Runtime (concept-level, prod + preview)
+### Runtime
 
 ```mermaid
 flowchart LR
@@ -65,9 +65,7 @@ flowchart LR
   WebPreview -.->|Pageviews & Events| GA
 ```
 
-### Deployment (API, optional)
-
-> 본 문서의 도메인은 모두 예시(`example.com`)이며, 실제 운영 환경에서는 별도 도메인/인프라로 구성할 수 있습니다.
+### Deployment
 
 ```mermaid
 flowchart TB
