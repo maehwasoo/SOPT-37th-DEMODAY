@@ -17,6 +17,9 @@
 | **`Library`**              | ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white)                                                                                     |
 | **`Programming Language`** | ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white)                                                                 |
 | **`Styling`**              | ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)                                                              |
+| **`UI Documentation`**     | ![Storybook](https://img.shields.io/badge/Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)                                                                         |
+| **`Observability`**        | ![Sentry](https://img.shields.io/badge/Sentry-362D59?style=for-the-badge&logo=sentry&logoColor=white)                                                                                  |
+| **`Analytics`**            | ![Google Analytics](https://img.shields.io/badge/Google%20Analytics-E37400?style=for-the-badge&logo=googleanalytics&logoColor=white)                                                   |
 
 ### Backend (`apps/api`)
 
@@ -26,6 +29,9 @@
 | **`Programming Language`** | ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)                                                    |
 | **`Build Tool`**           | ![Gradle](https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white)                                                 |
 | **`Database`**             | ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)                                      |
+| **`DB Migration`**         | ![Flyway](https://img.shields.io/badge/Flyway-CC0000?style=for-the-badge&logo=flyway&logoColor=white)                                                 |
+| **`API Docs`**             | ![OpenAPI](https://img.shields.io/badge/OpenAPI-6BA539?style=for-the-badge&logo=openapiinitiative&logoColor=white)                                    |
+| **`Testing`**              | ![JUnit 5](https://img.shields.io/badge/JUnit%205-25A162?style=for-the-badge&logo=junit5&logoColor=white) ![Testcontainers](https://img.shields.io/badge/Testcontainers-1B1C30?style=for-the-badge&logo=testcontainers&logoColor=white) |
 
 ### Tooling / Infra (Repo)
 
@@ -34,6 +40,7 @@
 | **`Package Manager`** | ![PNPM](https://img.shields.io/badge/pnpm-%23F29F05?style=for-the-badge&logo=pnpm&logoColor=white)                                                                                                                                                                |
 | **`Monorepo`**        | ![Turborepo](https://img.shields.io/badge/Turborepo-EF4444?style=for-the-badge&logo=turborepo&logoColor=white)                                                                                                                                                   |
 | **`Formatting`**      | ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white) ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white)                                         |
+| **`Git Hooks`**       | ![Lefthook](https://img.shields.io/badge/Lefthook-000000?style=for-the-badge) ![lint-staged](https://img.shields.io/badge/lint--staged-000000?style=for-the-badge)                                                                                               |
 | **`CI`**              | ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)                                                                                                                                   |
 | **`Deployment`**      | ![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonwebservices&logoColor=white)                                                                                                                                                       |
 | **`Local Infra`**     | ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)                                                                                                                                                            |
